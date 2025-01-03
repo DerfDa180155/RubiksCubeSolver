@@ -1,5 +1,5 @@
 import pygame
-
+import RubiksCubeSolver
 
 class main:
     def __init__(self):
@@ -17,6 +17,9 @@ class main:
 
         self.clock = pygame.time.Clock()
         self.running = True
+
+        self.solver = RubiksCubeSolver.RubiksCubeSolver()
+
         self.run()
 
     def run(self):
@@ -29,6 +32,12 @@ class main:
                         self.running = False
 
             self.screen.fill((50, 50, 50))
+
+            print(self.solver.top)
+
+
+
+
 
 
 
