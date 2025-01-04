@@ -33,7 +33,7 @@ class main:
 
             self.screen.fill((50, 50, 50))
 
-            print(self.solver.top)
+            print(self.solver.generateComplete())
 
 
 
