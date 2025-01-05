@@ -1,4 +1,5 @@
 import pygame
+
 import RubiksCubeSolver
 
 class main:
@@ -33,7 +34,31 @@ class main:
 
             self.screen.fill((50, 50, 50))
 
-            print(self.solver.generateComplete())
+            # draw cube
+            cube = self.solver.generateComplete()
+            for i in range(len(cube)):
+                for j in range(len(cube[0])):
+                    color = (0, 0, 0)
+                    width = 100
+                    height = 100
+                    x = 10 + (j * (width + 1))
+                    y = 10 + (i * (height + 1))
+
+                    match cube[i][j]:
+                        case 1: # white
+                            color = (255,255,255)
+                        case 2: # blue
+                            color = (0, 255, 0)
+                        case 3: # yellow
+                            color = (255,255,0)
+                        case 4: # green
+                            color = (0, 0, 255)
+                        case 5: # orange
+                            color = (255, 165, 0)
+                        case 6: # red
+                            color = (255, 0 ,0)
+
+                    pygame.draw.rect(self.screen, color, (x, y, width, height))
 
 
 
