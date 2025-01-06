@@ -32,11 +32,11 @@ class RubiksCubeSolver:
         for i in range(3):
             temp = []
             for j in range(3):
-                temp.append(0)
+                temp.append(-1)
             for j in range(3):
                 temp.append(self.top[j][i])
             for j in range(3):
-                temp.append(0)
+                temp.append(-1)
             complite.append(temp)
 
         for i in range(3):
@@ -52,21 +52,21 @@ class RubiksCubeSolver:
         for i in range(3):
             temp = []
             for j in range(3):
-                temp.append(0)
+                temp.append(-1)
             for j in range(3):
                 temp.append(self.bottom[j][i])
             for j in range(3):
-                temp.append(0)
+                temp.append(-1)
             complite.append(temp)
 
         for i in range(3):
             temp = []
             for j in range(3):
-                temp.append(0)
+                temp.append(-1)
             for j in range(3):
                 temp.append(self.back[j][i])
             for j in range(3):
-                temp.append(0)
+                temp.append(-1)
             complite.append(temp)
 
         return complite
