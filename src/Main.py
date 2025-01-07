@@ -34,6 +34,9 @@ class main:
 
             self.screen.fill((50, 50, 50))
 
+            for i in range(1,7):
+                self.solver.fillSide(i)
+
             # draw cube
             cube = self.solver.generateComplete()
             for i in range(len(cube)):
