@@ -98,6 +98,31 @@ class RubiksCubeSolver:
 
         return complite
 
+    def makeMove(self, move):
+        match move:
+            case "UP":
+                self.top = self.rotate(self.top)
+            case "Front":
+                pass
+            case "Down":
+                pass
+            case "Back":
+                pass
+            case "Left":
+                pass
+            case "Right":
+                pass
+
+    def rotate(self, side):
+        newSide = side
+        squares = [[0,0], [0,1], [0,2], [1,2], [2,2], [2,1], [2,0], [1,0], [0,0]]
+        i = 1
+        for square in squares:
+            if i <= 8:
+                newSide[square[0]][square[1]] = side[squares[i][0]][squares[i][1]]
+            i += 1
+        return newSide
+
     def solve(self):
         pass
 

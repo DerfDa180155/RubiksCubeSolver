@@ -37,6 +37,9 @@ class main:
             for i in range(1,7):
                 self.solver.fillSide(i)
 
+            self.solver.top[0][0] = 2
+
+            self.solver.makeMove("UP")
             # draw cube
             cube = self.solver.generateComplete()
             for i in range(len(cube)):
@@ -52,11 +55,11 @@ class main:
                             case 1: # white
                                 color = (255,255,255)
                             case 2: # blue
-                                color = (0, 255, 0)
+                                color = (0, 0, 255)
                             case 3: # yellow
                                 color = (255,255,0)
                             case 4: # green
-                                color = (0, 0, 255)
+                                color = (0, 255, 0)
                             case 5: # orange
                                 color = (255, 165, 0)
                             case 6: # red
@@ -64,7 +67,7 @@ class main:
 
                         pygame.draw.rect(self.screen, color, (x, y, width, height))
 
-
+            print(self.solver.top)
 
 
 
