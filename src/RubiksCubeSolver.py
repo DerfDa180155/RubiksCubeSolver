@@ -9,6 +9,9 @@ class RubiksCubeSolver:
         self.front = self.generateEmptySide(middle=2)
         self.back = self.generateEmptySide(middle=4)
 
+        for i in range(1, 7):
+            self.fillSide(i)
+
     def reset(self):
         self.top = self.generateEmptySide(middle=1)
         self.bottom = self.generateEmptySide(middle=3)
@@ -16,6 +19,9 @@ class RubiksCubeSolver:
         self.left = self.generateEmptySide(middle=5)
         self.front = self.generateEmptySide(middle=2)
         self.back = self.generateEmptySide(middle=4)
+
+        for i in range(1, 7):
+            self.fillSide(i)
 
     def generateEmptySide(self, middle):
         side = []
@@ -114,13 +120,18 @@ class RubiksCubeSolver:
                 pass
 
     def rotate(self, side):
-        newSide = side
-        squares = [[0,0], [0,1], [0,2], [1,2], [2,2], [2,1], [2,0], [1,0], [0,0]]
+        newSide = self.generateEmptySide(side[1][1])
+        corners = [[0,0], [0,2], [2,2], [2,0]]
+        edges = [[0,1], [1,2], [2,1], [1,0]]
+
+        temp = side[corners[0][0]][corners[0][1]]
         i = 1
-        for square in squares:
-            if i <= 8:
-                newSide[square[0]][square[1]] = side[squares[i][0]][squares[i][1]]
-            i += 1
+        for square in corners:
+            if i < 4:
+                newSide[square[0]][square[1]] = side[corners[i][0]][corners[i][1]]
+                i += 1
+            else:
+                newSide[square[0]][square[1]] = temp
         return newSide
 
     def solve(self):

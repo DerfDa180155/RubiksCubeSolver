@@ -34,10 +34,12 @@ class main:
 
             self.screen.fill((50, 50, 50))
 
-            for i in range(1,7):
-                self.solver.fillSide(i)
+
 
             self.solver.top[0][0] = 2
+            self.solver.top[2][0] = 6
+            self.solver.top[2][2] = 3
+            self.solver.top[0][2] = 4
 
             self.solver.makeMove("UP")
             # draw cube
