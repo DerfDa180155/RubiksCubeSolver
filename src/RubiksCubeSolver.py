@@ -132,6 +132,17 @@ class RubiksCubeSolver:
                 i += 1
             else:
                 newSide[square[0]][square[1]] = temp
+
+        temp = side[edges[0][0]][edges[0][1]]
+        i = 1
+        for square in edges:
+            if i < 4:
+                newSide[square[0]][square[1]] = side[edges[i][0]][edges[i][1]]
+                i += 1
+            else:
+                newSide[square[0]][square[1]] = temp
+
+
         return newSide
 
     def solve(self):
