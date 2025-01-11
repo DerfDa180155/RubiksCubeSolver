@@ -32,6 +32,15 @@ class main:
         self.solver.top[2][1] = 3
         self.solver.top[0][2] = 4
         self.solver.top[1][2] = 4
+
+        self.solver.bottom[0][0] = 2
+        self.solver.bottom[0][1] = 2
+        self.solver.bottom[2][0] = 6
+        self.solver.bottom[1][0] = 6
+        self.solver.bottom[2][2] = 3
+        self.solver.bottom[2][1] = 3
+        self.solver.bottom[0][2] = 4
+        self.solver.bottom[1][2] = 4
         while self.running:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:  # Quit the Game
@@ -39,8 +48,19 @@ class main:
                 elif event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_ESCAPE:  # Quit the Game
                         self.running = False
-                    elif event.key == pygame.K_w:
+                    elif event.key == pygame.K_1:
                         self.solver.makeMove("UP")
+                    elif event.key == pygame.K_2:
+                        self.solver.makeMove("Down")
+                    elif event.key == pygame.K_3:
+                        self.solver.makeMove("Front")
+                    elif event.key == pygame.K_4:
+                        self.solver.makeMove("Back")
+                    elif event.key == pygame.K_5:
+                        self.solver.makeMove("Left")
+                    elif event.key == pygame.K_6:
+                        self.solver.makeMove("Right")
+
 
             self.screen.fill((50, 50, 50))
 

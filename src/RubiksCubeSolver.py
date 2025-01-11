@@ -109,15 +109,15 @@ class RubiksCubeSolver:
             case "UP":
                 self.top = self.rotate(self.top)
             case "Front":
-                pass
+                self.front = self.rotate(self.front)
             case "Down":
-                pass
+                self.bottom = self.rotate(self.bottom)
             case "Back":
-                pass
+                self.back = self.rotate(self.back)
             case "Left":
-                pass
+                self.left = self.rotate(self.left)
             case "Right":
-                pass
+                self.right = self.rotate(self.right)
 
     def rotate(self, side):
         newSide = self.generateEmptySide(side[1][1])
