@@ -110,6 +110,7 @@ class RubiksCubeSolver:
                 self.top = self.rotate(self.top)
             case "Front":
                 self.front = self.rotate(self.front)
+                self.rotateAdjacent(self.top, self.right, self.bottom, self.left)
             case "Down":
                 self.bottom = self.rotate(self.bottom)
             case "Back":
@@ -142,8 +143,26 @@ class RubiksCubeSolver:
             else:
                 newSide[square[0]][square[1]] = temp
 
-
         return newSide
+
+    def rotateAdjacent(self, top, right, bottom, left):
+        temp = [top[0][2],top[1][2],top[2][2]]
+
+        top[0][2] = left[2][2]
+        top[1][2] = left[2][1]
+        top[2][2] = left[2][0]
+
+        left[2][0] = bottom[0][0]
+        left[2][1] = bottom[1][0]
+        left[2][2] = bottom[2][0]
+
+        bottom[2][0] = right[0][0]
+        bottom[1][0] = right[0][1]
+        bottom[0][0] = right[0][2]
+
+        right[0][0] = temp[0]
+        right[0][1] = temp[1]
+        right[0][2] = temp[2]
 
     def solve(self):
         pass

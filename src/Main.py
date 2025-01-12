@@ -24,23 +24,23 @@ class main:
         self.run()
 
     def run(self):
-        self.solver.top[0][0] = 2
-        self.solver.top[0][1] = 2
-        self.solver.top[2][0] = 6
-        self.solver.top[1][0] = 6
-        self.solver.top[2][2] = 3
-        self.solver.top[2][1] = 3
-        self.solver.top[0][2] = 4
-        self.solver.top[1][2] = 4
+        #self.solver.top[0][0] = 2
+        #self.solver.top[0][1] = 2
+        #self.solver.top[2][0] = 6
+        #self.solver.top[1][0] = 6
+        #self.solver.top[2][2] = 3
+        #self.solver.top[2][1] = 3
+        #self.solver.top[0][2] = 4
+        #self.solver.top[1][2] = 4
 
-        self.solver.bottom[0][0] = 2
-        self.solver.bottom[0][1] = 2
-        self.solver.bottom[2][0] = 6
-        self.solver.bottom[1][0] = 6
-        self.solver.bottom[2][2] = 3
-        self.solver.bottom[2][1] = 3
-        self.solver.bottom[0][2] = 4
-        self.solver.bottom[1][2] = 4
+        #self.solver.bottom[0][0] = 2
+        #self.solver.bottom[0][1] = 2
+        #self.solver.bottom[2][0] = 6
+        #self.solver.bottom[1][0] = 6
+        #self.solver.bottom[2][2] = 3
+        #self.solver.bottom[2][1] = 3
+        #self.solver.bottom[0][2] = 4
+        #self.solver.bottom[1][2] = 4
         while self.running:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:  # Quit the Game
