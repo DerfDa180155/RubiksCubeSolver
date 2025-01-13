@@ -108,17 +108,22 @@ class RubiksCubeSolver:
         match move:
             case "UP":
                 self.top = self.rotate(self.top)
+                self.rotateAdjacent(self.back, self.right, self.front, self.left)
             case "Front":
                 self.front = self.rotate(self.front)
                 self.rotateAdjacent(self.top, self.right, self.bottom, self.left)
             case "Down":
                 self.bottom = self.rotate(self.bottom)
+                self.rotateAdjacent(self.front, self.right, self.back, self.left)
             case "Back":
                 self.back = self.rotate(self.back)
+                self.rotateAdjacent(self.bottom, self.right, self.top, self.left)
             case "Left":
                 self.left = self.rotate(self.left)
+                self.rotateAdjacent(self.top, self.front, self.back, self.bottom)
             case "Right":
                 self.right = self.rotate(self.right)
+                self.rotateAdjacent(self.top, self.back, self.front, self.bottom)
 
     def rotate(self, side):
         newSide = self.generateEmptySide(side[1][1])
