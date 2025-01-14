@@ -108,22 +108,22 @@ class RubiksCubeSolver:
         match move:
             case "UP":
                 self.top = self.rotate(self.top)
-                self.rotateAdjacent(self.back, self.right, self.front, self.left)
+                self.rotateAdjacent(self.back, [[0,2],[1,2],[2,2]], self.right, [[2,0],[1,0],[0,0]], self.front, [[2,0],[1,0],[0,0]], self.left, [[2,0],[1,0],[0,0]])
             case "Front":
                 self.front = self.rotate(self.front)
-                self.rotateAdjacent(self.top, self.right, self.bottom, self.left)
+                self.rotateAdjacent(self.top, [[0,2],[1,2],[2,2]], self.right, [[0,0],[0,1],[0,2]], self.bottom, [[2,0],[1,0],[0,0]], self.left, [[2,2],[2,1],[2,0]])
             case "Down":
                 self.bottom = self.rotate(self.bottom)
-                self.rotateAdjacent(self.front, self.right, self.back, self.left)
+                self.rotateAdjacent(self.front, [[0,2],[1,2],[2,2]], self.right, [[0,2],[1,2],[2,2]], self.back, [[2,0],[1,0],[0,0]], self.left, [[0,2],[1,2],[2,2]])
             case "Back":
                 self.back = self.rotate(self.back)
-                self.rotateAdjacent(self.bottom, self.right, self.top, self.left)
+                self.rotateAdjacent(self.bottom, [[0,2],[1,2],[2,2]], self.right, [[2,2],[2,1],[2,0]], self.top, [[2,0],[1,0],[0,0]], self.left, [[0,0],[0,1],[0,2]])
             case "Left":
                 self.left = self.rotate(self.left)
-                self.rotateAdjacent(self.top, self.front, self.back, self.bottom)
+                self.rotateAdjacent(self.top, [[0,0],[0,1],[0,2]], self.front, [[0,0],[0,1],[0,2]], self.bottom, [[0,0],[0,1],[0,2]], self.back, [[0,0],[0,1],[0,2]])
             case "Right":
                 self.right = self.rotate(self.right)
-                self.rotateAdjacent(self.top, self.back, self.front, self.bottom)
+                self.rotateAdjacent(self.top, [[2,2],[2,1],[2,0]], self.back, [[2,2],[2,1],[2,0]], self.bottom, [[2,2],[2,1],[2,0]], self.front, [[2,2],[2,1],[2,0]])
 
     def rotate(self, side):
         newSide = self.generateEmptySide(side[1][1])
@@ -150,24 +150,24 @@ class RubiksCubeSolver:
 
         return newSide
 
-    def rotateAdjacent(self, top, right, bottom, left):
-        temp = [top[0][2],top[1][2],top[2][2]]
+    def rotateAdjacent(self, top, topPositions, right, rightPostions, bottom, bottomPositions, left, leftPositions):
+        temp = [top[topPositions[0][0]][topPositions[0][1]],top[topPositions[1][0]][topPositions[1][1]],top[topPositions[2][0]][topPositions[2][1]]]
 
-        top[0][2] = left[2][2]
-        top[1][2] = left[2][1]
-        top[2][2] = left[2][0]
+        top[topPositions[0][0]][topPositions[0][1]] = left[leftPositions[0][0]][leftPositions[0][1]]
+        top[topPositions[1][0]][topPositions[1][1]] = left[leftPositions[1][0]][leftPositions[1][1]]
+        top[topPositions[2][0]][topPositions[2][1]] = left[leftPositions[2][0]][leftPositions[2][1]]
 
-        left[2][0] = bottom[0][0]
-        left[2][1] = bottom[1][0]
-        left[2][2] = bottom[2][0]
+        left[leftPositions[0][0]][leftPositions[0][1]] = bottom[bottomPositions[0][0]][bottomPositions[0][1]]
+        left[leftPositions[1][0]][leftPositions[1][1]] = bottom[bottomPositions[1][0]][bottomPositions[1][1]]
+        left[leftPositions[2][0]][leftPositions[2][1]] = bottom[bottomPositions[2][0]][bottomPositions[2][1]]
 
-        bottom[2][0] = right[0][0]
-        bottom[1][0] = right[0][1]
-        bottom[0][0] = right[0][2]
+        bottom[bottomPositions[0][0]][bottomPositions[0][1]] = right[rightPostions[0][0]][rightPostions[0][1]]
+        bottom[bottomPositions[1][0]][bottomPositions[1][1]] = right[rightPostions[1][0]][rightPostions[1][1]]
+        bottom[bottomPositions[2][0]][bottomPositions[2][1]] = right[rightPostions[2][0]][rightPostions[2][1]]
 
-        right[0][0] = temp[0]
-        right[0][1] = temp[1]
-        right[0][2] = temp[2]
+        right[rightPostions[0][0]][rightPostions[0][1]] = temp[0]
+        right[rightPostions[1][0]][rightPostions[1][1]] = temp[1]
+        right[rightPostions[2][0]][rightPostions[2][1]] = temp[2]
 
     def solve(self):
         pass
