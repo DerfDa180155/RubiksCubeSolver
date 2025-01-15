@@ -65,7 +65,7 @@ class main:
             self.screen.fill((50, 50, 50))
 
 
-
+            self.solver.generateScramble()
 
 
 

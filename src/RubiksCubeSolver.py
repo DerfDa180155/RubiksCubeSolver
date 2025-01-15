@@ -1,3 +1,4 @@
+import random
 
 
 class RubiksCubeSolver:
@@ -106,22 +107,22 @@ class RubiksCubeSolver:
 
     def makeMove(self, move):
         match move:
-            case "UP":
+            case ["UP", "U"]:
                 self.top = self.rotate(self.top)
                 self.rotateAdjacent(self.back, [[0,2],[1,2],[2,2]], self.right, [[2,0],[1,0],[0,0]], self.front, [[2,0],[1,0],[0,0]], self.left, [[2,0],[1,0],[0,0]])
-            case "Front":
+            case ["Front", "F"]:
                 self.front = self.rotate(self.front)
                 self.rotateAdjacent(self.top, [[0,2],[1,2],[2,2]], self.right, [[0,0],[0,1],[0,2]], self.bottom, [[2,0],[1,0],[0,0]], self.left, [[2,2],[2,1],[2,0]])
-            case "Down":
+            case ["Down", "D"]:
                 self.bottom = self.rotate(self.bottom)
                 self.rotateAdjacent(self.front, [[0,2],[1,2],[2,2]], self.right, [[0,2],[1,2],[2,2]], self.back, [[2,0],[1,0],[0,0]], self.left, [[0,2],[1,2],[2,2]])
-            case "Back":
+            case ["Back", "B"]:
                 self.back = self.rotate(self.back)
                 self.rotateAdjacent(self.bottom, [[0,2],[1,2],[2,2]], self.right, [[2,2],[2,1],[2,0]], self.top, [[2,0],[1,0],[0,0]], self.left, [[0,0],[0,1],[0,2]])
-            case "Left":
+            case ["Left", "L"]:
                 self.left = self.rotate(self.left)
                 self.rotateAdjacent(self.top, [[0,0],[0,1],[0,2]], self.front, [[0,0],[0,1],[0,2]], self.bottom, [[0,0],[0,1],[0,2]], self.back, [[0,0],[0,1],[0,2]])
-            case "Right":
+            case ["Right", "R"]:
                 self.right = self.rotate(self.right)
                 self.rotateAdjacent(self.top, [[2,2],[2,1],[2,0]], self.back, [[2,2],[2,1],[2,0]], self.bottom, [[2,2],[2,1],[2,0]], self.front, [[2,2],[2,1],[2,0]])
 
@@ -168,6 +169,23 @@ class RubiksCubeSolver:
         right[rightPostions[0][0]][rightPostions[0][1]] = temp[0]
         right[rightPostions[1][0]][rightPostions[1][1]] = temp[1]
         right[rightPostions[2][0]][rightPostions[2][1]] = temp[2]
+
+    def generateScramble(self):
+        lastMove = ""
+        moves = ["U", "D", "F", "B", "L", "R"]
+        scramble = []
+        for i in range(20):
+            move = moves[random.randint(0, len(moves)-1)]
+            while move == lastMove:
+                move = moves[random.randint(0, len(moves) - 1)]
+            scramble.append(move)
+            lastMove = move
+        print(scramble)
+
+    def scramble(self, scramble):
+        for move in scramble:
+            self.makeMove(move)
+
 
     def solve(self):
         pass
