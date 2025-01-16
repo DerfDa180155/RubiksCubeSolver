@@ -60,12 +60,13 @@ class main:
                         self.solver.makeMove("Left")
                     elif event.key == pygame.K_6:
                         self.solver.makeMove("Right")
+                    elif event.key == pygame.K_SPACE:
+                        self.solver.generateScramble()
 
 
             self.screen.fill((50, 50, 50))
+            print(self.solver.scrambleMoves)
 
-
-            self.solver.generateScramble()
 
 
 

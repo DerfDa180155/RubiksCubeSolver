@@ -10,6 +10,8 @@ class RubiksCubeSolver:
         self.front = self.generateEmptySide(middle=2)
         self.back = self.generateEmptySide(middle=4)
 
+        self.scrambleMoves = []
+
         for i in range(1, 7):
             self.fillSide(i)
 
@@ -20,6 +22,8 @@ class RubiksCubeSolver:
         self.left = self.generateEmptySide(middle=5)
         self.front = self.generateEmptySide(middle=2)
         self.back = self.generateEmptySide(middle=4)
+
+        self.scrambleMoves = []
 
         for i in range(1, 7):
             self.fillSide(i)
@@ -107,22 +111,22 @@ class RubiksCubeSolver:
 
     def makeMove(self, move):
         match move:
-            case ["UP", "U"]:
+            case "UP" | "U":
                 self.top = self.rotate(self.top)
                 self.rotateAdjacent(self.back, [[0,2],[1,2],[2,2]], self.right, [[2,0],[1,0],[0,0]], self.front, [[2,0],[1,0],[0,0]], self.left, [[2,0],[1,0],[0,0]])
-            case ["Front", "F"]:
+            case "Front" | "F":
                 self.front = self.rotate(self.front)
                 self.rotateAdjacent(self.top, [[0,2],[1,2],[2,2]], self.right, [[0,0],[0,1],[0,2]], self.bottom, [[2,0],[1,0],[0,0]], self.left, [[2,2],[2,1],[2,0]])
-            case ["Down", "D"]:
+            case "Down" | "D":
                 self.bottom = self.rotate(self.bottom)
                 self.rotateAdjacent(self.front, [[0,2],[1,2],[2,2]], self.right, [[0,2],[1,2],[2,2]], self.back, [[2,0],[1,0],[0,0]], self.left, [[0,2],[1,2],[2,2]])
-            case ["Back", "B"]:
+            case "Back" | "B":
                 self.back = self.rotate(self.back)
                 self.rotateAdjacent(self.bottom, [[0,2],[1,2],[2,2]], self.right, [[2,2],[2,1],[2,0]], self.top, [[2,0],[1,0],[0,0]], self.left, [[0,0],[0,1],[0,2]])
-            case ["Left", "L"]:
+            case "Left" | "L":
                 self.left = self.rotate(self.left)
                 self.rotateAdjacent(self.top, [[0,0],[0,1],[0,2]], self.front, [[0,0],[0,1],[0,2]], self.bottom, [[0,0],[0,1],[0,2]], self.back, [[0,0],[0,1],[0,2]])
-            case ["Right", "R"]:
+            case "Right" | "R":
                 self.right = self.rotate(self.right)
                 self.rotateAdjacent(self.top, [[2,2],[2,1],[2,0]], self.back, [[2,2],[2,1],[2,0]], self.bottom, [[2,2],[2,1],[2,0]], self.front, [[2,2],[2,1],[2,0]])
 
@@ -173,14 +177,15 @@ class RubiksCubeSolver:
     def generateScramble(self):
         lastMove = ""
         moves = ["U", "D", "F", "B", "L", "R"]
-        scramble = []
+        self.reset()
         for i in range(20):
             move = moves[random.randint(0, len(moves)-1)]
             while move == lastMove:
                 move = moves[random.randint(0, len(moves) - 1)]
-            scramble.append(move)
+            self.scrambleMoves.append(move)
             lastMove = move
-        print(scramble)
+
+        self.scramble(self.scrambleMoves)
 
     def scramble(self, scramble):
         for move in scramble:
