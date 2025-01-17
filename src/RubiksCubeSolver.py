@@ -11,6 +11,7 @@ class RubiksCubeSolver:
         self.back = self.generateEmptySide(middle=4)
 
         self.scrambleMoves = []
+        self.solveMoves = []
 
         for i in range(1, 7):
             self.fillSide(i)
@@ -24,6 +25,7 @@ class RubiksCubeSolver:
         self.back = self.generateEmptySide(middle=4)
 
         self.scrambleMoves = []
+        self.solveMoves = []
 
         for i in range(1, 7):
             self.fillSide(i)
@@ -109,7 +111,9 @@ class RubiksCubeSolver:
 
         return complite
 
-    def makeMove(self, move):
+    def makeMove(self, move, isScrambleMove = False):
+        if not isScrambleMove:
+            self.solveMoves.append(move[:1])
         match move:
             case "UP" | "U":
                 self.top = self.rotate(self.top)
@@ -189,8 +193,7 @@ class RubiksCubeSolver:
 
     def scramble(self, scramble):
         for move in scramble:
-            self.makeMove(move)
-
+            self.makeMove(move, True)
 
     def solve(self):
         pass

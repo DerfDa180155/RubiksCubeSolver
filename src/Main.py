@@ -63,11 +63,22 @@ class main:
                     elif event.key == pygame.K_SPACE:
                         self.solver.generateScramble()
 
+            self.windowWidth = self.screen.get_width()
+            self.windowHeight = self.screen.get_height()
 
             self.screen.fill((50, 50, 50))
-            print(self.solver.scrambleMoves)
 
+            textSize = int((50 * self.windowWidth) / 2000)  # scale text size
+            font = pygame.font.Font(pygame.font.get_default_font(), textSize)
+            debugText = ["Scramble: " + str(self.solver.scrambleMoves), "Solve: " + str(self.solver.solveMoves)]
 
+            for i in range(len(debugText)):
+                # settings Text
+                text = font.render(debugText[i], True, (255,255,255))
+                newRect = text.get_rect()
+                newRect.x = 1000
+                newRect.y = ((10 * self.windowHeight) / 900) + textSize * i + textSize * i / 2
+                self.screen.blit(text, newRect)
 
 
             # draw cube
