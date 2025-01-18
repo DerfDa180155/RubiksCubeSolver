@@ -12,6 +12,7 @@ class RubiksCubeSolver:
 
         self.scrambleMoves = []
         self.solveMoves = []
+        self.state = 0
 
         for i in range(1, 7):
             self.fillSide(i)
@@ -26,6 +27,7 @@ class RubiksCubeSolver:
 
         self.scrambleMoves = []
         self.solveMoves = []
+        self.state = 0
 
         for i in range(1, 7):
             self.fillSide(i)
@@ -195,6 +197,20 @@ class RubiksCubeSolver:
         for move in scramble:
             self.makeMove(move, True)
 
+    def solveState(self):
+        match self.state:
+            case 0: # cross
+                if self.top[1][0] == 1 and self.top[2][1] == 1 and self.top[1][2] == 1 and self.top[0][1] == 1 and self.back[1][2] == 4 and self.right[1][0] == 6 and self.front[1][0] == 2 and self.left[1][0] == 5:
+                    self.state += 1
+            case 1: # corners
+                pass
+            case 2: # 2nd layer
+                pass
+            case 3: # OLL
+                pass
+            case 4: # PLL
+                pass
+
     def solve(self):
-        pass
+        self.solveState()
 
