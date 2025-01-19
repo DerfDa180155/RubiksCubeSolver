@@ -203,7 +203,8 @@ class RubiksCubeSolver:
                 if self.top[1][0] == 1 and self.top[2][1] == 1 and self.top[1][2] == 1 and self.top[0][1] == 1 and self.back[1][2] == 4 and self.right[1][0] == 6 and self.front[1][0] == 2 and self.left[1][0] == 5:
                     self.state += 1
             case 1: # corners
-                pass
+                if self.top[0][0] == 1 and self.top[2][0] == 1 and self.top[2][2] == 1 and self.top[0][2] == 1 and self.back[2][2] == 4 and self.back[0][2] == 4 and self.right[2][0] == 6 and self.right[0][0] == 6 and self.front[2][0] == 2 and self.front[0][0] == 2 and self.left[2][0] == 5 and self.left[0][0] == 5:
+                    self.state += 1
             case 2: # 2nd layer
                 pass
             case 3: # OLL

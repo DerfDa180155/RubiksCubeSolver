@@ -109,8 +109,8 @@ class main:
                         pygame.draw.rect(self.screen, color, (x, y, width, height))
 
             print(self.solver.top)
-
-
+            self.solver.solve()
+            print(self.solver.state)
 
 
 
