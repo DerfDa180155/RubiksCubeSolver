@@ -206,7 +206,8 @@ class RubiksCubeSolver:
                 if self.top[0][0] == 1 and self.top[2][0] == 1 and self.top[2][2] == 1 and self.top[0][2] == 1 and self.back[2][2] == 4 and self.back[0][2] == 4 and self.right[2][0] == 6 and self.right[0][0] == 6 and self.front[2][0] == 2 and self.front[0][0] == 2 and self.left[2][0] == 5 and self.left[0][0] == 5:
                     self.state += 1
             case 2: # 2nd layer
-                pass
+                if self.front[2][1] == 2 and self.front[0][1] == 2 and self.left[2][1] == 5 and self.left[0][1] == 5 and self.back[0][1] == 4 and self.back[2][1] == 4 and self.right[2][1] == 6 and self.right[0][2] == 6:
+                    self.state += 1
             case 3: # OLL
                 pass
             case 4: # PLL
