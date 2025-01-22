@@ -212,7 +212,8 @@ class RubiksCubeSolver:
                 if self.bottom[0][0] == 3 and self.bottom[1][0] == 3 and self.bottom[2][0] == 3 and self.bottom[2][1] == 3 and self.bottom[2][2] == 3 and self.bottom[1][2] == 3 and self.bottom[0][2] == 3 and self.bottom[0][1] == 3:
                     self.state += 1
             case 4: # PLL
-                pass
+                if self.front[0][2] == 2 and self.front[1][2] == 2 and self.front[2][2] == 2 and self.left[0][2] == 5 and self.left[1][2] == 5 and self.left[2][2] == 5 and self.back[2][0] == 4 and self.back[1][0] == 4 and self.back[0][0] == 4 and self.right[0][2] == 6 and self.right[1][2] == 6 and self.right[2][2] == 6:
+                    self.state += 1
 
     def solve(self):
         self.solveState()
