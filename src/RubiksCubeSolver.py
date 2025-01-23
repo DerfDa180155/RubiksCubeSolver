@@ -118,28 +118,44 @@ class RubiksCubeSolver:
             self.solveMoves.append(move[:1])
         match move:
             case "UP" | "U":
-                self.top = self.rotate(self.top)
+                self.top = self.rotate(self.top, True)
                 self.rotateAdjacent(self.back, [[0,2],[1,2],[2,2]], self.right, [[2,0],[1,0],[0,0]], self.front, [[2,0],[1,0],[0,0]], self.left, [[2,0],[1,0],[0,0]])
+            case "U'":
+                self.top = self.rotate(self.top, False)
             case "Front" | "F":
-                self.front = self.rotate(self.front)
+                self.front = self.rotate(self.front, True)
                 self.rotateAdjacent(self.top, [[0,2],[1,2],[2,2]], self.right, [[0,0],[0,1],[0,2]], self.bottom, [[2,0],[1,0],[0,0]], self.left, [[2,2],[2,1],[2,0]])
+            case "F'":
+                self.front = self.rotate(self.front, False)
             case "Down" | "D":
-                self.bottom = self.rotate(self.bottom)
+                self.bottom = self.rotate(self.bottom, True)
                 self.rotateAdjacent(self.front, [[0,2],[1,2],[2,2]], self.right, [[0,2],[1,2],[2,2]], self.back, [[2,0],[1,0],[0,0]], self.left, [[0,2],[1,2],[2,2]])
+            case "D'":
+                self.bottom = self.rotate(self.bottom, False)
             case "Back" | "B":
-                self.back = self.rotate(self.back)
+                self.back = self.rotate(self.back, True)
                 self.rotateAdjacent(self.bottom, [[0,2],[1,2],[2,2]], self.right, [[2,2],[2,1],[2,0]], self.top, [[2,0],[1,0],[0,0]], self.left, [[0,0],[0,1],[0,2]])
+            case "B'":
+                self.back = self.rotate(self.back, False)
             case "Left" | "L":
-                self.left = self.rotate(self.left)
+                self.left = self.rotate(self.left, True)
                 self.rotateAdjacent(self.top, [[0,0],[0,1],[0,2]], self.front, [[0,0],[0,1],[0,2]], self.bottom, [[0,0],[0,1],[0,2]], self.back, [[0,0],[0,1],[0,2]])
+            case "L'":
+                self.left = self.rotate(self.left, False)
             case "Right" | "R":
-                self.right = self.rotate(self.right)
+                self.right = self.rotate(self.right, True)
                 self.rotateAdjacent(self.top, [[2,2],[2,1],[2,0]], self.back, [[2,2],[2,1],[2,0]], self.bottom, [[2,2],[2,1],[2,0]], self.front, [[2,2],[2,1],[2,0]])
+            case "R'":
+                self.right = self.rotate(self.right, False)
 
-    def rotate(self, side):
+    def rotate(self, side, clockwise):
         newSide = self.generateEmptySide(side[1][1])
-        corners = [[0,0], [0,2], [2,2], [2,0]]
-        edges = [[0,1], [1,2], [2,1], [1,0]]
+        if clockwise:
+            corners = [[0,0], [0,2], [2,2], [2,0]]
+            edges = [[0,1], [1,2], [2,1], [1,0]]
+        else:
+            corners = [[0, 0], [2, 0], [2, 2], [0, 2]]
+            edges = [[0, 1], [1, 0], [2, 1], [1, 2]]
 
         temp = side[corners[0][0]][corners[0][1]]
         i = 1
