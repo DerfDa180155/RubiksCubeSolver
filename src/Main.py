@@ -20,6 +20,7 @@ class main:
         self.running = True
 
         self.solver = RubiksCubeSolver.RubiksCubeSolver()
+        self.invertedMove = False
 
         self.run()
 
@@ -48,18 +49,20 @@ class main:
                 elif event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_ESCAPE:  # Quit the Game
                         self.running = False
+                    elif event.key == pygame.K_w:
+                        self.invertedMove = not self.invertedMove
                     elif event.key == pygame.K_1:
-                        self.solver.makeMove("UP")
+                        self.solver.makeMove("U" + ("'" if self.invertedMove else ""))
                     elif event.key == pygame.K_2:
-                        self.solver.makeMove("Down")
+                        self.solver.makeMove("D" + ("'" if self.invertedMove else ""))
                     elif event.key == pygame.K_3:
-                        self.solver.makeMove("Front")
+                        self.solver.makeMove("F" + ("'" if self.invertedMove else ""))
                     elif event.key == pygame.K_4:
-                        self.solver.makeMove("Back")
+                        self.solver.makeMove("B" + ("'" if self.invertedMove else ""))
                     elif event.key == pygame.K_5:
-                        self.solver.makeMove("Left")
+                        self.solver.makeMove("L" + ("'" if self.invertedMove else ""))
                     elif event.key == pygame.K_6:
-                        self.solver.makeMove("Right")
+                        self.solver.makeMove("R" + ("'" if self.invertedMove else ""))
                     elif event.key == pygame.K_SPACE:
                         self.solver.generateScramble()
 
@@ -108,9 +111,9 @@ class main:
 
                         pygame.draw.rect(self.screen, color, (x, y, width, height))
 
-            print(self.solver.top)
+            #print(self.solver.top)
             self.solver.solve()
-            print(self.solver.state)
+            #print(self.solver.state)
 
 
 
