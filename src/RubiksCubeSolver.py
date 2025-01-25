@@ -115,7 +115,10 @@ class RubiksCubeSolver:
 
     def makeMove(self, move, isScrambleMove = False):
         if not isScrambleMove:
-            self.solveMoves.append(move[:1])
+            if move.find("'") != -1:
+                self.solveMoves.append(move[:2])
+            else:
+                self.solveMoves.append(move[:1])
         match move:
             case "UP" | "U":
                 self.top = self.rotate(self.top, True)
