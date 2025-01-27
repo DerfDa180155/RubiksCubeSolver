@@ -222,6 +222,10 @@ class RubiksCubeSolver:
         for move in scramble:
             self.makeMove(move, True)
 
+    def doAlgorithm(self, algorithm):
+        for move in algorithm:
+            self.makeMove(move, False)
+
     def solveState(self):
         match self.state:
             case 0: # cross
@@ -243,3 +247,14 @@ class RubiksCubeSolver:
     def solve(self):
         self.solveState()
 
+        match self.state:
+            case 0: # cross
+                pass
+            case 1: # corners
+                pass
+            case 2: # 2nd layer
+                pass
+            case 3: # OLL
+                pass
+            case 4: # PLL
+                pass
