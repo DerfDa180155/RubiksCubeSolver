@@ -245,6 +245,7 @@ class RubiksCubeSolver:
                     self.state += 1
 
     def solve(self):
+        print("solver")
         self.solveState()
 
         match self.state:

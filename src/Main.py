@@ -49,6 +49,8 @@ class main:
                 elif event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_ESCAPE:  # Quit the Game
                         self.running = False
+                    elif event.key == pygame.K_s:
+                        self.solver.solve()
                     elif event.key == pygame.K_w:
                         self.invertedMove = not self.invertedMove
                     elif event.key == pygame.K_1:
@@ -111,9 +113,6 @@ class main:
 
                         pygame.draw.rect(self.screen, color, (x, y, width, height))
 
-            #print(self.solver.top)
-            self.solver.solve()
-            #print(self.solver.state)
 
 
 
