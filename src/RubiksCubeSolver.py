@@ -250,7 +250,7 @@ class RubiksCubeSolver:
 
         match self.state:
             case 0: # cross
-                pass
+                self.crossSolver()
             case 1: # corners
                 pass
             case 2: # 2nd layer
@@ -259,3 +259,20 @@ class RubiksCubeSolver:
                 pass
             case 4: # PLL
                 pass
+
+
+    def crossSolver(self):
+        # correct edges
+        edges = []
+        edges.append(self.top[1][2] == 1 and self.front[1][0] == 2)
+        edges.append(self.top[0][1] == 1 and self.left[1][0] == 5)
+        edges.append(self.top[1][0] == 1 and self.back[1][2] == 4)
+        edges.append(self.top[2][1] == 1 and self.right[1][0] == 6)
+
+        print(edges)
+
+
+
+
+
+
