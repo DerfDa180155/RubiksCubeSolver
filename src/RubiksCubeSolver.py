@@ -1,5 +1,7 @@
 import random
 
+from numpy.random import vonmises
+
 
 class RubiksCubeSolver:
     def __init__(self):
@@ -269,8 +271,32 @@ class RubiksCubeSolver:
         edges.append(self.top[1][0] == 1 and self.back[1][2] == 4)
         edges.append(self.top[2][1] == 1 and self.right[1][0] == 6)
 
+        color = [2,5,4,6]
+
         print(edges)
 
+        bottomEdges = []
+        bottomEdges.append([self.bottom[1][0], self.front[1][2], self.front[1][1], ["F", "F"]])
+        bottomEdges.append([self.bottom[0][1], self.left[1][2], self.left[1][1], ["L", "L"]])
+        bottomEdges.append([self.bottom[1][2], self.back[1][0], self.back[1][1], ["B", "B"]])
+        bottomEdges.append([self.bottom[2][1], self.right[1][2], self.right[1][1], ["R", "R"]])
+
+        for i in range(len(bottomEdges)):
+            if bottomEdges[i][0] == 1:
+                if bottomEdges[i][1] == bottomEdges[i][2]:
+                    self.doAlgorithm(bottomEdges[i][3])
+                else:
+                    self.makeMove("D")
+                    bottomEdges = []
+                    bottomEdges.append([self.bottom[1][0], self.front[1][2], self.front[1][1], ["F", "F"]])
+                    bottomEdges.append([self.bottom[0][1], self.left[1][2], self.left[1][1], ["L", "L"]])
+                    bottomEdges.append([self.bottom[1][2], self.back[1][0], self.back[1][1], ["B", "B"]])
+                    bottomEdges.append([self.bottom[2][1], self.right[1][2], self.right[1][1], ["R", "R"]])
+
+
+        for i in range(len(edges)):
+            if not edges[i]:
+                pass
 
 
 
