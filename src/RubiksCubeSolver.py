@@ -281,18 +281,29 @@ class RubiksCubeSolver:
         bottomEdges.append([self.bottom[1][2], self.back[1][0], self.back[1][1], ["B", "B"]])
         bottomEdges.append([self.bottom[2][1], self.right[1][2], self.right[1][1], ["R", "R"]])
 
+        rotateBottom = False
+        edgeFound = False
+
         for i in range(len(bottomEdges)):
             if bottomEdges[i][0] == 1:
-                if bottomEdges[i][1] == bottomEdges[i][2]:
-                    self.doAlgorithm(bottomEdges[i][3])
-                else:
-                    self.makeMove("D")
-                    bottomEdges = []
-                    bottomEdges.append([self.bottom[1][0], self.front[1][2], self.front[1][1], ["F", "F"]])
-                    bottomEdges.append([self.bottom[0][1], self.left[1][2], self.left[1][1], ["L", "L"]])
-                    bottomEdges.append([self.bottom[1][2], self.back[1][0], self.back[1][1], ["B", "B"]])
-                    bottomEdges.append([self.bottom[2][1], self.right[1][2], self.right[1][1], ["R", "R"]])
+                edgeFound = True
 
+        while edgeFound:
+            edgeFound = False
+            for i in range(len(bottomEdges)):
+                if bottomEdges[i][0] == 1:
+                    if bottomEdges[i][1] == bottomEdges[i][2]:
+                        self.doAlgorithm(bottomEdges[i][3])
+                    else:
+                        rotateBottom = True
+                        edgeFound = True
+            if rotateBottom:
+                self.makeMove("D")
+                bottomEdges = []
+                bottomEdges.append([self.bottom[1][0], self.front[1][2], self.front[1][1], ["F", "F"]])
+                bottomEdges.append([self.bottom[0][1], self.left[1][2], self.left[1][1], ["L", "L"]])
+                bottomEdges.append([self.bottom[1][2], self.back[1][0], self.back[1][1], ["B", "B"]])
+                bottomEdges.append([self.bottom[2][1], self.right[1][2], self.right[1][1], ["R", "R"]])
 
         for i in range(len(edges)):
             if not edges[i]:
