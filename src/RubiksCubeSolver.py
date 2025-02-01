@@ -252,15 +252,16 @@ class RubiksCubeSolver:
 
         match self.state:
             case 0: # cross
+                print("cross")
                 self.crossSolver()
             case 1: # corners
-                pass
+                print("corners")
             case 2: # 2nd layer
-                pass
+                print("2nd layer")
             case 3: # OLL
-                pass
+                print("OLL")
             case 4: # PLL
-                pass
+                print("PLL")
 
 
     def crossSolver(self):
