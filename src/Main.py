@@ -106,10 +106,10 @@ class main:
                                 color = (255,255,0)
                             case 4: # green
                                 color = (0, 255, 0)
-                            case 5: # orange
-                                color = (255, 165, 0)
-                            case 6: # red
-                                color = (255, 0 ,0)
+                            case 5: # red
+                                color = (255, 0, 0)
+                            case 6: # orange
+                                color = (255, 165 ,0)
 
                         pygame.draw.rect(self.screen, color, (x, y, width, height))
 
