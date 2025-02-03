@@ -272,6 +272,12 @@ class RubiksCubeSolver:
         edges.append(self.top[1][0] == 1 and self.back[1][2] == 4)
         edges.append(self.top[2][1] == 1 and self.right[1][0] == 6)
 
+        searchEdges = []
+        searchEdges.append([self.front[1][2], ["F", "L", "D", "D", "L'", "F'"]])
+        searchEdges.append([self.left[1][2], ["L", "B", "D", "D", "B'", "L'"]])
+        searchEdges.append([self.back[1][0], ["B", "R", "D", "D", "R'", "B'"]])
+        searchEdges.append([self.right[1][2], ["R", "F", "D", "D", "F'", "R'"]])
+
         color = [2,5,4,6]
 
         print(edges)
@@ -306,11 +312,11 @@ class RubiksCubeSolver:
                 bottomEdges.append([self.bottom[1][2], self.back[1][0], self.back[1][1], ["B", "B"]])
                 bottomEdges.append([self.bottom[2][1], self.right[1][2], self.right[1][1], ["R", "R"]])
 
-        for i in range(len(edges)):
-            if not edges[i]:
-                pass
 
 
+        for edge in searchEdges:
+            if edge[0] == 1:
+                self.doAlgorithm(edge[1])
 
 
 
