@@ -291,6 +291,12 @@ class RubiksCubeSolver:
         searchEdges.append([self.back[0][1], ["L'", "D'", "L'"]])
         searchEdges.append([self.right[2][1], ["B'", "D'", "B"]])
 
+        # top side edges
+        searchEdges.append([self.front[1][0], ["F", "R'", "D", "R", "F'"]])
+        searchEdges.append([self.left[1][0], ["L", "F'", "D", "F", "L'"]])
+        searchEdges.append([self.back[1][2], ["B", "L'", "D", "L", "B'"]])
+        searchEdges.append([self.right[1][0], ["R", "B'", "D", "B", "R'"]])
+
         color = [2,5,4,6]
 
         print(edges)
