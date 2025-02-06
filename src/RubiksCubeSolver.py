@@ -282,13 +282,13 @@ class RubiksCubeSolver:
         # left side edges
         searchEdges.append([self.front[0][1], ["L", "D", "L'"]])
         searchEdges.append([self.left[0][1], ["B", "D", "B'"]])
-        searchEdges.append([self.back[2][1], ["R", "D", "R''"]])
+        searchEdges.append([self.back[2][1], ["R", "D", "R'"]])
         searchEdges.append([self.right[0][1], ["F", "D", "F'"]])
 
         # right side edges
         searchEdges.append([self.front[2][1], ["R'", "D'", "R"]])
         searchEdges.append([self.left[2][1], ["F'", "D'", "F"]])
-        searchEdges.append([self.back[0][1], ["L'", "D'", "L'"]])
+        searchEdges.append([self.back[0][1], ["L'", "D'", "L"]])
         searchEdges.append([self.right[2][1], ["B'", "D'", "B"]])
 
         # top side edges
@@ -337,5 +337,5 @@ class RubiksCubeSolver:
             if edge[0] == 1:
                 self.doAlgorithm(edge[1])
 
-
+        print(self.solveMoves)
 
