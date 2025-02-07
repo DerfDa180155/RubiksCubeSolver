@@ -266,11 +266,11 @@ class RubiksCubeSolver:
 
     def crossSolver(self):
         # correct edges
-        edges = []
-        edges.append(self.top[1][2] == 1 and self.front[1][0] == 2)
-        edges.append(self.top[0][1] == 1 and self.left[1][0] == 5)
-        edges.append(self.top[1][0] == 1 and self.back[1][2] == 4)
-        edges.append(self.top[2][1] == 1 and self.right[1][0] == 6)
+        topEdges = []
+        topEdges.append([self.top[1][2] == 1, self.front[1][0], 2, ["F", "F"]])
+        topEdges.append([self.top[0][1] == 1, self.left[1][0], 5, ["L", "L"]])
+        topEdges.append([self.top[1][0] == 1, self.back[1][2], 4, ["B", "B"]])
+        topEdges.append([self.top[2][1] == 1, self.right[1][0], 6, ["R", "R"]])
 
         searchEdges = []
         # bottom side edges
@@ -297,10 +297,7 @@ class RubiksCubeSolver:
         searchEdges.append([self.back[1][2], ["B", "L'", "D", "L", "B'"]])
         searchEdges.append([self.right[1][0], ["R", "B'", "D", "B", "R'"]])
 
-        color = [2,5,4,6]
-
-        print(edges)
-
+        # solve bottom top edges
         bottomEdges = []
         bottomEdges.append([self.bottom[1][0], self.front[1][2], self.front[1][1], ["F", "F"]])
         bottomEdges.append([self.bottom[0][1], self.left[1][2], self.left[1][1], ["L", "L"]])
@@ -331,8 +328,12 @@ class RubiksCubeSolver:
                 bottomEdges.append([self.bottom[1][2], self.back[1][0], self.back[1][1], ["B", "B"]])
                 bottomEdges.append([self.bottom[2][1], self.right[1][2], self.right[1][1], ["R", "R"]])
 
+        # check wrong top piece
+        for edge in topEdges:
+            if edge[0] and edge[1] != edge[2]:
+                self.doAlgorithm(edge[3])
 
-
+        # move edges to bottom
         for edge in searchEdges:
             if edge[0] == 1:
                 self.doAlgorithm(edge[1])
