@@ -298,6 +298,23 @@ class RubiksCubeSolver:
         searchEdges.append([self.right[1][0], ["R", "B'", "D", "B", "R'"]])
 
         # solve bottom top edges
+        self.moveBottomToTop()
+
+        # check wrong top piece
+        for edge in topEdges:
+            if edge[0] and edge[1] != edge[2]:
+                self.doAlgorithm(edge[3])
+                self.moveBottomToTop()
+
+        # move edges to bottom
+        for edge in searchEdges:
+            if edge[0] == 1:
+                self.doAlgorithm(edge[1])
+                self.moveBottomToTop()
+
+        print(self.solveMoves)
+
+    def moveBottomToTop(self):
         bottomEdges = []
         bottomEdges.append([self.bottom[1][0], self.front[1][2], self.front[1][1], ["F", "F"]])
         bottomEdges.append([self.bottom[0][1], self.left[1][2], self.left[1][1], ["L", "L"]])
@@ -327,16 +344,3 @@ class RubiksCubeSolver:
                 bottomEdges.append([self.bottom[0][1], self.left[1][2], self.left[1][1], ["L", "L"]])
                 bottomEdges.append([self.bottom[1][2], self.back[1][0], self.back[1][1], ["B", "B"]])
                 bottomEdges.append([self.bottom[2][1], self.right[1][2], self.right[1][1], ["R", "R"]])
-
-        # check wrong top piece
-        for edge in topEdges:
-            if edge[0] and edge[1] != edge[2]:
-                self.doAlgorithm(edge[3])
-
-        # move edges to bottom
-        for edge in searchEdges:
-            if edge[0] == 1:
-                self.doAlgorithm(edge[1])
-
-        print(self.solveMoves)
-
