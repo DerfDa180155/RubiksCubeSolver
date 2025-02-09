@@ -256,6 +256,7 @@ class RubiksCubeSolver:
                 self.crossSolver()
             case 1: # corners
                 print("corners")
+                self.cornerSolver()
             case 2: # 2nd layer
                 print("2nd layer")
             case 3: # OLL
@@ -344,3 +345,20 @@ class RubiksCubeSolver:
                 bottomEdges.append([self.bottom[0][1], self.left[1][2], self.left[1][1], ["L", "L"]])
                 bottomEdges.append([self.bottom[1][2], self.back[1][0], self.back[1][1], ["B", "B"]])
                 bottomEdges.append([self.bottom[2][1], self.right[1][2], self.right[1][1], ["R", "R"]])
+
+    def cornerSolver(self):
+        topCorner = []
+        topCorner.append(self.top[0][0] == 1)
+        topCorner.append(self.top[2][0] == 1)
+        topCorner.append(self.top[2][2] == 1)
+        topCorner.append(self.top[0][2] == 1)
+
+
+
+
+
+
+
+
+
+
