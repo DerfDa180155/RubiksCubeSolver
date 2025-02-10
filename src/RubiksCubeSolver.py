@@ -353,9 +353,19 @@ class RubiksCubeSolver:
         topCorner.append(self.top[2][2] == 1)
         topCorner.append(self.top[0][2] == 1)
 
+        searchCorners = []
+        searchCorners.append([self.top[0][2], self.left[2][2] == self.left[1][1], ["F'", "D'", "F"]])
+        searchCorners.append([self.top[2][2], self.right[0][2] == self.right[1][1], ["F", "D", "F'"]])
+        searchCorners.append([self.left[0][2], self.back[0][0] == self.back[1][1], ["L'", "D'", "L"]])
+        searchCorners.append([self.left[2][2], self.front[0][2] == self.front[1][1], ["L", "D", "L'"]])
+        searchCorners.append([self.back[2][0], self.right[2][2] == self.right[1][1], ["B'", "D'", "B"]])
+        searchCorners.append([self.back[0][0], self.left[0][2] == self.left[1][1], ["B", "D", "B'"]])
+        searchCorners.append([self.right[0][2], self.front[2][2] == self.front[1][1], ["R'", "D'", "R"]])
+        searchCorners.append([self.right[2][2], self.back[2][0] == self.back[1][1], ["R", "D", "R'"]])
 
-
-
+        for corner in searchCorners:
+            if corner[0] == 1 and corner[1]:
+                self.doAlgorithm(corner[2])
 
 
 
