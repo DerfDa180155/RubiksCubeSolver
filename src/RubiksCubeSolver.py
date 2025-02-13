@@ -354,6 +354,12 @@ class RubiksCubeSolver:
         topCorner.append([self.top[2][2] == 1, self.right[0][0] != self.right[1][1], ["R'", "D", "R"]])
         topCorner.append([self.top[0][2] == 1, self.left[2][0] != self.left[1][1], ["L", "D'", "L'"]])
 
+        bottomCorner = []
+        bottomCorner.append([self.bottom[0][2] == 1, self.top[0][0] != 1, ["B", "D'", "B'"]])
+        bottomCorner.append([self.bottom[2][2] == 1, self.top[2][0] != 1, ["B'", "D", "B"]])
+        bottomCorner.append([self.bottom[2][0] == 1, self.top[2][2] != 1, ["F", "D'", "F'"]])
+        bottomCorner.append([self.bottom[0][0] == 1, self.top[0][2] != 1, ["F'", "D", "F"]])
+
         searchCorners = []
         searchCorners.append([self.front[0][2], self.left[2][2] == self.left[1][1], ["F'", "D'", "F"]])
         searchCorners.append([self.front[2][2], self.right[0][2] == self.right[1][1], ["F", "D", "F'"]])
@@ -391,6 +397,17 @@ class RubiksCubeSolver:
                 searchCorners.append([self.back[0][0], self.left[0][2] == self.left[1][1], ["B", "D", "B'"]])
                 searchCorners.append([self.right[0][2], self.front[2][2] == self.front[1][1], ["R'", "D'", "R"]])
                 searchCorners.append([self.right[2][2], self.back[2][0] == self.back[1][1], ["R", "D", "R'"]])
+
+        # bottom corners
+        foundCorner = False
+        for corner in bottomCorner:
+            if corner[0]:
+                foundCorner = True
+                if corner[1]:
+                    self.doAlgorithm(corner[2])
+                    foundCorner = False
+            if foundCorner:
+                self.makeMove("D")
 
         # wrong top corners
         for corner in topCorner:
