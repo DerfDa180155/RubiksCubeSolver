@@ -259,6 +259,7 @@ class RubiksCubeSolver:
                 self.cornerSolver()
             case 2: # 2nd layer
                 print("2nd layer")
+                self.secondLayer()
             case 3: # OLL
                 print("OLL")
             case 4: # PLL
@@ -314,8 +315,6 @@ class RubiksCubeSolver:
             if edge[0] == 1:
                 self.doAlgorithm(edge[1])
                 self.moveBottomToTop()
-
-        print(self.solveMoves)
 
     def moveBottomToTop(self):
         bottomEdges = []
@@ -455,5 +454,10 @@ class RubiksCubeSolver:
             if corner[0]:
                 self.doAlgorithm(corner[1])
 
-
+    def secondLayer(self):
+        solvedEdges = []
+        solvedEdges.append(self.front[0][1] == self.front[1][1] and self.left[2][1] == self.left[1][1])
+        solvedEdges.append(self.left[0][1] == self.left[1][1] and self.back[0][1] == self.back[1][1])
+        solvedEdges.append(self.back[2][1] == self.back[1][1] and self.right[2][1] == self.right[1][1])
+        solvedEdges.append(self.right[0][1] == self.right[1][1] and self.front[2][1] == self.front[1][1])
 
