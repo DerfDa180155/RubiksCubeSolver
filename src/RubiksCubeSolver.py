@@ -461,3 +461,15 @@ class RubiksCubeSolver:
         solvedEdges.append(self.back[2][1] == self.back[1][1] and self.right[2][1] == self.right[1][1])
         solvedEdges.append(self.right[0][1] == self.right[1][1] and self.front[2][1] == self.front[1][1])
 
+        searchEdges = []
+        searchEdges.append([self.front[1][2] == self.front[1][1], self.bottom[1][0] == self.right[1][1], []])
+        searchEdges.append([self.front[1][2] == self.front[1][1], self.bottom[1][0] == self.left[1][1], []])
+        searchEdges.append([self.left[1][2] == self.left[1][1], self.bottom[0][1] == self.front[1][1], []])
+        searchEdges.append([self.left[1][2] == self.left[1][1], self.bottom[0][1] == self.back[1][1], []])
+        searchEdges.append([self.back[1][0] == self.back[1][1], self.bottom[1][2] == self.left[1][1], []])
+        searchEdges.append([self.back[1][0] == self.back[1][1], self.bottom[1][2] == self.right[1][1], []])
+        searchEdges.append([self.right[1][2] == self.right[1][1], self.bottom[2][1] == self.back[1][1], []])
+        searchEdges.append([self.right[1][2] == self.right[1][1], self.bottom[2][1] == self.front[1][1], []])
+
+
+
