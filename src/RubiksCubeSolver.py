@@ -412,6 +412,7 @@ class RubiksCubeSolver:
                 if corner[1]:
                     self.doAlgorithm(corner[2])
                     #foundCorner = False
+                    bottomCorner = []
                     bottomCorner.append([self.bottom[0][2] == 1, self.top[0][0] != 1, ["B", "D'", "B'"]])
                     bottomCorner.append([self.bottom[2][2] == 1, self.top[2][0] != 1, ["B'", "D", "B"]])
                     bottomCorner.append([self.bottom[2][0] == 1, self.top[2][2] != 1, ["F", "D'", "F'"]])
@@ -421,6 +422,7 @@ class RubiksCubeSolver:
                     rotateBottom = True
             if rotateBottom:
                 self.makeMove("D")
+                bottomCorner = []
                 bottomCorner.append([self.bottom[0][2] == 1, self.top[0][0] != 1, ["B", "D'", "B'"]])
                 bottomCorner.append([self.bottom[2][2] == 1, self.top[2][0] != 1, ["B'", "D", "B"]])
                 bottomCorner.append([self.bottom[2][0] == 1, self.top[2][2] != 1, ["F", "D'", "F'"]])
@@ -471,5 +473,8 @@ class RubiksCubeSolver:
         searchEdges.append([self.right[1][2] == self.right[1][1], self.bottom[2][1] == self.back[1][1], []])
         searchEdges.append([self.right[1][2] == self.right[1][1], self.bottom[2][1] == self.front[1][1], []])
 
-
+        for edge in searchEdges:
+            if edge[0] and edge[1]:
+                #self.doAlgorithm(edge[2])
+                pass
 
