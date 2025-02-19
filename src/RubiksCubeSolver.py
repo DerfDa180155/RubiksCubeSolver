@@ -473,8 +473,15 @@ class RubiksCubeSolver:
         searchEdges.append([self.right[1][2] == self.right[1][1], self.bottom[2][1] == self.back[1][1], []])
         searchEdges.append([self.right[1][2] == self.right[1][1], self.bottom[2][1] == self.front[1][1], []])
 
+        found = False
         for edge in searchEdges:
             if edge[0] and edge[1]:
-                #self.doAlgorithm(edge[2])
-                pass
+                found = True
 
+        rotate = False
+        while found:
+            for edge in searchEdges:
+                if edge[0] and edge[1]:
+                    self.doAlgorithm(edge[2])
+            if rotate:
+                self.makeMove("D")
