@@ -473,13 +473,12 @@ class RubiksCubeSolver:
         searchEdges.append([self.right[1][2] == self.right[1][1], self.bottom[2][1] == self.back[1][1], ["D'", "B'", "D", "B", "D", "R", "D'", "R'"]])
         searchEdges.append([self.right[1][2] == self.right[1][1], self.bottom[2][1] == self.front[1][1], ["D", "F", "D'", "F'", "D", "R'", "D", "R"]])
 
-        found = False
-        for edge in searchEdges:
-            if edge[0] and edge[1]:
-                found = True
+        done = False
+        for edge in solvedEdges:
+            if not edge:
+                done = True
 
-        rotate = False
-        while found:
+        while done:
             for edge in searchEdges:
                 if edge[0] and edge[1]:
                     self.doAlgorithm(edge[2])
@@ -492,7 +491,7 @@ class RubiksCubeSolver:
                     searchEdges.append([self.back[1][0] == self.back[1][1], self.bottom[1][2] == self.right[1][1], ["D", "R", "D'", "R'", "D", "B'", "D", "B"]])
                     searchEdges.append([self.right[1][2] == self.right[1][1], self.bottom[2][1] == self.back[1][1], ["D'", "B'", "D", "B", "D", "R", "D'", "R'"]])
                     searchEdges.append([self.right[1][2] == self.right[1][1], self.bottom[2][1] == self.front[1][1], ["D", "F", "D'", "F'", "D", "R'", "D", "R"]])
-            #if rotate:
+
             self.makeMove("D")
             searchEdges = []
             searchEdges.append([self.front[1][2] == self.front[1][1], self.bottom[1][0] == self.right[1][1], ["D'", "R'", "D", "R", "D", "F", "D'", "F'"]])
@@ -510,7 +509,7 @@ class RubiksCubeSolver:
             solvedEdges.append(self.back[2][1] == self.back[1][1] and self.right[2][1] == self.right[1][1])
             solvedEdges.append(self.right[0][1] == self.right[1][1] and self.front[2][1] == self.front[1][1])
 
-            found = False
+            done = False
             for solved in solvedEdges:
                 if not solved:
-                    found = True
+                    done = False
