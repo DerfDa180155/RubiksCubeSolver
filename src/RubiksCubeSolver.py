@@ -465,13 +465,13 @@ class RubiksCubeSolver:
 
         searchEdges = []
         searchEdges.append([self.front[1][2] == self.front[1][1], self.bottom[1][0] == self.right[1][1], ["D'", "R'", "D", "R", "D", "F", "D'", "F'"]])
-        searchEdges.append([self.front[1][2] == self.front[1][1], self.bottom[1][0] == self.left[1][1], ["D", "L", "D'", "L'", "D", "F'", "D", "F"]])
+        searchEdges.append([self.front[1][2] == self.front[1][1], self.bottom[1][0] == self.left[1][1], ["D", "L", "D'", "L'", "D'", "F'", "D", "F"]])
         searchEdges.append([self.left[1][2] == self.left[1][1], self.bottom[0][1] == self.front[1][1], ["D'", "F'", "D", "F", "D", "L", "D'", "L'"]])
-        searchEdges.append([self.left[1][2] == self.left[1][1], self.bottom[0][1] == self.back[1][1], ["D", "B", "D'", "B'", "D", "L'", "D", "L"]])
+        searchEdges.append([self.left[1][2] == self.left[1][1], self.bottom[0][1] == self.back[1][1], ["D", "B", "D'", "B'", "D'", "L'", "D", "L"]])
         searchEdges.append([self.back[1][0] == self.back[1][1], self.bottom[1][2] == self.left[1][1], ["D'", "L'", "D", "L", "D", "B", "D'", "B'"]])
-        searchEdges.append([self.back[1][0] == self.back[1][1], self.bottom[1][2] == self.right[1][1], ["D", "R", "D'", "R'", "D", "B'", "D", "B"]])
+        searchEdges.append([self.back[1][0] == self.back[1][1], self.bottom[1][2] == self.right[1][1], ["D", "R", "D'", "R'", "D'", "B'", "D", "B"]])
         searchEdges.append([self.right[1][2] == self.right[1][1], self.bottom[2][1] == self.back[1][1], ["D'", "B'", "D", "B", "D", "R", "D'", "R'"]])
-        searchEdges.append([self.right[1][2] == self.right[1][1], self.bottom[2][1] == self.front[1][1], ["D", "F", "D'", "F'", "D", "R'", "D", "R"]])
+        searchEdges.append([self.right[1][2] == self.right[1][1], self.bottom[2][1] == self.front[1][1], ["D", "F", "D'", "F'", "D'", "R'", "D", "R"]])
 
         done = False
         for edge in solvedEdges:
@@ -484,24 +484,24 @@ class RubiksCubeSolver:
                     self.doAlgorithm(edge[2])
                     searchEdges = []
                     searchEdges.append([self.front[1][2] == self.front[1][1], self.bottom[1][0] == self.right[1][1], ["D'", "R'", "D", "R", "D", "F", "D'", "F'"]])
-                    searchEdges.append([self.front[1][2] == self.front[1][1], self.bottom[1][0] == self.left[1][1], ["D", "L", "D'", "L'", "D", "F'", "D", "F"]])
+                    searchEdges.append([self.front[1][2] == self.front[1][1], self.bottom[1][0] == self.left[1][1], ["D", "L", "D'", "L'", "D'", "F'", "D", "F"]])
                     searchEdges.append([self.left[1][2] == self.left[1][1], self.bottom[0][1] == self.front[1][1], ["D'", "F'", "D", "F", "D", "L", "D'", "L'"]])
-                    searchEdges.append([self.left[1][2] == self.left[1][1], self.bottom[0][1] == self.back[1][1], ["D", "B", "D'", "B'", "D", "L'", "D", "L"]])
+                    searchEdges.append([self.left[1][2] == self.left[1][1], self.bottom[0][1] == self.back[1][1], ["D", "B", "D'", "B'", "D'", "L'", "D", "L"]])
                     searchEdges.append([self.back[1][0] == self.back[1][1], self.bottom[1][2] == self.left[1][1], ["D'", "L'", "D", "L", "D", "B", "D'", "B'"]])
-                    searchEdges.append([self.back[1][0] == self.back[1][1], self.bottom[1][2] == self.right[1][1], ["D", "R", "D'", "R'", "D", "B'", "D", "B"]])
+                    searchEdges.append([self.back[1][0] == self.back[1][1], self.bottom[1][2] == self.right[1][1], ["D", "R", "D'", "R'", "D'", "B'", "D", "B"]])
                     searchEdges.append([self.right[1][2] == self.right[1][1], self.bottom[2][1] == self.back[1][1], ["D'", "B'", "D", "B", "D", "R", "D'", "R'"]])
-                    searchEdges.append([self.right[1][2] == self.right[1][1], self.bottom[2][1] == self.front[1][1], ["D", "F", "D'", "F'", "D", "R'", "D", "R"]])
+                    searchEdges.append([self.right[1][2] == self.right[1][1], self.bottom[2][1] == self.front[1][1], ["D", "F", "D'", "F'", "D'", "R'", "D", "R"]])
 
             self.makeMove("D")
             searchEdges = []
             searchEdges.append([self.front[1][2] == self.front[1][1], self.bottom[1][0] == self.right[1][1], ["D'", "R'", "D", "R", "D", "F", "D'", "F'"]])
-            searchEdges.append([self.front[1][2] == self.front[1][1], self.bottom[1][0] == self.left[1][1], ["D", "L", "D'", "L'", "D", "F'", "D", "F"]])
+            searchEdges.append([self.front[1][2] == self.front[1][1], self.bottom[1][0] == self.left[1][1], ["D", "L", "D'", "L'", "D'", "F'", "D", "F"]])
             searchEdges.append([self.left[1][2] == self.left[1][1], self.bottom[0][1] == self.front[1][1], ["D'", "F'", "D", "F", "D", "L", "D'", "L'"]])
-            searchEdges.append([self.left[1][2] == self.left[1][1], self.bottom[0][1] == self.back[1][1], ["D", "B", "D'", "B'", "D", "L'", "D", "L"]])
+            searchEdges.append([self.left[1][2] == self.left[1][1], self.bottom[0][1] == self.back[1][1], ["D", "B", "D'", "B'", "D'", "L'", "D", "L"]])
             searchEdges.append([self.back[1][0] == self.back[1][1], self.bottom[1][2] == self.left[1][1], ["D'", "L'", "D", "L", "D", "B", "D'", "B'"]])
-            searchEdges.append([self.back[1][0] == self.back[1][1], self.bottom[1][2] == self.right[1][1], ["D", "R", "D'", "R'", "D", "B'", "D", "B"]])
+            searchEdges.append([self.back[1][0] == self.back[1][1], self.bottom[1][2] == self.right[1][1], ["D", "R", "D'", "R'", "D'", "B'", "D", "B"]])
             searchEdges.append([self.right[1][2] == self.right[1][1], self.bottom[2][1] == self.back[1][1], ["D'", "B'", "D", "B", "D", "R", "D'", "R'"]])
-            searchEdges.append([self.right[1][2] == self.right[1][1], self.bottom[2][1] == self.front[1][1], ["D", "F", "D'", "F'", "D", "R'", "D", "R"]])
+            searchEdges.append([self.right[1][2] == self.right[1][1], self.bottom[2][1] == self.front[1][1], ["D", "F", "D'", "F'", "D'", "R'", "D", "R"]])
 
             solvedEdges = []
             solvedEdges.append(self.front[0][1] == self.front[1][1] and self.left[2][1] == self.left[1][1])
