@@ -473,6 +473,12 @@ class RubiksCubeSolver:
         searchEdges.append([self.right[1][2] == self.right[1][1], self.bottom[2][1] == self.back[1][1], ["D'", "B'", "D", "B", "D", "R", "D'", "R'"]])
         searchEdges.append([self.right[1][2] == self.right[1][1], self.bottom[2][1] == self.front[1][1], ["D", "F", "D'", "F'", "D'", "R'", "D", "R"]])
 
+        wrongEdges = []
+        wrongEdges.append([self.front[0][1] == 3 or self.left[2][1] == 3, ["D", "L", "D'", "L'", "D'", "F'", "D", "F"]])
+        wrongEdges.append([self.left[0][1] == 3 or self.back[0][1] == 3, ["D'", "L'", "D", "L", "D", "B", "D'", "B'"]])
+        wrongEdges.append([self.back[2][1] == 3 or self.right[2][1] == 3, ["D", "R", "D'", "R'", "D'", "B'", "D", "B"]])
+        wrongEdges.append([self.right[0][1] == 3 or self.front[2][1] == 3, ["D'", "R'", "D", "R", "D", "F", "D'", "F'"]])
+
         done = False
         for edge in solvedEdges:
             if not edge:
@@ -493,6 +499,17 @@ class RubiksCubeSolver:
                     searchEdges.append([self.right[1][2] == self.right[1][1], self.bottom[2][1] == self.front[1][1], ["D", "F", "D'", "F'", "D'", "R'", "D", "R"]])
 
             self.makeMove("D")
+
+            wrongEdges = []
+            wrongEdges.append([self.front[0][1] == 3 or self.left[2][1] == 3, ["D", "L", "D'", "L'", "D'", "F'", "D", "F"]])
+            wrongEdges.append([self.left[0][1] == 3 or self.back[0][1] == 3, ["D'", "L'", "D", "L", "D", "B", "D'", "B'"]])
+            wrongEdges.append([self.back[2][1] == 3 or self.right[2][1] == 3, ["D", "R", "D'", "R'", "D'", "B'", "D", "B"]])
+            wrongEdges.append([self.right[0][1] == 3 or self.front[2][1] == 3, ["D'", "R'", "D", "R", "D", "F", "D'", "F'"]])
+
+            for edge in wrongEdges:
+                if edge[0]:
+                    self.doAlgorithm(edge[1])
+
             searchEdges = []
             searchEdges.append([self.front[1][2] == self.front[1][1], self.bottom[1][0] == self.right[1][1], ["D'", "R'", "D", "R", "D", "F", "D'", "F'"]])
             searchEdges.append([self.front[1][2] == self.front[1][1], self.bottom[1][0] == self.left[1][1], ["D", "L", "D'", "L'", "D'", "F'", "D", "F"]])
@@ -508,6 +525,8 @@ class RubiksCubeSolver:
             solvedEdges.append(self.left[0][1] == self.left[1][1] and self.back[0][1] == self.back[1][1])
             solvedEdges.append(self.back[2][1] == self.back[1][1] and self.right[2][1] == self.right[1][1])
             solvedEdges.append(self.right[0][1] == self.right[1][1] and self.front[2][1] == self.front[1][1])
+
+
 
             done = False
             for solved in solvedEdges:
