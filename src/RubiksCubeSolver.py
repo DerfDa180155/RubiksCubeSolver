@@ -474,10 +474,10 @@ class RubiksCubeSolver:
         searchEdges.append([self.right[1][2] == self.right[1][1], self.bottom[2][1] == self.front[1][1], ["D", "F", "D'", "F'", "D'", "R'", "D", "R"]])
 
         wrongEdges = []
-        wrongEdges.append([self.front[0][1] == 3 or self.left[2][1] == 3, ["D", "L", "D'", "L'", "D'", "F'", "D", "F"]])
-        wrongEdges.append([self.left[0][1] == 3 or self.back[0][1] == 3, ["D'", "L'", "D", "L", "D", "B", "D'", "B'"]])
-        wrongEdges.append([self.back[2][1] == 3 or self.right[2][1] == 3, ["D", "R", "D'", "R'", "D'", "B'", "D", "B"]])
-        wrongEdges.append([self.right[0][1] == 3 or self.front[2][1] == 3, ["D'", "R'", "D", "R", "D", "F", "D'", "F'"]])
+        wrongEdges.append([self.front[0][1] in [1,2,4,5,6] and self.left[2][1] in [1,2,4,5,6] and not solvedEdges[0], ["D", "L", "D'", "L'", "D'", "F'", "D", "F"]])
+        wrongEdges.append([self.left[0][1] in [1,2,4,5,6] and self.back[0][1] in [1,2,4,5,6] and not solvedEdges[1], ["D'", "L'", "D", "L", "D", "B", "D'", "B'"]])
+        wrongEdges.append([self.back[2][1] in [1,2,4,5,6] and self.right[2][1] in [1,2,4,5,6] and not solvedEdges[2], ["D", "R", "D'", "R'", "D'", "B'", "D", "B"]])
+        wrongEdges.append([self.right[0][1] in [1,2,4,5,6] and self.front[2][1] in [1,2,4,5,6] and not solvedEdges[3], ["D'", "R'", "D", "R", "D", "F", "D'", "F'"]])
 
         done = False
         for edge in solvedEdges:
@@ -501,11 +501,20 @@ class RubiksCubeSolver:
             self.makeMove("D")
 
             wrongEdges = []
-            wrongEdges.append([self.front[0][1] == 3 or self.left[2][1] == 3, ["D", "L", "D'", "L'", "D'", "F'", "D", "F"]])
-            wrongEdges.append([self.left[0][1] == 3 or self.back[0][1] == 3, ["D'", "L'", "D", "L", "D", "B", "D'", "B'"]])
-            wrongEdges.append([self.back[2][1] == 3 or self.right[2][1] == 3, ["D", "R", "D'", "R'", "D'", "B'", "D", "B"]])
-            wrongEdges.append([self.right[0][1] == 3 or self.front[2][1] == 3, ["D'", "R'", "D", "R", "D", "F", "D'", "F'"]])
+            wrongEdges.append(
+                [self.front[0][1] in [1, 2, 4, 5, 6] and self.left[2][1] in [1, 2, 4, 5, 6] and not solvedEdges[0],
+                 ["D", "L", "D'", "L'", "D'", "F'", "D", "F"]])
+            wrongEdges.append(
+                [self.left[0][1] in [1, 2, 4, 5, 6] and self.back[0][1] in [1, 2, 4, 5, 6] and not solvedEdges[1],
+                 ["D'", "L'", "D", "L", "D", "B", "D'", "B'"]])
+            wrongEdges.append(
+                [self.back[2][1] in [1, 2, 4, 5, 6] and self.right[2][1] in [1, 2, 4, 5, 6] and not solvedEdges[2],
+                 ["D", "R", "D'", "R'", "D'", "B'", "D", "B"]])
+            wrongEdges.append(
+                [self.right[0][1] in [1, 2, 4, 5, 6] and self.front[2][1] in [1, 2, 4, 5, 6] and not solvedEdges[3],
+                 ["D'", "R'", "D", "R", "D", "F", "D'", "F'"]])
 
+            print(wrongEdges)
             for edge in wrongEdges:
                 if edge[0]:
                     self.doAlgorithm(edge[1])
