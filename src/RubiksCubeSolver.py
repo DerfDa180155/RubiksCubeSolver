@@ -500,21 +500,18 @@ class RubiksCubeSolver:
 
             self.makeMove("D")
 
-            wrongEdges = []
-            wrongEdges.append(
-                [self.front[0][1] in [1, 2, 4, 5, 6] and self.left[2][1] in [1, 2, 4, 5, 6] and not solvedEdges[0],
-                 ["D", "L", "D'", "L'", "D'", "F'", "D", "F"]])
-            wrongEdges.append(
-                [self.left[0][1] in [1, 2, 4, 5, 6] and self.back[0][1] in [1, 2, 4, 5, 6] and not solvedEdges[1],
-                 ["D'", "L'", "D", "L", "D", "B", "D'", "B'"]])
-            wrongEdges.append(
-                [self.back[2][1] in [1, 2, 4, 5, 6] and self.right[2][1] in [1, 2, 4, 5, 6] and not solvedEdges[2],
-                 ["D", "R", "D'", "R'", "D'", "B'", "D", "B"]])
-            wrongEdges.append(
-                [self.right[0][1] in [1, 2, 4, 5, 6] and self.front[2][1] in [1, 2, 4, 5, 6] and not solvedEdges[3],
-                 ["D'", "R'", "D", "R", "D", "F", "D'", "F'"]])
+            solvedEdges = []
+            solvedEdges.append(self.front[0][1] == self.front[1][1] and self.left[2][1] == self.left[1][1])
+            solvedEdges.append(self.left[0][1] == self.left[1][1] and self.back[0][1] == self.back[1][1])
+            solvedEdges.append(self.back[2][1] == self.back[1][1] and self.right[2][1] == self.right[1][1])
+            solvedEdges.append(self.right[0][1] == self.right[1][1] and self.front[2][1] == self.front[1][1])
 
-            print(wrongEdges)
+            wrongEdges = []
+            wrongEdges.append([self.front[0][1] in [1, 2, 4, 5, 6] and self.left[2][1] in [1, 2, 4, 5, 6] and not solvedEdges[0], ["D", "L", "D'", "L'", "D'", "F'", "D", "F"]])
+            wrongEdges.append([self.left[0][1] in [1, 2, 4, 5, 6] and self.back[0][1] in [1, 2, 4, 5, 6] and not solvedEdges[1], ["D'", "L'", "D", "L", "D", "B", "D'", "B'"]])
+            wrongEdges.append([self.back[2][1] in [1, 2, 4, 5, 6] and self.right[2][1] in [1, 2, 4, 5, 6] and not solvedEdges[2], ["D", "R", "D'", "R'", "D'", "B'", "D", "B"]])
+            wrongEdges.append([self.right[0][1] in [1, 2, 4, 5, 6] and self.front[2][1] in [1, 2, 4, 5, 6] and not solvedEdges[3], ["D'", "R'", "D", "R", "D", "F", "D'", "F'"]])
+
             for edge in wrongEdges:
                 if edge[0]:
                     self.doAlgorithm(edge[1])
@@ -535,9 +532,7 @@ class RubiksCubeSolver:
             solvedEdges.append(self.back[2][1] == self.back[1][1] and self.right[2][1] == self.right[1][1])
             solvedEdges.append(self.right[0][1] == self.right[1][1] and self.front[2][1] == self.front[1][1])
 
-
-
             done = False
             for solved in solvedEdges:
                 if not solved:
-                    done = False
+                    done = True
