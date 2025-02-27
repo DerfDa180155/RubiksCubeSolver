@@ -259,9 +259,10 @@ class RubiksCubeSolver:
                 self.cornerSolver()
             case 2: # 2nd layer
                 print("2nd layer")
-                self.secondLayer()
+                self.secondLayerSolver()
             case 3: # OLL
                 print("OLL")
+                self.OLLSolver()
             case 4: # PLL
                 print("PLL")
 
@@ -456,7 +457,7 @@ class RubiksCubeSolver:
             if corner[0]:
                 self.doAlgorithm(corner[1])
 
-    def secondLayer(self):
+    def secondLayerSolver(self):
         solvedEdges = []
         solvedEdges.append(self.front[0][1] == self.front[1][1] and self.left[2][1] == self.left[1][1])
         solvedEdges.append(self.left[0][1] == self.left[1][1] and self.back[0][1] == self.back[1][1])
@@ -536,3 +537,25 @@ class RubiksCubeSolver:
             for solved in solvedEdges:
                 if not solved:
                     done = True
+
+    def OLLSolver(self):
+        oll1 = []
+        oll1.append([self.front[1][2] == 3 and self.right[1][2] == 3 and self.back[1][0] == 3 and self.left[1][2] == 3, []])
+        oll1.append([self.front[1][2] == 3 and self.bottom[2][1] == 3 and self.back[1][0] == 3 and self.bottom[0][1] == 3, []])
+        oll1.append([self.front[1][2] == 3 and self.bottom[2][1] == 3 and self.bottom[1][2] == 3 and self.left[1][2] == 3, []])
+
+        moved = False
+        while not moved:
+            for oll in oll1:
+                if oll[0]:
+                    moved = True
+
+            print(oll1)
+            if not moved:
+                self.makeMove("D")
+                oll1 = []
+                oll1.append([self.front[1][2] == 3 and self.right[1][2] == 3 and self.back[1][0] == 3 and self.left[1][2] == 3, []])
+                oll1.append([self.front[1][2] == 3 and self.bottom[2][1] == 3 and self.back[1][0] == 3 and self.bottom[0][1] == 3, []])
+                oll1.append([self.front[1][2] == 3 and self.bottom[2][1] == 3 and self.bottom[1][2] == 3 and self.left[1][2] == 3, []])
+
+
