@@ -540,9 +540,9 @@ class RubiksCubeSolver:
 
     def OLLSolver(self):
         oll1 = []
-        oll1.append([self.front[1][2] == 3 and self.right[1][2] == 3 and self.back[1][0] == 3 and self.left[1][2] == 3, []])
-        oll1.append([self.front[1][2] == 3 and self.bottom[2][1] == 3 and self.back[1][0] == 3 and self.bottom[0][1] == 3, []])
-        oll1.append([self.front[1][2] == 3 and self.bottom[2][1] == 3 and self.bottom[1][2] == 3 and self.left[1][2] == 3, []])
+        oll1.append([self.front[1][2] == 3 and self.right[1][2] == 3 and self.back[1][0] == 3 and self.left[1][2] == 3, ["B", "R", "D", "R'", "D'", "B'", "b", "R", "D", "R'", "D'", "b'"]]) # dot
+        oll1.append([self.front[1][2] == 3 and self.bottom[2][1] == 3 and self.back[1][0] == 3 and self.bottom[0][1] == 3, ["B", "R", "D", "R'", "D'", "B"]]) # I
+        oll1.append([self.front[1][2] == 3 and self.bottom[2][1] == 3 and self.bottom[1][2] == 3 and self.left[1][2] == 3, ["b", "R", "D", "R'", "D'", "b'"]]) # L
 
         moved = False
         while not moved:
@@ -558,4 +558,14 @@ class RubiksCubeSolver:
                 oll1.append([self.front[1][2] == 3 and self.bottom[2][1] == 3 and self.back[1][0] == 3 and self.bottom[0][1] == 3, []])
                 oll1.append([self.front[1][2] == 3 and self.bottom[2][1] == 3 and self.bottom[1][2] == 3 and self.left[1][2] == 3, []])
 
+        oll2 = []
+
+        moved = True
+        while not moved:
+            for oll in oll2:
+                if oll[0]:
+                    moved = True
+
+            if not moved:
+                self.makeMove("D")
 
