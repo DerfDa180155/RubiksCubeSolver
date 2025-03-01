@@ -159,6 +159,43 @@ class RubiksCubeSolver:
                 self.right = self.rotate(self.right, False)
                 self.rotateAdjacent(self.top, [[2, 2], [2, 1], [2, 0]], self.front, [[2, 2], [2, 1], [2, 0]], self.bottom, [[2, 2], [2, 1], [2, 0]], self.back, [[2, 2], [2, 1], [2, 0]])
 
+            case "u":
+                self.top = self.rotate(self.top, True)
+                self.rotateAdjacent(self.back, [[0, 2], [1, 2], [2, 2]], self.right, [[2, 0], [1, 0], [0, 0]], self.front, [[2, 0], [1, 0], [0, 0]], self.left, [[2, 0], [1, 0], [0, 0]])
+            case "u'":
+                self.top = self.rotate(self.top, False)
+                self.rotateAdjacent(self.back, [[0, 2], [1, 2], [2, 2]], self.left, [[2, 0], [1, 0], [0, 0]], self.front, [[2, 0], [1, 0], [0, 0]], self.right, [[2, 0], [1, 0], [0, 0]])
+            case "f":
+                self.front = self.rotate(self.front, True)
+                self.rotateAdjacent(self.top, [[0, 2], [1, 2], [2, 2]], self.right, [[0, 0], [0, 1], [0, 2]], self.bottom, [[2, 0], [1, 0], [0, 0]], self.left, [[2, 2], [2, 1], [2, 0]])
+            case "f'":
+                self.front = self.rotate(self.front, False)
+                self.rotateAdjacent(self.top, [[0, 2], [1, 2], [2, 2]], self.left, [[2, 2], [2, 1], [2, 0]], self.bottom, [[2, 0], [1, 0], [0, 0]], self.right, [[0, 0], [0, 1], [0, 2]])
+            case "d":
+                self.bottom = self.rotate(self.bottom, True)
+                self.rotateAdjacent(self.front, [[0, 2], [1, 2], [2, 2]], self.right, [[0, 2], [1, 2], [2, 2]], self.back, [[2, 0], [1, 0], [0, 0]], self.left, [[0, 2], [1, 2], [2, 2]])
+            case "d'":
+                self.bottom = self.rotate(self.bottom, False)
+                self.rotateAdjacent(self.front, [[0, 2], [1, 2], [2, 2]], self.left, [[0, 2], [1, 2], [2, 2]], self.back, [[2, 0], [1, 0], [0, 0]], self.right, [[0, 2], [1, 2], [2, 2]])
+            case "b":
+                self.back = self.rotate(self.back, True)
+                self.rotateAdjacent(self.bottom, [[0, 2], [1, 2], [2, 2]], self.right, [[2, 2], [2, 1], [2, 0]], self.top, [[2, 0], [1, 0], [0, 0]], self.left, [[0, 0], [0, 1], [0, 2]])
+            case "b'":
+                self.back = self.rotate(self.back, False)
+                self.rotateAdjacent(self.bottom, [[0, 2], [1, 2], [2, 2]], self.left, [[0, 0], [0, 1], [0, 2]], self.top, [[2, 0], [1, 0], [0, 0]], self.right, [[2, 2], [2, 1], [2, 0]])
+            case "l":
+                self.left = self.rotate(self.left, True)
+                self.rotateAdjacent(self.top, [[0, 0], [0, 1], [0, 2]], self.front, [[0, 0], [0, 1], [0, 2]], self.bottom, [[0, 0], [0, 1], [0, 2]], self.back, [[0, 0], [0, 1], [0, 2]])
+            case "l'":
+                self.left = self.rotate(self.left, False)
+                self.rotateAdjacent(self.top, [[0, 0], [0, 1], [0, 2]], self.back, [[0, 0], [0, 1], [0, 2]], self.bottom, [[0, 0], [0, 1], [0, 2]], self.front, [[0, 0], [0, 1], [0, 2]])
+            case "r":
+                self.right = self.rotate(self.right, True)
+                self.rotateAdjacent(self.top, [[2, 2], [2, 1], [2, 0]], self.back, [[2, 2], [2, 1], [2, 0]], self.bottom, [[2, 2], [2, 1], [2, 0]], self.front, [[2, 2], [2, 1], [2, 0]])
+            case "r'":
+                self.right = self.rotate(self.right, False)
+                self.rotateAdjacent(self.top, [[2, 2], [2, 1], [2, 0]], self.front, [[2, 2], [2, 1], [2, 0]], self.bottom, [[2, 2], [2, 1], [2, 0]], self.back, [[2, 2], [2, 1], [2, 0]])
+
     def rotate(self, side, clockwise):
         newSide = self.generateEmptySide(side[1][1])
         if clockwise:
@@ -554,9 +591,9 @@ class RubiksCubeSolver:
             if not moved:
                 self.makeMove("D")
                 oll1 = []
-                oll1.append([self.front[1][2] == 3 and self.right[1][2] == 3 and self.back[1][0] == 3 and self.left[1][2] == 3, []])
-                oll1.append([self.front[1][2] == 3 and self.bottom[2][1] == 3 and self.back[1][0] == 3 and self.bottom[0][1] == 3, []])
-                oll1.append([self.front[1][2] == 3 and self.bottom[2][1] == 3 and self.bottom[1][2] == 3 and self.left[1][2] == 3, []])
+                oll1.append([self.front[1][2] == 3 and self.right[1][2] == 3 and self.back[1][0] == 3 and self.left[1][2] == 3, ["B", "R", "D", "R'", "D'", "B'", "b", "R", "D", "R'", "D'", "b'"]])  # dot
+                oll1.append([self.front[1][2] == 3 and self.bottom[2][1] == 3 and self.back[1][0] == 3 and self.bottom[0][1] == 3, ["B", "R", "D", "R'", "D'", "B"]])  # I
+                oll1.append([self.front[1][2] == 3 and self.bottom[2][1] == 3 and self.bottom[1][2] == 3 and self.left[1][2] == 3, ["b", "R", "D", "R'", "D'", "b'"]])  # L
 
         oll2 = []
 
