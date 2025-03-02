@@ -244,6 +244,21 @@ class RubiksCubeSolver:
         right[rightPostions[1][0]][rightPostions[1][1]] = temp[1]
         right[rightPostions[2][0]][rightPostions[2][1]] = temp[2]
 
+    def rotateMiddle(self, side1, side1Positions, side2, side2Positions, side3, side3Positions, side4, side4Positions):
+        temp = [side1[side1Positions[0][0]][side1Positions[0][1]], side1[side1Positions[1][0]][side1Positions[1][1]]]
+
+        side1[side1Positions[0][0]][side1Positions[0][1]] = side2[side2Positions[0][0]][side2Positions[0][1]]
+        side1[side1Positions[1][0]][side1Positions[1][1]] = side2[side2Positions[1][0]][side2Positions[1][1]]
+
+        side2[side2Positions[0][0]][side2Positions[0][1]] = side3[side3Positions[0][0]][side3Positions[0][1]]
+        side2[side2Positions[1][0]][side2Positions[1][1]] = side3[side3Positions[1][0]][side3Positions[1][1]]
+
+        side3[side3Positions[0][0]][side3Positions[0][1]] = side4[side4Positions[0][0]][side4Positions[0][1]]
+        side3[side3Positions[1][0]][side3Positions[1][1]] = side4[side4Positions[1][0]][side4Positions[1][1]]
+
+        side4[side4Positions[0][0]][side4Positions[0][1]] = temp[0]
+        side4[side4Positions[1][0]][side4Positions[1][1]] = temp[1]
+
     def generateScramble(self):
         lastMove = ""
         moves = ["U", "D", "F", "B", "L", "R"]
