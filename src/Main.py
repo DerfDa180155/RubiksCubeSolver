@@ -21,6 +21,7 @@ class main:
 
         self.solver = RubiksCubeSolver.RubiksCubeSolver()
         self.invertedMove = False
+        self.middelMoves = False
 
         self.run()
 
@@ -53,18 +54,38 @@ class main:
                         self.solver.solve()
                     elif event.key == pygame.K_w:
                         self.invertedMove = not self.invertedMove
+                    elif event.key == pygame.K_e:
+                        self.middelMoves = not self.middelMoves
                     elif event.key == pygame.K_1:
-                        self.solver.makeMove("U" + ("'" if self.invertedMove else ""))
+                        if not self.middelMoves:
+                            self.solver.makeMove("U" + ("'" if self.invertedMove else ""))
+                        else:
+                            self.solver.makeMove("u" + ("'" if self.invertedMove else ""))
                     elif event.key == pygame.K_2:
-                        self.solver.makeMove("D" + ("'" if self.invertedMove else ""))
+                        if not self.middelMoves:
+                            self.solver.makeMove("D" + ("'" if self.invertedMove else ""))
+                        else:
+                            self.solver.makeMove("d" + ("'" if self.invertedMove else ""))
                     elif event.key == pygame.K_3:
-                        self.solver.makeMove("F" + ("'" if self.invertedMove else ""))
+                        if not self.middelMoves:
+                            self.solver.makeMove("F" + ("'" if self.invertedMove else ""))
+                        else:
+                            self.solver.makeMove("f" + ("'" if self.invertedMove else ""))
                     elif event.key == pygame.K_4:
-                        self.solver.makeMove("B" + ("'" if self.invertedMove else ""))
+                        if not self.middelMoves:
+                            self.solver.makeMove("B" + ("'" if self.invertedMove else ""))
+                        else:
+                            self.solver.makeMove("b" + ("'" if self.invertedMove else ""))
                     elif event.key == pygame.K_5:
-                        self.solver.makeMove("L" + ("'" if self.invertedMove else ""))
+                        if not self.middelMoves:
+                            self.solver.makeMove("L" + ("'" if self.invertedMove else ""))
+                        else:
+                            self.solver.makeMove("l" + ("'" if self.invertedMove else ""))
                     elif event.key == pygame.K_6:
-                        self.solver.makeMove("R" + ("'" if self.invertedMove else ""))
+                        if not self.middelMoves:
+                            self.solver.makeMove("R" + ("'" if self.invertedMove else ""))
+                        else:
+                            self.solver.makeMove("r" + ("'" if self.invertedMove else ""))
                     elif event.key == pygame.K_SPACE:
                         self.solver.generateScramble()
 
