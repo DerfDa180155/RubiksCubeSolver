@@ -608,6 +608,8 @@ class RubiksCubeSolver:
         oll1.append([self.front[1][2] == 3 and self.bottom[2][1] == 3 and self.back[1][0] == 3 and self.bottom[0][1] == 3, ["B", "R", "D", "R'", "D'", "B'"]]) # I
         oll1.append([self.front[1][2] == 3 and self.bottom[2][1] == 3 and self.bottom[1][2] == 3 and self.left[1][2] == 3, ["b", "R", "D", "R'", "D'", "b'"]]) # L
 
+        oll1.append([self.bottom[1][0] == 3 and self.bottom[2][1] == 3 and self.bottom[1][2] == 3 and self.bottom[0][1] == 3 and self.right[2][2] == 3 and self.back[0][0] == 3 and self.left[2][2] == 3, ["R", "D", "D", "R'", "D'", "R", "D'", "R'"]]) # Antisune
+
         moved = False
         while not moved:
             for oll in oll1:
@@ -624,15 +626,3 @@ class RubiksCubeSolver:
                 oll1.append([self.front[1][2] == 3 and self.bottom[2][1] == 3 and self.bottom[1][2] == 3 and self.left[1][2] == 3, ["b", "R", "D", "R'", "D'", "b'"]])  # L
 
         print(self.solveMoves)
-
-        oll2 = []
-
-        moved = True
-        while not moved:
-            for oll in oll2:
-                if oll[0]:
-                    moved = True
-
-            if not moved:
-                self.makeMove("D")
-
