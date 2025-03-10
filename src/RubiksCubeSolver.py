@@ -611,7 +611,7 @@ class RubiksCubeSolver:
         oll1.append([self.bottom[1][0] == 3 and self.bottom[2][1] == 3 and self.bottom[1][2] == 3 and self.bottom[0][1] == 3 and self.bottom[2][0] == 3 and self.right[2][2] == 3 and self.back[0][0] == 3 and self.left[2][2] == 3, ["R", "D", "D", "R'", "D'", "R", "D'", "R'"]]) # Antisune
         oll1.append([self.bottom[1][0] == 3 and self.bottom[2][1] == 3 and self.bottom[1][2] == 3 and self.bottom[0][1] == 3 and self.right[0][2] == 3 and self.right[2][2] == 3 and self.left[0][2] == 3 and self.left[2][2] == 3, ["R", "D", "R'", "D", "R", "D'", "R'", "D", "R", "D", "D", "R'"]]) # H
         oll1.append([self.bottom[1][0] == 3 and self.bottom[2][1] == 3 and self.bottom[1][2] == 3 and self.bottom[0][1] == 3 and self.right[0][2] == 3 and self.bottom[2][2] == 3 and self.back[0][0] == 3 and self.bottom[0][0] == 3, ["B", "R'", "B'", "r", "D", "R", "D'", "r'"]]) # L
-
+        oll1.append([self.bottom[1][0] == 3 and self.bottom[2][1] == 3 and self.bottom[1][2] == 3 and self.bottom[0][1] == 3 and self.front[2][2] == 3 and self.back[2][0] == 3 and self.left[0][2] == 3 and self.left[2][2] == 3, ["R", "D", "D", "R", "R", "D'", "R", "R", "D'", "R", "R", "D", "D", "R"]]) # Pi
 
         moved = False
         while not moved:
