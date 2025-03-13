@@ -616,28 +616,46 @@ class RubiksCubeSolver:
         oll1.append([self.bottom[1][0] == 3 and self.bottom[2][1] == 3 and self.bottom[1][2] == 3 and self.bottom[0][1] == 3 and self.front[0][2] == 3 and self.bottom[2][0] == 3 and self.bottom[2][2] == 3 and self.back[0][0] == 3, ["r", "D", "R'", "D'", "r'", "B", "R", "B'"]]) # T
         oll1.append([self.bottom[1][0] == 3 and self.bottom[2][1] == 3 and self.bottom[1][2] == 3 and self.bottom[0][1] == 3 and self.bottom[0][0] == 3 and self.bottom[2][0] == 3 and self.back[2][0] == 3 and self.back[0][0] == 3, ["R", "R", "U", "R'", "D", "D", "R", "U'", "R'", "D", "D", "R'"]]) # U
 
+        done = False
+        moves = 3
         moved = False
-        while not moved:
+        while not done:
+            moved = False
             for oll in oll1:
                 if oll[0]:
                     moved = True
+                    moves = 3
                     self.doAlgorithm(oll[1])
-            print(oll1)
-            print(moved)
-            if not moved:
-                self.makeMove("D")
-                oll1 = []
-                oll1.append(
-                    [self.front[1][2] == 3 and self.right[1][2] == 3 and self.back[1][0] == 3 and self.left[1][2] == 3, ["B", "R", "D", "R'", "D'", "B'", "b", "R", "D", "R'", "D'", "b'"]]) # dot
-                oll1.append([self.front[1][2] == 3 and self.bottom[2][1] == 3 and self.back[1][0] == 3 and self.bottom[0][1] == 3, ["B", "R", "D", "R'", "D'", "B'"]]) # I
-                oll1.append([self.front[1][2] == 3 and self.bottom[2][1] == 3 and self.bottom[1][2] == 3 and self.left[1][2] == 3, ["b", "R", "D", "R'", "D'", "b'"]]) # L
 
-                oll1.append([self.bottom[1][0] == 3 and self.bottom[2][1] == 3 and self.bottom[1][2] == 3 and self.bottom[0][1] == 3 and self.bottom[2][0] == 3 and self.right[2][2] == 3 and self.back[0][0] == 3 and self.left[2][2] == 3, ["R", "D", "D", "R'", "D'", "R", "D'", "R'"]]) # Antisune
-                oll1.append([self.bottom[1][0] == 3 and self.bottom[2][1] == 3 and self.bottom[1][2] == 3 and self.bottom[0][1] == 3 and self.right[0][2] == 3 and self.right[2][2] == 3 and self.left[0][2] == 3 and self.left[2][2] == 3, ["R", "D", "R'", "D", "R", "D'", "R'", "D", "R", "D", "D", "R'"]]) # H
-                oll1.append([self.bottom[1][0] == 3 and self.bottom[2][1] == 3 and self.bottom[1][2] == 3 and self.bottom[0][1] == 3 and self.right[0][2] == 3 and self.bottom[2][2] == 3 and self.back[0][0] == 3 and self.bottom[0][0] == 3, ["B", "R'", "B'", "r", "D", "R", "D'", "r'"]]) # L
-                oll1.append([self.bottom[1][0] == 3 and self.bottom[2][1] == 3 and self.bottom[1][2] == 3 and self.bottom[0][1] == 3 and self.front[2][2] == 3 and self.back[2][0] == 3 and self.left[0][2] == 3 and self.left[2][2] == 3, ["R", "D", "D", "R", "R", "D'", "R", "R", "D'", "R", "R", "D", "D", "R"]]) # Pi
-                oll1.append([self.bottom[1][0] == 3 and self.bottom[2][1] == 3 and self.bottom[1][2] == 3 and self.bottom[0][1] == 3 and self.front[0][2] == 3 and self.right[0][2] == 3 and self.back[2][0] == 3 and self.bottom[0][2] == 3, ["R", "D", "R'", "D", "R", "D", "D", "R'"]]) # Sune
-                oll1.append([self.bottom[1][0] == 3 and self.bottom[2][1] == 3 and self.bottom[1][2] == 3 and self.bottom[0][1] == 3 and self.front[0][2] == 3 and self.bottom[2][0] == 3 and self.bottom[2][2] == 3 and self.back[0][0] == 3, ["r", "D", "R'", "D'", "r'", "B", "R", "B'"]]) # T
-                oll1.append([self.bottom[1][0] == 3 and self.bottom[2][1] == 3 and self.bottom[1][2] == 3 and self.bottom[0][1] == 3 and self.bottom[0][0] == 3 and self.bottom[2][0] == 3 and self.back[2][0] == 3 and self.back[0][0] == 3, ["R", "R", "U", "R'", "D", "D", "R", "U'", "R'", "D", "D", "R'"]]) # U
+                    oll1 = []
+                    oll1.append([self.front[1][2] == 3 and self.right[1][2] == 3 and self.back[1][0] == 3 and self.left[1][2] == 3, ["B", "R", "D", "R'", "D'", "B'", "b", "R", "D", "R'", "D'", "b'"]]) # dot
+                    oll1.append([self.front[1][2] == 3 and self.bottom[2][1] == 3 and self.back[1][0] == 3 and self.bottom[0][1] == 3, ["B", "R", "D", "R'", "D'", "B'"]]) # I
+                    oll1.append([self.front[1][2] == 3 and self.bottom[2][1] == 3 and self.bottom[1][2] == 3 and self.left[1][2] == 3, ["b", "R", "D", "R'", "D'", "b'"]]) # L
+
+                    oll1.append([self.bottom[1][0] == 3 and self.bottom[2][1] == 3 and self.bottom[1][2] == 3 and self.bottom[0][1] == 3 and self.bottom[2][0] == 3 and self.right[2][2] == 3 and self.back[0][0] == 3 and self.left[2][2] == 3, ["R", "D", "D", "R'", "D'", "R", "D'", "R'"]]) # Antisune
+                    oll1.append([self.bottom[1][0] == 3 and self.bottom[2][1] == 3 and self.bottom[1][2] == 3 and self.bottom[0][1] == 3 and self.right[0][2] == 3 and self.right[2][2] == 3 and self.left[0][2] == 3 and self.left[2][2] == 3, ["R", "D", "R'", "D", "R", "D'", "R'", "D", "R", "D", "D", "R'"]]) # H
+                    oll1.append([self.bottom[1][0] == 3 and self.bottom[2][1] == 3 and self.bottom[1][2] == 3 and self.bottom[0][1] == 3 and self.right[0][2] == 3 and self.bottom[2][2] == 3 and self.back[0][0] == 3 and self.bottom[0][0] == 3, ["B", "R'", "B'", "r", "D", "R", "D'", "r'"]]) # L
+                    oll1.append([self.bottom[1][0] == 3 and self.bottom[2][1] == 3 and self.bottom[1][2] == 3 and self.bottom[0][1] == 3 and self.front[2][2] == 3 and self.back[2][0] == 3 and self.left[0][2] == 3 and self.left[2][2] == 3, ["R", "D", "D", "R", "R", "D'", "R", "R", "D'", "R", "R", "D", "D", "R"]]) # Pi
+                    oll1.append([self.bottom[1][0] == 3 and self.bottom[2][1] == 3 and self.bottom[1][2] == 3 and self.bottom[0][1] == 3 and self.front[0][2] == 3 and self.right[0][2] == 3 and self.back[2][0] == 3 and self.bottom[0][2] == 3, ["R", "D", "R'", "D", "R", "D", "D", "R'"]]) # Sune
+                    oll1.append([self.bottom[1][0] == 3 and self.bottom[2][1] == 3 and self.bottom[1][2] == 3 and self.bottom[0][1] == 3 and self.front[0][2] == 3 and self.bottom[2][0] == 3 and self.bottom[2][2] == 3 and self.back[0][0] == 3, ["r", "D", "R'", "D'", "r'", "B", "R", "B'"]]) # T
+                    oll1.append([self.bottom[1][0] == 3 and self.bottom[2][1] == 3 and self.bottom[1][2] == 3 and self.bottom[0][1] == 3 and self.bottom[0][0] == 3 and self.bottom[2][0] == 3 and self.back[2][0] == 3 and self.back[0][0] == 3, ["R", "R", "U", "R'", "D", "D", "R", "U'", "R'", "D", "D", "R'"]]) # U
+            if not moved:
+                if moves == 0:
+                    done = True
+                else:
+                    self.makeMove("D")
+                    moves -= 1
+                    oll1 = []
+                    oll1.append([self.front[1][2] == 3 and self.right[1][2] == 3 and self.back[1][0] == 3 and self.left[1][2] == 3, ["B", "R", "D", "R'", "D'", "B'", "b", "R", "D", "R'", "D'", "b'"]]) # dot
+                    oll1.append([self.front[1][2] == 3 and self.bottom[2][1] == 3 and self.back[1][0] == 3 and self.bottom[0][1] == 3, ["B", "R", "D", "R'", "D'", "B'"]]) # I
+                    oll1.append([self.front[1][2] == 3 and self.bottom[2][1] == 3 and self.bottom[1][2] == 3 and self.left[1][2] == 3, ["b", "R", "D", "R'", "D'", "b'"]]) # L
+
+                    oll1.append([self.bottom[1][0] == 3 and self.bottom[2][1] == 3 and self.bottom[1][2] == 3 and self.bottom[0][1] == 3 and self.bottom[2][0] == 3 and self.right[2][2] == 3 and self.back[0][0] == 3 and self.left[2][2] == 3, ["R", "D", "D", "R'", "D'", "R", "D'", "R'"]]) # Antisune
+                    oll1.append([self.bottom[1][0] == 3 and self.bottom[2][1] == 3 and self.bottom[1][2] == 3 and self.bottom[0][1] == 3 and self.right[0][2] == 3 and self.right[2][2] == 3 and self.left[0][2] == 3 and self.left[2][2] == 3, ["R", "D", "R'", "D", "R", "D'", "R'", "D", "R", "D", "D", "R'"]]) # H
+                    oll1.append([self.bottom[1][0] == 3 and self.bottom[2][1] == 3 and self.bottom[1][2] == 3 and self.bottom[0][1] == 3 and self.right[0][2] == 3 and self.bottom[2][2] == 3 and self.back[0][0] == 3 and self.bottom[0][0] == 3, ["B", "R'", "B'", "r", "D", "R", "D'", "r'"]]) # L
+                    oll1.append([self.bottom[1][0] == 3 and self.bottom[2][1] == 3 and self.bottom[1][2] == 3 and self.bottom[0][1] == 3 and self.front[2][2] == 3 and self.back[2][0] == 3 and self.left[0][2] == 3 and self.left[2][2] == 3, ["R", "D", "D", "R", "R", "D'", "R", "R", "D'", "R", "R", "D", "D", "R"]]) # Pi
+                    oll1.append([self.bottom[1][0] == 3 and self.bottom[2][1] == 3 and self.bottom[1][2] == 3 and self.bottom[0][1] == 3 and self.front[0][2] == 3 and self.right[0][2] == 3 and self.back[2][0] == 3 and self.bottom[0][2] == 3, ["R", "D", "R'", "D", "R", "D", "D", "R'"]]) # Sune
+                    oll1.append([self.bottom[1][0] == 3 and self.bottom[2][1] == 3 and self.bottom[1][2] == 3 and self.bottom[0][1] == 3 and self.front[0][2] == 3 and self.bottom[2][0] == 3 and self.bottom[2][2] == 3 and self.back[0][0] == 3, ["r", "D", "R'", "D'", "r'", "B", "R", "B'"]]) # T
+                    oll1.append([self.bottom[1][0] == 3 and self.bottom[2][1] == 3 and self.bottom[1][2] == 3 and self.bottom[0][1] == 3 and self.bottom[0][0] == 3 and self.bottom[2][0] == 3 and self.back[2][0] == 3 and self.back[0][0] == 3, ["R", "R", "U", "R'", "D", "D", "R", "U'", "R'", "D", "D", "R'"]]) # U
 
         print(self.solveMoves)
