@@ -329,6 +329,7 @@ class RubiksCubeSolver:
                 self.OLLSolver()
             case 4: # PLL
                 print("PLL")
+                self.PLLSolver()
 
         print(self.solveMoves)
 
@@ -658,4 +659,15 @@ class RubiksCubeSolver:
                     oll1.append([self.bottom[1][0] == 3 and self.bottom[2][1] == 3 and self.bottom[1][2] == 3 and self.bottom[0][1] == 3 and self.front[0][2] == 3 and self.bottom[2][0] == 3 and self.bottom[2][2] == 3 and self.back[0][0] == 3, ["r", "D", "R'", "D'", "r'", "B", "R", "B'"]]) # T
                     oll1.append([self.bottom[1][0] == 3 and self.bottom[2][1] == 3 and self.bottom[1][2] == 3 and self.bottom[0][1] == 3 and self.bottom[0][0] == 3 and self.bottom[2][0] == 3 and self.back[2][0] == 3 and self.back[0][0] == 3, ["R", "R", "U", "R'", "D", "D", "R", "U'", "R'", "D", "D", "R'"]]) # U
 
-        print(self.solveMoves)
+
+    def PLLSolver(self):
+        pll1 = []
+        pll1.append([self.front[0][2] == self.back[1][1] and self.left[2][2] == self.right[1][1] and self.right[2][2] == self.left[1][1] and self.back[2][0] == self.front[1][1], ["B", "R", "D'", "R'", "D'", "R", "D", "R'", "B'", "R", "D", "R'", "D'", "R'", "B", "R", "B'"]]) # Diagonal
+
+
+        for pll in pll1:
+            if pll[0]:
+                self.doAlgorithm(pll[1])
+
+
+
