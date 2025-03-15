@@ -663,7 +663,7 @@ class RubiksCubeSolver:
     def PLLSolver(self):
         pll1 = []
         pll1.append([self.front[0][2] == self.back[1][1] and self.left[2][2] == self.right[1][1] and self.right[2][2] == self.left[1][1] and self.back[2][0] == self.front[1][1], ["B", "R", "D'", "R'", "D'", "R", "D", "R'", "B'", "R", "D", "R'", "D'", "R'", "B", "R", "B'"]]) # Diagonal
-
+        pll1.append([self.front[2][2] == self.right[1][1] and self.right[0][2] == self.back[1][1] and self.right[2][2] == self.front[1][1] and self.back[2][0] == self.right[1][1],["R", "D", "R'", "D'", "R'", "B", "R", "R", "D'", "R'", "D'", "R", "D", "R'", "B'"]]) # Headlights
 
         for pll in pll1:
             if pll[0]:
