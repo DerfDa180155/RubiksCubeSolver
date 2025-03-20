@@ -208,6 +208,11 @@ class RubiksCubeSolver:
                 self.rotateAdjacent(self.top, [[2, 2], [2, 1], [2, 0]], self.front, [[2, 2], [2, 1], [2, 0]], self.bottom, [[2, 2], [2, 1], [2, 0]], self.back, [[2, 2], [2, 1], [2, 0]])
                 self.rotateMiddle(self.top, [[1, 2], [1, 0]], self.back, [[1, 2], [1, 0]], self.bottom, [[1, 2], [1, 0]], self.front, [[1, 2], [1, 0]])
 
+            case "M":
+                self.rotateMiddle(self.top, [[1, 0], [1, 2]], self.front, [[1, 0], [1, 2]], self.bottom, [[1, 0], [1, 2]], self.back, [[1, 0], [1, 2]])
+            case "M'":
+                self.rotateMiddle(self.top, [[1, 2], [1, 0]], self.back, [[1, 2], [1, 0]], self.bottom, [[1, 2], [1, 0]], self.front, [[1, 2], [1, 0]])
+
     def rotate(self, side, clockwise):
         newSide = self.generateEmptySide(side[1][1])
         if clockwise:

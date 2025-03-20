@@ -86,6 +86,8 @@ class main:
                             self.solver.makeMove("R" + ("'" if self.invertedMove else ""))
                         else:
                             self.solver.makeMove("r" + ("'" if self.invertedMove else ""))
+                    elif event.key == pygame.K_7:
+                        self.solver.makeMove("M" + ("'" if self.invertedMove else ""))
                     elif event.key == pygame.K_SPACE:
                         self.solver.generateScramble()
 
