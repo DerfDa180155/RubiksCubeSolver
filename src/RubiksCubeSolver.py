@@ -675,9 +675,45 @@ class RubiksCubeSolver:
         pll1.append([self.right[1][2] == self.back[0][0] and self.right[1][2] == self.back[2][0] and self.back[1][0] == self.left[2][2] and self.back[1][0] == self.left[0][2] and self.left[1][2] == self.right[0][2] and self.left[1][2] == self.right[2][2], ["R", "R", "D", "R", "D", "R'", "D'", "R'", "D'", "R'", "D", "R'"]]) # PLL (Ub)
         pll1.append([self.front[1][2] == self.right[0][2] and self.front[1][2] == self.right[2][2] and self.right[1][2] == self.front[0][2] and self.right[1][2] == self.front[2][2] and self.back[1][0] == self.left[2][2] and self.back[1][0] == self.left[0][2] and self.left[1][2] == self.back[0][0] and self.left[1][2] == self.back[2][0], ["M'", "D", "M", "M", "D", "M", "M", "D", "M'", "D", "D", "M", "M"]]) # PLL (Z)
 
-        for pll in pll1:
-            if pll[0]:
-                self.doAlgorithm(pll[1])
+        done = False
+        moves = 3
+        moved = False
+        while not done:
+            moved = False
+            for pll in pll1:
+                if pll[0]:
+                    moved = True
+                    moves = 3
+                    self.doAlgorithm(pll[1])
 
+                    pll1 = []
+                    pll1.append([self.front[0][2] == self.back[0][0] and self.left[2][2] == self.right[0][2] and self.right[2][2] == self.left[0][2] and self.back[2][0] == self.front[2][2], ["B", "R", "D'", "R'", "D'", "R", "D", "R'", "B'", "R", "D", "R'", "D'", "R'", "B", "R", "B'"]])  # Diagonal
+                    pll1.append([self.front[2][2] == self.back[2][0] and self.right[0][2] == self.back[0][0] and self.right[2][2] == self.front[0][2], ["R", "D", "R'", "D'", "R'", "B", "R", "R", "D'", "R'", "D'", "R", "D", "R'", "B'"]])  # Headlights
 
+                    pll1.append([self.front[1][2] == self.back[0][0] and self.front[1][2] == self.back[2][0] and self.back[1][0] == self.front[0][2] and self.back[1][0] == self.front[2][2] and self.right[1][2] == self.left[2][2] and self.right[1][2] == self.left[0][2] and self.left[1][2] == self.right[0][2] and self.left[1][2] == self.right[2][2], ["M", "M", "D", "M", "M", "D", "D", "M", "M", "D", "M", "M"]])  # PLL (H)
+                    pll1.append([self.right[1][2] == self.left[2][2] and self.right[1][2] == self.left[0][2] and self.left[1][2] == self.back[0][0] and self.left[1][2] == self.back[2][0] and self.back[1][0] == self.right[0][2] and self.back[1][0] == self.right[2][2], ["R", "D'", "R", "D", "R", "D", "R", "D'", "R'", "D'", "R", "R"]])  # PLL (Ua)
+                    pll1.append([self.right[1][2] == self.back[0][0] and self.right[1][2] == self.back[2][0] and self.back[1][0] == self.left[2][2] and self.back[1][0] == self.left[0][2] and self.left[1][2] == self.right[0][2] and self.left[1][2] == self.right[2][2], ["R", "R", "D", "R", "D", "R'", "D'", "R'", "D'", "R'", "D", "R'"]])  # PLL (Ub)
+                    pll1.append([self.front[1][2] == self.right[0][2] and self.front[1][2] == self.right[2][2] and self.right[1][2] == self.front[0][2] and self.right[1][2] == self.front[2][2] and self.back[1][0] == self.left[2][2] and self.back[1][0] == self.left[0][2] and self.left[1][2] == self.back[0][0] and self.left[1][2] == self.back[2][0], ["M'", "D", "M", "M", "D", "M", "M", "D", "M'", "D", "D", "M", "M"]])  # PLL (Z)
 
+            if not moved:
+                if moves == 0:
+                    done = True
+                else:
+                    self.makeMove("D")
+                    moves -= 1
+
+                    pll1 = []
+                    pll1.append([self.front[0][2] == self.back[0][0] and self.left[2][2] == self.right[0][2] and self.right[2][2] == self.left[0][2] and self.back[2][0] == self.front[2][2], ["B", "R", "D'", "R'", "D'", "R", "D", "R'", "B'", "R", "D", "R'", "D'", "R'", "B", "R", "B'"]])  # Diagonal
+                    pll1.append([self.front[2][2] == self.back[2][0] and self.right[0][2] == self.back[0][0] and self.right[2][2] == self.front[0][2], ["R", "D", "R'", "D'", "R'", "B", "R", "R", "D'", "R'", "D'", "R", "D", "R'", "B'"]])  # Headlights
+
+                    pll1.append([self.front[1][2] == self.back[0][0] and self.front[1][2] == self.back[2][0] and self.back[1][0] == self.front[0][2] and self.back[1][0] == self.front[2][2] and self.right[1][2] == self.left[2][2] and self.right[1][2] == self.left[0][2] and self.left[1][2] == self.right[0][2] and self.left[1][2] == self.right[2][2], ["M", "M", "D", "M", "M", "D", "D", "M", "M", "D", "M", "M"]])  # PLL (H)
+                    pll1.append([self.right[1][2] == self.left[2][2] and self.right[1][2] == self.left[0][2] and self.left[1][2] == self.back[0][0] and self.left[1][2] == self.back[2][0] and self.back[1][0] == self.right[0][2] and self.back[1][0] == self.right[2][2], ["R", "D'", "R", "D", "R", "D", "R", "D'", "R'", "D'", "R", "R"]])  # PLL (Ua)
+                    pll1.append([self.right[1][2] == self.back[0][0] and self.right[1][2] == self.back[2][0] and self.back[1][0] == self.left[2][2] and self.back[1][0] == self.left[0][2] and self.left[1][2] == self.right[0][2] and self.left[1][2] == self.right[2][2], ["R", "R", "D", "R", "D", "R'", "D'", "R'", "D'", "R'", "D", "R'"]])  # PLL (Ub)
+                    pll1.append([self.front[1][2] == self.right[0][2] and self.front[1][2] == self.right[2][2] and self.right[1][2] == self.front[0][2] and self.right[1][2] == self.front[2][2] and self.back[1][0] == self.left[2][2] and self.back[1][0] == self.left[0][2] and self.left[1][2] == self.back[0][0] and self.left[1][2] == self.back[2][0], ["M'", "D", "M", "M", "D", "M", "M", "D", "M'", "D", "D", "M", "M"]])  # PLL (Z)
+
+        solved = False
+        while not solved:
+            if self.front[1][1] == self.front[1][2]:
+                solved = True
+            else:
+                self.makeMove("D")
