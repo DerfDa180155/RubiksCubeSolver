@@ -335,6 +335,8 @@ class RubiksCubeSolver:
             case 4: # PLL
                 print("PLL")
                 self.PLLSolver()
+            case 5: # Done
+                print(self.simplifySolve())
 
         print(self.solveMoves)
 
@@ -664,7 +666,6 @@ class RubiksCubeSolver:
                     oll1.append([self.bottom[1][0] == 3 and self.bottom[2][1] == 3 and self.bottom[1][2] == 3 and self.bottom[0][1] == 3 and self.front[0][2] == 3 and self.bottom[2][0] == 3 and self.bottom[2][2] == 3 and self.back[0][0] == 3, ["r", "D", "R'", "D'", "r'", "B", "R", "B'"]]) # T
                     oll1.append([self.bottom[1][0] == 3 and self.bottom[2][1] == 3 and self.bottom[1][2] == 3 and self.bottom[0][1] == 3 and self.bottom[0][0] == 3 and self.bottom[2][0] == 3 and self.back[2][0] == 3 and self.back[0][0] == 3, ["R", "R", "U", "R'", "D", "D", "R", "U'", "R'", "D", "D", "R'"]]) # U
 
-
     def PLLSolver(self):
         pll1 = []
         pll1.append([self.front[0][2] == self.back[0][0] and self.left[2][2] == self.right[0][2] and self.right[2][2] == self.left[0][2] and self.back[2][0] == self.front[2][2], ["B", "R", "D'", "R'", "D'", "R", "D", "R'", "B'", "R", "D", "R'", "D'", "R'", "B", "R", "B'"]]) # Diagonal
@@ -717,3 +718,19 @@ class RubiksCubeSolver:
                 solved = True
             else:
                 self.makeMove("D")
+
+    def simplifySolve(self):
+        simplifiedMoves = []
+
+        first = True
+        for move in self.solveMoves:
+            if first:
+                simplifiedMoves.append(move)
+                first = False
+            else:
+                if move == simplifiedMoves[len(simplifiedMoves)-1]:
+                    simplifiedMoves[len(simplifiedMoves)-1] += "2"
+                else:
+                    simplifiedMoves.append(move)
+
+        return simplifiedMoves
