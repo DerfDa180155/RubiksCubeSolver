@@ -730,6 +730,7 @@ class RubiksCubeSolver:
             else:
                 if move == simplifiedMoves[len(simplifiedMoves)-1]:
                     simplifiedMoves[len(simplifiedMoves)-1] += "2"
+                    simplifiedMoves[len(simplifiedMoves)-1].replace("'", "")
                 elif simplifiedMoves[len(simplifiedMoves)-1].find(move) != -1:
                     if simplifiedMoves[len(simplifiedMoves)-1].find("2"):
                         simplifiedMoves[len(simplifiedMoves)-1].replace("2", "'")
