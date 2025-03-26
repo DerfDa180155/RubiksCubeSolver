@@ -98,7 +98,7 @@ class main:
 
             textSize = int((50 * self.windowWidth) / 2000)  # scale text size
             font = pygame.font.Font(pygame.font.get_default_font(), textSize)
-            debugText = ["Scramble: " + str(self.solver.scrambleMoves), "Solve: " + str(self.solver.solveMoves)]
+            debugText = ["Scramble: " + str(self.solver.scrambleMoves), "Solve (" + str(len(self.solver.solveMoves)) + "): " + str(self.solver.solveMoves)]
 
             for i in range(len(debugText)):
                 # settings Text
