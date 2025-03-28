@@ -103,8 +103,8 @@ class main:
                 # settings Text
                 text = font.render(debugText[i], True, (255,255,255))
                 newRect = text.get_rect()
-                newRect.x = 1000
-                newRect.y = ((10 * self.windowHeight) / 900) + textSize * i + textSize * i / 2
+                newRect.x = 10
+                newRect.y = (((10 * self.windowHeight) / 900) + textSize * i + textSize * i / 2) + 1250
                 self.screen.blit(text, newRect)
 
 
