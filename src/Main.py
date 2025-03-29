@@ -96,9 +96,17 @@ class main:
 
             self.screen.fill((50, 50, 50))
 
-            textSize = int((50 * self.windowWidth) / 2000)  # scale text size
+            textSize = int((30 * self.windowWidth) / 2000)  # scale text size
             font = pygame.font.Font(pygame.font.get_default_font(), textSize)
-            debugText = ["Scramble: " + str(self.solver.scrambleMoves), "Solve (" + str(len(self.solver.solveMoves)) + "): " + str(self.solver.solveMoves), "simplifiedMoves (" + str(len(self.solver.simplifySolve())) + "):" + str(self.solver.simplifySolve())]
+            scrambleMoves = ""
+            first = True
+            for move in self.solver.scrambleMoves:
+                if first:
+                    scrambleMoves += str(move)
+                    first = False
+                else:
+                    scrambleMoves += " ," + str(move)
+            debugText = ["Scramble: " + scrambleMoves, "Solve (" + str(len(self.solver.solveMoves)) + "): " + str(self.solver.solveMoves), "simplifiedMoves (" + str(len(self.solver.simplifySolve())) + "):" + str(self.solver.simplifySolve())]
             for i in range(len(debugText)):
                 # settings Text
                 text = font.render(debugText[i], True, (255,255,255))
