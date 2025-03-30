@@ -106,7 +106,15 @@ class main:
                     first = False
                 else:
                     scrambleMoves += " ," + str(move)
-            debugText = ["Scramble: " + scrambleMoves, "Solve (" + str(len(self.solver.solveMoves)) + "): " + str(self.solver.solveMoves), "simplifiedMoves (" + str(len(self.solver.simplifySolve())) + "):" + str(self.solver.simplifySolve())]
+            solveMoves = ""
+            first = True
+            for move in self.solver.solveMoves:
+                if first:
+                    solveMoves += str(move)
+                    first = False
+                else:
+                    solveMoves += " ," + str(move)
+            debugText = ["Scramble: " + scrambleMoves, "Solve (" + str(len(self.solver.solveMoves)) + "): " + solveMoves, "simplifiedMoves (" + str(len(self.solver.simplifySolve())) + "):" + str(self.solver.simplifySolve())]
             for i in range(len(debugText)):
                 # settings Text
                 text = font.render(debugText[i], True, (255,255,255))
