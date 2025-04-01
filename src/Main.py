@@ -138,8 +138,11 @@ class main:
                 for j in range(len(cube[0])):
                     if cube[i][j] != -1:
                         color = (0, 0, 0)
-                        width = 100
-                        height = 100
+                        if self.windowWidth < self.windowHeight:
+                            width = (100 * self.windowWidth) / 2000
+                        else:
+                            width = (100 * self.windowHeight) / 2000
+                        height = width
                         x = 10 + (j * (width + 1))
                         y = 10 + (i * (height + 1))
 
