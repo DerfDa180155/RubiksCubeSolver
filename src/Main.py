@@ -96,7 +96,12 @@ class main:
 
             self.screen.fill((50, 50, 50))
 
-            textSize = int((30 * self.windowWidth) / 2000)  # scale text size
+            unscaledSize = 30
+            if self.windowWidth < self.windowHeight:
+                textSize = int((unscaledSize * self.windowWidth) / 2000) # scale text size
+            else:
+                textSize = int((unscaledSize * self.windowHeight) / 2000) # scale text size
+
             font = pygame.font.Font(pygame.font.get_default_font(), textSize)
             scrambleMoves = ""
             first = True
