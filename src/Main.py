@@ -99,8 +99,10 @@ class main:
             unscaledSize = 30
             if self.windowWidth < self.windowHeight:
                 textSize = int((unscaledSize * self.windowWidth) / 2000) # scale text size
+                width = (100 * self.windowWidth) / 2000
             else:
                 textSize = int((unscaledSize * self.windowHeight) / 2000) # scale text size
+                width = (100 * self.windowHeight) / 2000
 
             font = pygame.font.Font(pygame.font.get_default_font(), textSize)
             scrambleMoves = ""
@@ -133,7 +135,7 @@ class main:
                 text = font.render(debugText[i], True, (255,255,255))
                 newRect = text.get_rect()
                 newRect.x = 10
-                newRect.y = (((10 * self.windowHeight) / 900) + textSize * i + textSize * i / 2) + 1250
+                newRect.y = (((10 * self.windowHeight) / 900) + textSize * i + textSize * i / 2) + (12*width) + 10
                 self.screen.blit(text, newRect)
 
 
@@ -143,10 +145,7 @@ class main:
                 for j in range(len(cube[0])):
                     if cube[i][j] != -1:
                         color = (0, 0, 0)
-                        if self.windowWidth < self.windowHeight:
-                            width = (100 * self.windowWidth) / 2000
-                        else:
-                            width = (100 * self.windowHeight) / 2000
+
                         height = width
                         x = 10 + (j * (width + 1))
                         y = 10 + (i * (height + 1))
