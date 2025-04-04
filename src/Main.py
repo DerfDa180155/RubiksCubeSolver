@@ -129,9 +129,13 @@ class main:
                     first = False
                 else:
                     simplifiedMoves += " ," + str(move)
-            debugText = ["Scramble: " + scrambleMoves, "Solve (" + str(len(self.solver.solveMoves)) + "): " + solveMoves, "simplifiedMoves (" + str(len(self.solver.simplifySolve())) + "): " + simplifiedMoves]
+            debugText = []
+            debugText.append("Scramble: " + scrambleMoves)
+            debugText.append("Solve (" + str(len(self.solver.solveMoves)) + "):")
+            for i in range(0, len(solveMoves), 100):
+                debugText.append(solveMoves[i:i+100])
+            debugText.append("simplifiedMoves (" + str(len(self.solver.simplifySolve())) + "): " + simplifiedMoves)
             for i in range(len(debugText)):
-                # settings Text
                 text = font.render(debugText[i], True, (255,255,255))
                 newRect = text.get_rect()
                 newRect.x = 10
