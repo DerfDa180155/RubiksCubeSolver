@@ -105,6 +105,7 @@ class main:
                 width = (100 * self.windowHeight) / 2000
 
             font = pygame.font.Font(pygame.font.get_default_font(), textSize)
+
             scrambleMoves = ""
             first = True
             for move in self.solver.scrambleMoves:
@@ -113,6 +114,7 @@ class main:
                     first = False
                 else:
                     scrambleMoves += " ," + str(move)
+
             solveMoves = ""
             first = True
             for move in self.solver.solveMoves:
@@ -121,6 +123,7 @@ class main:
                     first = False
                 else:
                     solveMoves += " ," + str(move)
+
             simplifiedMoves = ""
             first = True
             for move in self.solver.simplifySolve():
@@ -129,14 +132,20 @@ class main:
                     first = False
                 else:
                     simplifiedMoves += " ," + str(move)
-            debugText = []
-            debugText.append("Scramble: " + scrambleMoves)
-            debugText.append("Solve (" + str(len(self.solver.solveMoves)) + "):")
+
+            displayedText = []
+            displayedText.append("Scramble: " + scrambleMoves)
+
+            displayedText.append("Solve (" + str(len(self.solver.solveMoves)) + "):")
             for i in range(0, len(solveMoves), 100):
-                debugText.append(solveMoves[i:i+100])
-            debugText.append("simplifiedMoves (" + str(len(self.solver.simplifySolve())) + "): " + simplifiedMoves)
-            for i in range(len(debugText)):
-                text = font.render(debugText[i], True, (255,255,255))
+                displayedText.append(solveMoves[i:i+100])
+
+            displayedText.append("simplifiedMoves (" + str(len(self.solver.simplifySolve())) + "):")
+            for i in range(0, len(simplifiedMoves), 100):
+                displayedText.append(simplifiedMoves[i:i+100])
+
+            for i in range(len(displayedText)):
+                text = font.render(displayedText[i], True, (255,255,255))
                 newRect = text.get_rect()
                 newRect.x = 10
                 newRect.y = (((10 * self.windowHeight) / 900) + textSize * i + textSize * i / 2) + (12*width) + 10
