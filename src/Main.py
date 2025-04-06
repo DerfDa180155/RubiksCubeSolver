@@ -115,14 +115,7 @@ class main:
                 else:
                     scrambleMoves += " ," + str(move)
 
-            solveMoves = ""
-            first = True
-            for move in self.solver.solveMoves:
-                if first:
-                    solveMoves += str(move)
-                    first = False
-                else:
-                    solveMoves += " ," + str(move)
+
 
             simplifiedMoves = ""
             first = True
@@ -137,8 +130,24 @@ class main:
             displayedText.append("Scramble: " + scrambleMoves)
 
             displayedText.append("Solve (" + str(len(self.solver.solveMoves)) + "):")
-            for i in range(0, len(solveMoves), 100):
-                displayedText.append(solveMoves[i:i+100])
+
+            solveMoves = ""
+            first = True
+            count = 0
+            for move in self.solver.solveMoves:
+                count += 1
+
+                if first:
+                    solveMoves += str(move)
+                    first = False
+                else:
+                    solveMoves += " ," + str(move)
+
+                if count == 30:
+                    count = 0
+                    displayedText.append(solveMoves)
+                    solveMoves = ""
+                    first = True
 
             displayedText.append("simplifiedMoves (" + str(len(self.solver.simplifySolve())) + "):")
             for i in range(0, len(simplifiedMoves), 100):
