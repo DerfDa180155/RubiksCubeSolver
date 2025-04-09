@@ -731,7 +731,7 @@ class RubiksCubeSolver:
                 if move == simplifiedMoves[len(simplifiedMoves)-1]: # U + U == U2
                     simplifiedMoves[len(simplifiedMoves)-1] += "2"
                     simplifiedMoves[len(simplifiedMoves)-1].replace("'", "")
-                if move + "'" == simplifiedMoves[len(simplifiedMoves)-1]: # U' + U == -
+                if move + "'" == simplifiedMoves[len(simplifiedMoves)-1] or move == simplifiedMoves[len(simplifiedMoves)-1] + "'": # U' + U == -
                     simplifiedMoves.pop(len(simplifiedMoves)-1)
                 elif simplifiedMoves[len(simplifiedMoves)-1].find(move) != -1:
                     if simplifiedMoves[len(simplifiedMoves)-1].find("2"):
