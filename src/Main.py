@@ -140,6 +140,7 @@ class main:
                     displayedText.append(solveMoves)
                     solveMoves = ""
                     first = True
+            displayedText.append(solveMoves)
 
             displayedText.append("simplifiedMoves (" + str(len(self.solver.simplifySolve())) + "):")
 
@@ -159,7 +160,7 @@ class main:
                     displayedText.append(simplifiedMoves)
                     simplifiedMoves = ""
                     first = True
-
+            displayedText.append(simplifiedMoves)
 
             for i in range(len(displayedText)):
                 text = font.render(displayedText[i], True, (255,255,255))
