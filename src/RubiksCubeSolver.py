@@ -734,7 +734,9 @@ class RubiksCubeSolver:
                 if move + "'" == simplifiedMoves[len(simplifiedMoves)-1] or move == simplifiedMoves[len(simplifiedMoves)-1] + "'": # U' + U == -
                     simplifiedMoves.pop(len(simplifiedMoves)-1)
                 elif simplifiedMoves[len(simplifiedMoves)-1].find(move) != -1:
-                    if simplifiedMoves[len(simplifiedMoves)-1].find("2"):
+                    if simplifiedMoves[len(simplifiedMoves)-1].find("2") != -1 and move.find("'") != -1:
+                        simplifiedMoves[len(simplifiedMoves)-1].replace("2", "")
+                    elif simplifiedMoves[len(simplifiedMoves)-1].find("2") != -1:
                         simplifiedMoves[len(simplifiedMoves)-1].replace("2", "'")
                 else:
                     simplifiedMoves.append(move)
