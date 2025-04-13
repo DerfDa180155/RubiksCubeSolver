@@ -319,26 +319,32 @@ class RubiksCubeSolver:
         print("solver")
         self.solveState()
 
-        match self.state:
-            case 0: # cross
-                print("cross")
-                self.crossSolver()
-            case 1: # corners
-                print("corners")
-                self.cornerSolver()
-            case 2: # 2nd layer
-                print("2nd layer")
-                self.secondLayerSolver()
-            case 3: # OLL
-                print("OLL")
-                self.OLLSolver()
-            case 4: # PLL
-                print("PLL")
-                self.PLLSolver()
-            case 5: # Done
-                print(self.simplifySolve())
+        done = False
+        oldState = self.state
+        while not done:
+            match self.state:
+                case 0: # cross
+                    print("cross")
+                    self.crossSolver()
+                case 1: # corners
+                    print("corners")
+                    self.cornerSolver()
+                case 2: # 2nd layer
+                    print("2nd layer")
+                    self.secondLayerSolver()
+                case 3: # OLL
+                    print("OLL")
+                    self.OLLSolver()
+                case 4: # PLL
+                    print("PLL")
+                    self.PLLSolver()
+                case 5: # Done
+                    print(self.simplifySolve())
 
-        print(self.solveMoves)
+            #print(self.solveMoves)
+            self.solveState()
+            done = oldState == self.state
+            oldState = self.state
 
 
     def crossSolver(self):
