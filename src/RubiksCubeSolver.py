@@ -348,52 +348,58 @@ class RubiksCubeSolver:
 
 
     def crossSolver(self):
-        # correct edges
-        topEdges = []
-        topEdges.append([self.top[1][2] == 1, self.front[1][0], 2, ["F", "F"]])
-        topEdges.append([self.top[0][1] == 1, self.left[1][0], 5, ["L", "L"]])
-        topEdges.append([self.top[1][0] == 1, self.back[1][2], 4, ["B", "B"]])
-        topEdges.append([self.top[2][1] == 1, self.right[1][0], 6, ["R", "R"]])
+        done = False
+        while not done:
+            # correct edges
+            topEdges = []
+            topEdges.append([self.top[1][2] == 1, self.front[1][0], 2, ["F", "F"]])
+            topEdges.append([self.top[0][1] == 1, self.left[1][0], 5, ["L", "L"]])
+            topEdges.append([self.top[1][0] == 1, self.back[1][2], 4, ["B", "B"]])
+            topEdges.append([self.top[2][1] == 1, self.right[1][0], 6, ["R", "R"]])
 
-        searchEdges = []
-        # bottom side edges
-        searchEdges.append([self.front[1][2], ["F", "L", "D", "D", "L'", "F'"]])
-        searchEdges.append([self.left[1][2], ["L", "B", "D", "D", "B'", "L'"]])
-        searchEdges.append([self.back[1][0], ["B", "R", "D", "D", "R'", "B'"]])
-        searchEdges.append([self.right[1][2], ["R", "F", "D", "D", "F'", "R'"]])
+            searchEdges = []
+            # bottom side edges
+            searchEdges.append([self.front[1][2], ["F", "L", "D", "D", "L'", "F'"]])
+            searchEdges.append([self.left[1][2], ["L", "B", "D", "D", "B'", "L'"]])
+            searchEdges.append([self.back[1][0], ["B", "R", "D", "D", "R'", "B'"]])
+            searchEdges.append([self.right[1][2], ["R", "F", "D", "D", "F'", "R'"]])
 
-        # left side edges
-        searchEdges.append([self.front[0][1], ["L", "D", "L'"]])
-        searchEdges.append([self.left[0][1], ["B", "D", "B'"]])
-        searchEdges.append([self.back[2][1], ["R", "D", "R'"]])
-        searchEdges.append([self.right[0][1], ["F", "D", "F'"]])
+            # left side edges
+            searchEdges.append([self.front[0][1], ["L", "D", "L'"]])
+            searchEdges.append([self.left[0][1], ["B", "D", "B'"]])
+            searchEdges.append([self.back[2][1], ["R", "D", "R'"]])
+            searchEdges.append([self.right[0][1], ["F", "D", "F'"]])
 
-        # right side edges
-        searchEdges.append([self.front[2][1], ["R'", "D'", "R"]])
-        searchEdges.append([self.left[2][1], ["F'", "D'", "F"]])
-        searchEdges.append([self.back[0][1], ["L'", "D'", "L"]])
-        searchEdges.append([self.right[2][1], ["B'", "D'", "B"]])
+            # right side edges
+            searchEdges.append([self.front[2][1], ["R'", "D'", "R"]])
+            searchEdges.append([self.left[2][1], ["F'", "D'", "F"]])
+            searchEdges.append([self.back[0][1], ["L'", "D'", "L"]])
+            searchEdges.append([self.right[2][1], ["B'", "D'", "B"]])
 
-        # top side edges
-        searchEdges.append([self.front[1][0], ["F", "R'", "D", "R", "F'"]])
-        searchEdges.append([self.left[1][0], ["L", "F'", "D", "F", "L'"]])
-        searchEdges.append([self.back[1][2], ["B", "L'", "D", "L", "B'"]])
-        searchEdges.append([self.right[1][0], ["R", "B'", "D", "B", "R'"]])
+            # top side edges
+            searchEdges.append([self.front[1][0], ["F", "R'", "D", "R", "F'"]])
+            searchEdges.append([self.left[1][0], ["L", "F'", "D", "F", "L'"]])
+            searchEdges.append([self.back[1][2], ["B", "L'", "D", "L", "B'"]])
+            searchEdges.append([self.right[1][0], ["R", "B'", "D", "B", "R'"]])
 
-        # solve bottom top edges
-        self.moveBottomToTop()
+            # solve bottom top edges
+            self.moveBottomToTop()
 
-        # check wrong top piece
-        for edge in topEdges:
-            if edge[0] and edge[1] != edge[2]:
-                self.doAlgorithm(edge[3])
-                self.moveBottomToTop()
+            done = True
 
-        # move edges to bottom
-        for edge in searchEdges:
-            if edge[0] == 1:
-                self.doAlgorithm(edge[1])
-                self.moveBottomToTop()
+            # check wrong top piece
+            for edge in topEdges:
+                if edge[0] and edge[1] != edge[2]:
+                    self.doAlgorithm(edge[3])
+                    self.moveBottomToTop()
+                    done = False
+
+            # move edges to bottom
+            for edge in searchEdges:
+                if edge[0] == 1:
+                    self.doAlgorithm(edge[1])
+                    self.moveBottomToTop()
+                    done = False
 
     def moveBottomToTop(self):
         bottomEdges = []
