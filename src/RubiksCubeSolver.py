@@ -434,112 +434,118 @@ class RubiksCubeSolver:
                 bottomEdges.append([self.bottom[2][1], self.right[1][2], self.right[1][1], ["R", "R"]])
 
     def cornerSolver(self):
-        searchCorners = []
-        searchCorners.append([self.front[0][2], self.left[2][2] == self.left[1][1], ["F'", "D'", "F"]])
-        searchCorners.append([self.front[2][2], self.right[0][2] == self.right[1][1], ["F", "D", "F'"]])
-        searchCorners.append([self.left[0][2], self.back[0][0] == self.back[1][1], ["L'", "D'", "L"]])
-        searchCorners.append([self.left[2][2], self.front[0][2] == self.front[1][1], ["L", "D", "L'"]])
-        searchCorners.append([self.back[2][0], self.right[2][2] == self.right[1][1], ["B'", "D'", "B"]])
-        searchCorners.append([self.back[0][0], self.left[0][2] == self.left[1][1], ["B", "D", "B'"]])
-        searchCorners.append([self.right[0][2], self.front[2][2] == self.front[1][1], ["R'", "D'", "R"]])
-        searchCorners.append([self.right[2][2], self.back[2][0] == self.back[1][1], ["R", "D", "R'"]])
+        done = False
+        while not done:
+            done = True
+            searchCorners = []
+            searchCorners.append([self.front[0][2], self.left[2][2] == self.left[1][1], ["F'", "D'", "F"]])
+            searchCorners.append([self.front[2][2], self.right[0][2] == self.right[1][1], ["F", "D", "F'"]])
+            searchCorners.append([self.left[0][2], self.back[0][0] == self.back[1][1], ["L'", "D'", "L"]])
+            searchCorners.append([self.left[2][2], self.front[0][2] == self.front[1][1], ["L", "D", "L'"]])
+            searchCorners.append([self.back[2][0], self.right[2][2] == self.right[1][1], ["B'", "D'", "B"]])
+            searchCorners.append([self.back[0][0], self.left[0][2] == self.left[1][1], ["B", "D", "B'"]])
+            searchCorners.append([self.right[0][2], self.front[2][2] == self.front[1][1], ["R'", "D'", "R"]])
+            searchCorners.append([self.right[2][2], self.back[2][0] == self.back[1][1], ["R", "D", "R'"]])
 
-        foundCorner = False
-        rotateBottom = False
-        for corner in searchCorners:
-            if corner[0] == 1:
-                foundCorner = True
-
-        while foundCorner:
             foundCorner = False
             rotateBottom = False
             for corner in searchCorners:
                 if corner[0] == 1:
+                    foundCorner = True
+
+            while foundCorner:
+                foundCorner = False
+                rotateBottom = False
+                for corner in searchCorners:
+                    if corner[0] == 1:
+                        if corner[1]:
+                            self.doAlgorithm(corner[2])
+                            searchCorners = []
+                            searchCorners.append([self.front[0][2], self.left[2][2] == self.left[1][1], ["F'", "D'", "F"]])
+                            searchCorners.append([self.front[2][2], self.right[0][2] == self.right[1][1], ["F", "D", "F'"]])
+                            searchCorners.append([self.left[0][2], self.back[0][0] == self.back[1][1], ["L'", "D'", "L"]])
+                            searchCorners.append([self.left[2][2], self.front[0][2] == self.front[1][1], ["L", "D", "L'"]])
+                            searchCorners.append([self.back[2][0], self.right[2][2] == self.right[1][1], ["B'", "D'", "B"]])
+                            searchCorners.append([self.back[0][0], self.left[0][2] == self.left[1][1], ["B", "D", "B'"]])
+                            searchCorners.append([self.right[0][2], self.front[2][2] == self.front[1][1], ["R'", "D'", "R"]])
+                            searchCorners.append([self.right[2][2], self.back[2][0] == self.back[1][1], ["R", "D", "R'"]])
+                            done = False
+                        else:
+                            foundCorner = True
+                            rotateBottom = True
+                if rotateBottom:
+                    self.makeMove("D")
+                    searchCorners = []
+                    searchCorners.append([self.front[0][2], self.left[2][2] == self.left[1][1], ["F'", "D'", "F"]])
+                    searchCorners.append([self.front[2][2], self.right[0][2] == self.right[1][1], ["F", "D", "F'"]])
+                    searchCorners.append([self.left[0][2], self.back[0][0] == self.back[1][1], ["L'", "D'", "L"]])
+                    searchCorners.append([self.left[2][2], self.front[0][2] == self.front[1][1], ["L", "D", "L'"]])
+                    searchCorners.append([self.back[2][0], self.right[2][2] == self.right[1][1], ["B'", "D'", "B"]])
+                    searchCorners.append([self.back[0][0], self.left[0][2] == self.left[1][1], ["B", "D", "B'"]])
+                    searchCorners.append([self.right[0][2], self.front[2][2] == self.front[1][1], ["R'", "D'", "R"]])
+                    searchCorners.append([self.right[2][2], self.back[2][0] == self.back[1][1], ["R", "D", "R'"]])
+
+
+            # bottom corners
+            bottomCorner = []
+            bottomCorner.append([self.bottom[0][2] == 1, self.top[0][0] != 1, ["B", "D'", "B'"]])
+            bottomCorner.append([self.bottom[2][2] == 1, self.top[2][0] != 1, ["B'", "D", "B"]])
+            bottomCorner.append([self.bottom[2][0] == 1, self.top[2][2] != 1, ["F", "D'", "F'"]])
+            bottomCorner.append([self.bottom[0][0] == 1, self.top[0][2] != 1, ["F'", "D", "F"]])
+
+
+            for corner in bottomCorner:
+                #foundCorner = False
+                rotateBottom = False
+                if corner[0]:
                     if corner[1]:
                         self.doAlgorithm(corner[2])
-                        searchCorners = []
-                        searchCorners.append([self.front[0][2], self.left[2][2] == self.left[1][1], ["F'", "D'", "F"]])
-                        searchCorners.append([self.front[2][2], self.right[0][2] == self.right[1][1], ["F", "D", "F'"]])
-                        searchCorners.append([self.left[0][2], self.back[0][0] == self.back[1][1], ["L'", "D'", "L"]])
-                        searchCorners.append([self.left[2][2], self.front[0][2] == self.front[1][1], ["L", "D", "L'"]])
-                        searchCorners.append([self.back[2][0], self.right[2][2] == self.right[1][1], ["B'", "D'", "B"]])
-                        searchCorners.append([self.back[0][0], self.left[0][2] == self.left[1][1], ["B", "D", "B'"]])
-                        searchCorners.append([self.right[0][2], self.front[2][2] == self.front[1][1], ["R'", "D'", "R"]])
-                        searchCorners.append([self.right[2][2], self.back[2][0] == self.back[1][1], ["R", "D", "R'"]])
+                        #foundCorner = False
+                        bottomCorner = []
+                        bottomCorner.append([self.bottom[0][2] == 1, self.top[0][0] != 1, ["B", "D'", "B'"]])
+                        bottomCorner.append([self.bottom[2][2] == 1, self.top[2][0] != 1, ["B'", "D", "B"]])
+                        bottomCorner.append([self.bottom[2][0] == 1, self.top[2][2] != 1, ["F", "D'", "F'"]])
+                        bottomCorner.append([self.bottom[0][0] == 1, self.top[0][2] != 1, ["F'", "D", "F"]])
+                        done = False
                     else:
-                        foundCorner = True
+                        #foundCorner = True
                         rotateBottom = True
-            if rotateBottom:
-                self.makeMove("D")
-                searchCorners = []
-                searchCorners.append([self.front[0][2], self.left[2][2] == self.left[1][1], ["F'", "D'", "F"]])
-                searchCorners.append([self.front[2][2], self.right[0][2] == self.right[1][1], ["F", "D", "F'"]])
-                searchCorners.append([self.left[0][2], self.back[0][0] == self.back[1][1], ["L'", "D'", "L"]])
-                searchCorners.append([self.left[2][2], self.front[0][2] == self.front[1][1], ["L", "D", "L'"]])
-                searchCorners.append([self.back[2][0], self.right[2][2] == self.right[1][1], ["B'", "D'", "B"]])
-                searchCorners.append([self.back[0][0], self.left[0][2] == self.left[1][1], ["B", "D", "B'"]])
-                searchCorners.append([self.right[0][2], self.front[2][2] == self.front[1][1], ["R'", "D'", "R"]])
-                searchCorners.append([self.right[2][2], self.back[2][0] == self.back[1][1], ["R", "D", "R'"]])
-
-
-        # bottom corners
-        bottomCorner = []
-        bottomCorner.append([self.bottom[0][2] == 1, self.top[0][0] != 1, ["B", "D'", "B'"]])
-        bottomCorner.append([self.bottom[2][2] == 1, self.top[2][0] != 1, ["B'", "D", "B"]])
-        bottomCorner.append([self.bottom[2][0] == 1, self.top[2][2] != 1, ["F", "D'", "F'"]])
-        bottomCorner.append([self.bottom[0][0] == 1, self.top[0][2] != 1, ["F'", "D", "F"]])
-
-
-        for corner in bottomCorner:
-            #foundCorner = False
-            rotateBottom = False
-            if corner[0]:
-                if corner[1]:
-                    self.doAlgorithm(corner[2])
-                    #foundCorner = False
+                if rotateBottom:
+                    self.makeMove("D")
                     bottomCorner = []
                     bottomCorner.append([self.bottom[0][2] == 1, self.top[0][0] != 1, ["B", "D'", "B'"]])
                     bottomCorner.append([self.bottom[2][2] == 1, self.top[2][0] != 1, ["B'", "D", "B"]])
                     bottomCorner.append([self.bottom[2][0] == 1, self.top[2][2] != 1, ["F", "D'", "F'"]])
                     bottomCorner.append([self.bottom[0][0] == 1, self.top[0][2] != 1, ["F'", "D", "F"]])
-                else:
-                    #foundCorner = True
-                    rotateBottom = True
-            if rotateBottom:
-                self.makeMove("D")
-                bottomCorner = []
-                bottomCorner.append([self.bottom[0][2] == 1, self.top[0][0] != 1, ["B", "D'", "B'"]])
-                bottomCorner.append([self.bottom[2][2] == 1, self.top[2][0] != 1, ["B'", "D", "B"]])
-                bottomCorner.append([self.bottom[2][0] == 1, self.top[2][2] != 1, ["F", "D'", "F'"]])
-                bottomCorner.append([self.bottom[0][0] == 1, self.top[0][2] != 1, ["F'", "D", "F"]])
 
 
-        topCorner = []
-        topCorner.append([self.top[0][0] == 1, self.left[0][0] != self.left[1][1], ["L'", "D", "L"]])
-        topCorner.append([self.top[2][0] == 1, self.right[2][0] != self.right[1][1], ["R", "D'", "R'"]])
-        topCorner.append([self.top[2][2] == 1, self.right[0][0] != self.right[1][1], ["R'", "D", "R"]])
-        topCorner.append([self.top[0][2] == 1, self.left[2][0] != self.left[1][1], ["L", "D'", "L'"]])
+            topCorner = []
+            topCorner.append([self.top[0][0] == 1, self.left[0][0] != self.left[1][1], ["L'", "D", "L"]])
+            topCorner.append([self.top[2][0] == 1, self.right[2][0] != self.right[1][1], ["R", "D'", "R'"]])
+            topCorner.append([self.top[2][2] == 1, self.right[0][0] != self.right[1][1], ["R'", "D", "R"]])
+            topCorner.append([self.top[0][2] == 1, self.left[2][0] != self.left[1][1], ["L", "D'", "L'"]])
 
-        # wrong top corners
-        for corner in topCorner:
-            if corner[0] and corner[1]:
-                self.doAlgorithm(corner[2])
+            # wrong top corners
+            for corner in topCorner:
+                if corner[0] and corner[1]:
+                    self.doAlgorithm(corner[2])
+                    done = False
 
 
-        # top side corners
-        topSideCorners = []
-        topSideCorners.append([self.front[0][0] == 1, ["F'", "D", "F"]])
-        topSideCorners.append([self.front[2][0] == 1, ["F", "D'", "F'"]])
-        topSideCorners.append([self.left[0][0] == 1, ["L'", "D", "L"]])
-        topSideCorners.append([self.left[2][0] == 1, ["L", "D'", "L'"]])
-        topSideCorners.append([self.back[2][2] == 1, ["B'", "D", "B"]])
-        topSideCorners.append([self.back[0][2] == 1, ["B", "D'", "B'"]])
-        topSideCorners.append([self.right[0][0] == 1, ["R'", "D", "R"]])
-        topSideCorners.append([self.right[2][0] == 1, ["R", "D'", "R'"]])
+            # top side corners
+            topSideCorners = []
+            topSideCorners.append([self.front[0][0] == 1, ["F'", "D", "F"]])
+            topSideCorners.append([self.front[2][0] == 1, ["F", "D'", "F'"]])
+            topSideCorners.append([self.left[0][0] == 1, ["L'", "D", "L"]])
+            topSideCorners.append([self.left[2][0] == 1, ["L", "D'", "L'"]])
+            topSideCorners.append([self.back[2][2] == 1, ["B'", "D", "B"]])
+            topSideCorners.append([self.back[0][2] == 1, ["B", "D'", "B'"]])
+            topSideCorners.append([self.right[0][0] == 1, ["R'", "D", "R"]])
+            topSideCorners.append([self.right[2][0] == 1, ["R", "D'", "R'"]])
 
-        for corner in topSideCorners:
-            if corner[0]:
-                self.doAlgorithm(corner[1])
+            for corner in topSideCorners:
+                if corner[0]:
+                    self.doAlgorithm(corner[1])
 
     def secondLayerSolver(self):
         solvedEdges = []
