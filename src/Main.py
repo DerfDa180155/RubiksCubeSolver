@@ -23,6 +23,8 @@ class main:
         self.invertedMove = False
         self.middelMoves = False
 
+        self.menu = "main"
+
         self.run()
 
     def run(self):
@@ -96,107 +98,82 @@ class main:
 
             self.screen.fill((50, 50, 50))
 
-            unscaledSize = 30
-            if self.windowWidth < self.windowHeight:
-                textSize = int((unscaledSize * self.windowWidth) / 2000) # scale text size
-                width = (100 * self.windowWidth) / 2000
-            else:
-                textSize = int((unscaledSize * self.windowHeight) / 2000) # scale text size
-                width = (100 * self.windowHeight) / 2000
+            match self.menu:
+                case "main":
+                    unscaledSize = 30
+                    if self.windowWidth < self.windowHeight:
+                        textSize = int((unscaledSize * self.windowWidth) / 2000) # scale text size
+                        width = (100 * self.windowWidth) / 2000
+                    else:
+                        textSize = int((unscaledSize * self.windowHeight) / 2000) # scale text size
+                        width = (100 * self.windowHeight) / 2000
 
-            font = pygame.font.Font(pygame.font.get_default_font(), textSize)
+                    font = pygame.font.Font(pygame.font.get_default_font(), textSize)
 
-            scrambleMoves = ""
-            first = True
-            for move in self.solver.scrambleMoves:
-                if first:
-                    scrambleMoves += str(move)
-                    first = False
-                else:
-                    scrambleMoves += " ," + str(move)
+                    scrambleMoves = ""
+                    first = True
+                    for move in self.solver.scrambleMoves:
+                        if first:
+                            scrambleMoves += str(move)
+                            first = False
+                        else:
+                            scrambleMoves += " ," + str(move)
 
+                    displayedText = []
+                    displayedText.append("Scramble: " + scrambleMoves)
 
+                    displayedText.append("Solve (" + str(len(self.solver.solveMoves)) + "):")
 
-
-            displayedText = []
-            displayedText.append("Scramble: " + scrambleMoves)
-
-            displayedText.append("Solve (" + str(len(self.solver.solveMoves)) + "):")
-
-            solveMoves = ""
-            first = True
-            count = 0
-            for move in self.solver.solveMoves:
-                count += 1
-
-                if first:
-                    solveMoves += str(move)
-                    first = False
-                else:
-                    solveMoves += " ," + str(move)
-
-                if count == 30:
-                    count = 0
-                    displayedText.append(solveMoves)
                     solveMoves = ""
                     first = True
-            displayedText.append(solveMoves)
-
-            displayedText.append("simplifiedMoves (" + str(len(self.solver.simplifySolve())) + "):")
-
-            simplifiedMoves = ""
-            first = True
-            count = 0
-            for move in self.solver.simplifySolve():
-                count += 1
-                if first:
-                    simplifiedMoves += str(move)
-                    first = False
-                else:
-                    simplifiedMoves += " ," + str(move)
-
-                if count == 30:
                     count = 0
-                    displayedText.append(simplifiedMoves)
+                    for move in self.solver.solveMoves:
+                        count += 1
+
+                        if first:
+                            solveMoves += str(move)
+                            first = False
+                        else:
+                            solveMoves += " ," + str(move)
+
+                        if count == 30:
+                            count = 0
+                            displayedText.append(solveMoves)
+                            solveMoves = ""
+                            first = True
+                    displayedText.append(solveMoves)
+
+                    displayedText.append("simplifiedMoves (" + str(len(self.solver.simplifySolve())) + "):")
+
                     simplifiedMoves = ""
                     first = True
-            displayedText.append(simplifiedMoves)
+                    count = 0
+                    for move in self.solver.simplifySolve():
+                        count += 1
+                        if first:
+                            simplifiedMoves += str(move)
+                            first = False
+                        else:
+                            simplifiedMoves += " ," + str(move)
 
-            for i in range(len(displayedText)):
-                text = font.render(displayedText[i], True, (255,255,255))
-                newRect = text.get_rect()
-                newRect.x = 10
-                newRect.y = (((10 * self.windowHeight) / 900) + textSize * i + textSize * i / 2) + (12*width) + 10
-                self.screen.blit(text, newRect)
+                        if count == 30:
+                            count = 0
+                            displayedText.append(simplifiedMoves)
+                            simplifiedMoves = ""
+                            first = True
+                    displayedText.append(simplifiedMoves)
 
+                    for i in range(len(displayedText)):
+                        text = font.render(displayedText[i], True, (255,255,255))
+                        newRect = text.get_rect()
+                        newRect.x = 10
+                        newRect.y = (((10 * self.windowHeight) / 900) + textSize * i + textSize * i / 2) + (12*width) + 10
+                        self.screen.blit(text, newRect)
 
-            # draw cube
-            cube = self.solver.generateComplete()
-            for i in range(len(cube)):
-                for j in range(len(cube[0])):
-                    if cube[i][j] != -1:
-                        color = (0, 0, 0)
+                    self.drawCube(width)
 
-                        height = width
-                        x = 10 + (j * (width + 1))
-                        y = 10 + (i * (height + 1))
-
-                        match cube[i][j]:
-                            case 1: # white
-                                color = (255,255,255)
-                            case 2: # blue
-                                color = (0, 0, 255)
-                            case 3: # yellow
-                                color = (255,255,0)
-                            case 4: # green
-                                color = (0, 255, 0)
-                            case 5: # red
-                                color = (255, 0, 0)
-                            case 6: # orange
-                                color = (255, 165 ,0)
-
-                        pygame.draw.rect(self.screen, color, (x, y, width, height))
-
+                case "customScramble":
+                    pass
 
 
 
@@ -204,6 +181,34 @@ class main:
 
             pygame.display.flip()
             self.clock.tick(60)
+
+    def drawCube(self, width):
+        # draw cube
+        cube = self.solver.generateComplete()
+        for i in range(len(cube)):
+            for j in range(len(cube[0])):
+                if cube[i][j] != -1:
+                    color = (0, 0, 0)
+
+                    height = width
+                    x = 10 + (j * (width + 1))
+                    y = 10 + (i * (height + 1))
+
+                    match cube[i][j]:
+                        case 1:  # white
+                            color = (255, 255, 255)
+                        case 2:  # blue
+                            color = (0, 0, 255)
+                        case 3:  # yellow
+                            color = (255, 255, 0)
+                        case 4:  # green
+                            color = (0, 255, 0)
+                        case 5:  # red
+                            color = (255, 0, 0)
+                        case 6:  # orange
+                            color = (255, 165, 0)
+
+                    pygame.draw.rect(self.screen, color, (x, y, width, height))
 
 if __name__ == "__main__":
     main()
