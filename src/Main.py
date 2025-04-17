@@ -24,6 +24,7 @@ class main:
         self.middelMoves = False
 
         self.menu = "main"
+        self.spacePressed = False
 
         self.run()
 
@@ -91,22 +92,27 @@ class main:
                     elif event.key == pygame.K_7:
                         self.solver.makeMove("M" + ("'" if self.invertedMove else ""))
                     elif event.key == pygame.K_SPACE:
-                        self.solver.generateScramble()
+                        self.spacePressed = True
 
             self.windowWidth = self.screen.get_width()
             self.windowHeight = self.screen.get_height()
 
             self.screen.fill((50, 50, 50))
 
+            unscaledSize = 30
+            if self.windowWidth < self.windowHeight:
+                textSize = int((unscaledSize * self.windowWidth) / 2000)  # scale text size
+                width = (100 * self.windowWidth) / 2000
+            else:
+                textSize = int((unscaledSize * self.windowHeight) / 2000)  # scale text size
+                width = (100 * self.windowHeight) / 2000
+
             match self.menu:
                 case "main":
-                    unscaledSize = 30
-                    if self.windowWidth < self.windowHeight:
-                        textSize = int((unscaledSize * self.windowWidth) / 2000) # scale text size
-                        width = (100 * self.windowWidth) / 2000
-                    else:
-                        textSize = int((unscaledSize * self.windowHeight) / 2000) # scale text size
-                        width = (100 * self.windowHeight) / 2000
+                    if self.spacePressed:
+                        self.solver.generateScramble()
+                        self.spacePressed = not self.spacePressed
+
 
                     font = pygame.font.Font(pygame.font.get_default_font(), textSize)
 
@@ -173,7 +179,11 @@ class main:
                     self.drawCube(width)
 
                 case "customScramble":
-                    pass
+                    if self.spacePressed:
+                        self.solver.solve()
+                        self.spacePressed = not self.spacePressed
+
+                    self.drawCube(width)
 
 
 
