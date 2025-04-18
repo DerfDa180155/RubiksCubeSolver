@@ -93,6 +93,10 @@ class main:
                         self.solver.makeMove("M" + ("'" if self.invertedMove else ""))
                     elif event.key == pygame.K_SPACE:
                         self.spacePressed = True
+                    elif event.key == pygame.K_n:
+                        self.menu = "main"
+                    elif event.key == pygame.K_m:
+                        self.menu = "customScramble"
 
             self.windowWidth = self.screen.get_width()
             self.windowHeight = self.screen.get_height()
