@@ -97,6 +97,8 @@ class main:
                         self.menu = "main"
                     elif event.key == pygame.K_m:
                         self.menu = "customScramble"
+                    elif event.key == pygame.K_q:
+                        self.solver.reset()
 
             self.windowWidth = self.screen.get_width()
             self.windowHeight = self.screen.get_height()
