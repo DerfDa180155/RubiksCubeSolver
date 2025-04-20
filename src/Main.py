@@ -113,14 +113,19 @@ class main:
                 textSize = int((unscaledSize * self.windowHeight) / 2000)  # scale text size
                 width = (100 * self.windowHeight) / 2000
 
+            font = pygame.font.Font(pygame.font.get_default_font(), textSize)
+
+            text = font.render(self.menu, True, (255, 255, 255))
+            newRect = text.get_rect()
+            newRect.centerx = self.windowWidth/2
+            newRect.y = textSize * 0.5
+            self.screen.blit(text, newRect)
+
             match self.menu:
                 case "main":
                     if self.spacePressed:
                         self.solver.generateScramble()
                         self.spacePressed = not self.spacePressed
-
-
-                    font = pygame.font.Font(pygame.font.get_default_font(), textSize)
 
                     scrambleMoves = ""
                     first = True
