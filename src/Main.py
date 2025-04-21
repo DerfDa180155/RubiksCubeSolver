@@ -196,9 +196,24 @@ class main:
 
                     self.drawCube(width)
 
+                    displayedText = []
+                    scrambleMoves = ""
+                    first = True
+                    for move in self.solver.scrambleMoves:
+                        if first:
+                            scrambleMoves += str(move)
+                            first = False
+                        else:
+                            scrambleMoves += " ," + str(move)
+                    displayedText.append("Scramble: " + scrambleMoves)
 
-
-
+                    for i in range(len(displayedText)):
+                        text = font.render(displayedText[i], True, (255, 255, 255))
+                        newRect = text.get_rect()
+                        newRect.x = 10
+                        newRect.y = (((10 * self.windowHeight) / 900) + textSize * i + textSize * i / 2) + (
+                                    12 * width) + 10
+                        self.screen.blit(text, newRect)
 
             pygame.display.flip()
             self.clock.tick(60)
