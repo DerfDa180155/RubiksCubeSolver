@@ -116,6 +116,9 @@ class RubiksCubeSolver:
         return complite
 
     def makeMove(self, move, isScrambleMove = False):
+        if isScrambleMove and self.state == 5:
+            self.reset()
+
         if not isScrambleMove:
             if move.find("'") != -1:
                 self.solveMoves.append(move[:2])
