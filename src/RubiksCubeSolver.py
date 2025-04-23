@@ -124,6 +124,11 @@ class RubiksCubeSolver:
                 self.solveMoves.append(move[:2])
             else:
                 self.solveMoves.append(move[:1])
+        else:
+            if move.find("'") != -1:
+                self.scrambleMoves.append(move[:2])
+            else:
+                self.scrambleMoves.append(move[:1])
         match move:
             case "UP" | "U":
                 self.top = self.rotate(self.top, True)
@@ -283,14 +288,15 @@ class RubiksCubeSolver:
         lastMove = ""
         moves = ["U", "D", "F", "B", "L", "R"]
         self.reset()
+        scrambleMoves = []
         for i in range(20):
             move = moves[random.randint(0, len(moves)-1)]
             while move == lastMove:
                 move = moves[random.randint(0, len(moves) - 1)]
-            self.scrambleMoves.append(move)
+            scrambleMoves.append(move)
             lastMove = move
 
-        self.scramble(self.scrambleMoves)
+        self.scramble(scrambleMoves)
 
     def scramble(self, scramble):
         for move in scramble:

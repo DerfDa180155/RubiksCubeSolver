@@ -199,6 +199,7 @@ class main:
                     displayedText = []
                     scrambleMoves = ""
                     first = True
+                    print(self.solver.scrambleMoves)
                     for move in self.solver.scrambleMoves:
                         if first:
                             scrambleMoves += str(move)
