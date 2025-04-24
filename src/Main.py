@@ -187,19 +187,20 @@ class main:
                         newRect.y = (((10 * self.windowHeight) / 900) + textSize * i + textSize * i / 2) + (12*width) + 10
                         self.screen.blit(text, newRect)
 
-                    self.drawCube(width)
+                    self.drawCube(width, 10, 10)
 
                 case "customScramble":
                     if self.spacePressed:
                         self.solver.solve()
                         self.spacePressed = not self.spacePressed
 
-                    self.drawCube(width)
+                    centerX = self.windowWidth/2
+                    centerY = self.windowHeight/2
+                    self.drawCube(width, centerX, centerY, True)
 
                     displayedText = []
                     scrambleMoves = ""
                     first = True
-                    print(self.solver.scrambleMoves)
                     for move in self.solver.scrambleMoves:
                         if first:
                             scrambleMoves += str(move)
@@ -219,7 +220,7 @@ class main:
             pygame.display.flip()
             self.clock.tick(60)
 
-    def drawCube(self, width):
+    def drawCube(self, width, posX, posY, center=False):
         # draw cube
         cube = self.solver.generateComplete()
         for i in range(len(cube)):
@@ -228,8 +229,12 @@ class main:
                     color = (0, 0, 0)
 
                     height = width
-                    x = 10 + (j * (width + 1))
-                    y = 10 + (i * (height + 1))
+                    x = (j * (width + 1)) + posX
+                    y = (i * (height + 1)) + posY
+
+                    if center:
+                        x += -(width*4.5)
+                        y += -(width*6)
 
                     match cube[i][j]:
                         case 1:  # white
