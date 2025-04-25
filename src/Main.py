@@ -196,7 +196,7 @@ class main:
 
                     centerX = self.windowWidth/2
                     centerY = self.windowHeight/2
-                    self.drawCube(width, centerX, centerY, True)
+                    self.drawCube(width, centerX, 100, True)
 
                     displayedText = []
                     scrambleMoves = ""
@@ -220,7 +220,7 @@ class main:
             pygame.display.flip()
             self.clock.tick(60)
 
-    def drawCube(self, width, posX, posY, center=False):
+    def drawCube(self, width, posX, posY, centerX=False, centerY=False):
         # draw cube
         cube = self.solver.generateComplete()
         for i in range(len(cube)):
@@ -232,8 +232,9 @@ class main:
                     x = (j * (width + 1)) + posX
                     y = (i * (height + 1)) + posY
 
-                    if center:
+                    if centerX:
                         x += -(width*4.5)
+                    if centerY:
                         y += -(width*6)
 
                     match cube[i][j]:
