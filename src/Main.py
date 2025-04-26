@@ -213,8 +213,7 @@ class main:
                         text = font.render(displayedText[i], True, (255, 255, 255))
                         newRect = text.get_rect()
                         newRect.x = 10
-                        newRect.y = (((10 * self.windowHeight) / 900) + textSize * i + textSize * i / 2) + (
-                                    12 * width) + 10
+                        newRect.y = (((10 * self.windowHeight) / 900) + textSize * i + textSize * i / 2) + (14 * width) + 10
                         self.screen.blit(text, newRect)
 
             pygame.display.flip()
