@@ -209,6 +209,27 @@ class main:
                             scrambleMoves += " ," + str(move)
                     displayedText.append("Scramble: " + scrambleMoves)
 
+                    displayedText.append("Solve (" + str(len(self.solver.solveMoves)) + "):")
+
+                    solveMoves = ""
+                    first = True
+                    count = 0
+                    for move in self.solver.solveMoves:
+                        count += 1
+
+                        if first:
+                            solveMoves += str(move)
+                            first = False
+                        else:
+                            solveMoves += " ," + str(move)
+
+                        if count == 30:
+                            count = 0
+                            displayedText.append(solveMoves)
+                            solveMoves = ""
+                            first = True
+                    displayedText.append(solveMoves)
+
                     for i in range(len(displayedText)):
                         text = font.render(displayedText[i], True, (255, 255, 255))
                         newRect = text.get_rect()
