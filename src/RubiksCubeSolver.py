@@ -14,6 +14,7 @@ class RubiksCubeSolver:
 
         self.scrambleMoves = []
         self.solveMoves = []
+        self.simplifiedSolveMoves = []
         self.state = 0
 
         for i in range(1, 7):
@@ -29,6 +30,7 @@ class RubiksCubeSolver:
 
         self.scrambleMoves = []
         self.solveMoves = []
+        self.simplifiedSolveMoves = []
         self.state = 0
 
         for i in range(1, 7):
@@ -747,25 +749,25 @@ class RubiksCubeSolver:
                 self.makeMove("D")
 
     def simplifySolve(self):
-        simplifiedMoves = []
+        self.simplifiedSolveMoves = []
 
         first = True
         for move in self.solveMoves:
             if first:
-                simplifiedMoves.append(move)
+                self.simplifiedSolveMoves.append(move)
                 first = False
             else:
-                if move == simplifiedMoves[len(simplifiedMoves)-1]: # U + U == U2
-                    simplifiedMoves[len(simplifiedMoves)-1] += "2"
-                    simplifiedMoves[len(simplifiedMoves)-1] = simplifiedMoves[len(simplifiedMoves)-1].replace("'", "")
-                elif move + "'" == simplifiedMoves[len(simplifiedMoves)-1] or move == simplifiedMoves[len(simplifiedMoves)-1] + "'": # U' + U == -
-                    simplifiedMoves.pop(len(simplifiedMoves)-1)
-                elif simplifiedMoves[len(simplifiedMoves)-1].find(move) != -1:
-                    if simplifiedMoves[len(simplifiedMoves)-1].find("2") != -1 and move.find("'") != -1:
-                        simplifiedMoves[len(simplifiedMoves)-1] = simplifiedMoves[len(simplifiedMoves)-1].replace("2", "")
-                    elif simplifiedMoves[len(simplifiedMoves)-1].find("2") != -1:
-                        simplifiedMoves[len(simplifiedMoves)-1] = simplifiedMoves[len(simplifiedMoves)-1].replace("2", "'")
+                if move == self.simplifiedSolveMoves[len(self.simplifiedSolveMoves)-1]: # U + U == U2
+                    self.simplifiedSolveMoves[len(self.simplifiedSolveMoves)-1] += "2"
+                    self.simplifiedSolveMoves[len(self.simplifiedSolveMoves)-1] = self.simplifiedSolveMoves[len(self.simplifiedSolveMoves)-1].replace("'", "")
+                elif move + "'" == self.simplifiedSolveMoves[len(self.simplifiedSolveMoves)-1] or move == self.simplifiedSolveMoves[len(self.simplifiedSolveMoves)-1] + "'": # U' + U == -
+                    self.simplifiedSolveMoves.pop(len(self.simplifiedSolveMoves)-1)
+                elif self.simplifiedSolveMoves[len(self.simplifiedSolveMoves)-1].find(move) != -1:
+                    if self.simplifiedSolveMoves[len(self.simplifiedSolveMoves)-1].find("2") != -1 and move.find("'") != -1:
+                        self.simplifiedSolveMoves[len(self.simplifiedSolveMoves)-1] = self.simplifiedSolveMoves[len(self.simplifiedSolveMoves)-1].replace("2", "")
+                    elif self.simplifiedSolveMoves[len(self.simplifiedSolveMoves)-1].find("2") != -1:
+                        self.simplifiedSolveMoves[len(self.simplifiedSolveMoves)-1] = self.simplifiedSolveMoves[len(self.simplifiedSolveMoves)-1].replace("2", "'")
                 else:
-                    simplifiedMoves.append(move)
+                    self.simplifiedSolveMoves.append(move)
 
-        return simplifiedMoves
+        return self.simplifiedSolveMoves

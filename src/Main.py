@@ -214,7 +214,7 @@ class main:
                     solveMoves = ""
                     first = True
                     count = 0
-                    for move in self.solver.solveMoves:
+                    for move in self.solver.simplifiedSolveMoves:
                         count += 1
 
                         if first:
