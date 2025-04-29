@@ -59,37 +59,37 @@ class main:
                         self.invertedMove = not self.invertedMove
                     elif event.key == pygame.K_e:
                         self.middelMoves = not self.middelMoves
-                    elif event.key == pygame.K_1:
+                    elif event.key == pygame.K_u:
                         if not self.middelMoves:
                             self.solver.makeMove("U" + ("'" if self.invertedMove else ""), True)
                         else:
                             self.solver.makeMove("u" + ("'" if self.invertedMove else ""), True)
-                    elif event.key == pygame.K_2:
+                    elif event.key == pygame.K_d:
                         if not self.middelMoves:
                             self.solver.makeMove("D" + ("'" if self.invertedMove else ""), True)
                         else:
                             self.solver.makeMove("d" + ("'" if self.invertedMove else ""), True)
-                    elif event.key == pygame.K_3:
+                    elif event.key == pygame.K_f:
                         if not self.middelMoves:
                             self.solver.makeMove("F" + ("'" if self.invertedMove else ""), True)
                         else:
                             self.solver.makeMove("f" + ("'" if self.invertedMove else ""), True)
-                    elif event.key == pygame.K_4:
+                    elif event.key == pygame.K_b:
                         if not self.middelMoves:
                             self.solver.makeMove("B" + ("'" if self.invertedMove else ""), True)
                         else:
                             self.solver.makeMove("b" + ("'" if self.invertedMove else ""), True)
-                    elif event.key == pygame.K_5:
+                    elif event.key == pygame.K_l:
                         if not self.middelMoves:
                             self.solver.makeMove("L" + ("'" if self.invertedMove else ""), True)
                         else:
                             self.solver.makeMove("l" + ("'" if self.invertedMove else ""), True)
-                    elif event.key == pygame.K_6:
+                    elif event.key == pygame.K_r:
                         if not self.middelMoves:
                             self.solver.makeMove("R" + ("'" if self.invertedMove else ""), True)
                         else:
                             self.solver.makeMove("r" + ("'" if self.invertedMove else ""), True)
-                    elif event.key == pygame.K_7:
+                    elif event.key == pygame.K_1:
                         self.solver.makeMove("M" + ("'" if self.invertedMove else ""), True)
                     elif event.key == pygame.K_SPACE:
                         self.spacePressed = True
