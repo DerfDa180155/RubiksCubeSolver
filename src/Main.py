@@ -187,7 +187,8 @@ class main:
                         newRect.y = (((10 * self.windowHeight) / 900) + textSize * i + textSize * i / 2) + (12*width) + 10
                         self.screen.blit(text, newRect)
 
-                    self.drawCube(width, 10, 10)
+                    centerX = self.windowWidth / 2
+                    self.drawCube(width, centerX, 100, True)
 
                 case "customScramble":
                     if self.spacePressed:
