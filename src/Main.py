@@ -210,7 +210,7 @@ class main:
                             scrambleMoves += " ," + str(move)
                     displayedText.append("Scramble: " + scrambleMoves)
 
-                    displayedText.append("Solve (" + str(len(self.solver.solveMoves)) + "):")
+                    displayedText.append("Solve (" + str(len(self.solver.simplifiedSolveMoves)) + "):")
 
                     solveMoves = ""
                     first = True
