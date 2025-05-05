@@ -332,6 +332,7 @@ class RubiksCubeSolver:
 
         done = False
         oldState = self.state
+        counter = 3
         while not done:
             match self.state:
                 case 0: # cross
@@ -354,8 +355,14 @@ class RubiksCubeSolver:
 
             #print(self.solveMoves)
             self.solveState()
-            done = oldState == self.state
-            oldState = self.state
+            if oldState != self.state:
+                counter = 3
+                oldState = self.state
+            elif counter == 0:
+                counter = 3
+                done = True
+            else:
+                counter -= 1
 
 
     def crossSolver(self):
