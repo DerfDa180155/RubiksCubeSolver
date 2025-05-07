@@ -163,14 +163,15 @@ class main:
                             first = True
                     displayedText.append(simplifiedMoves)
 
+                    centerX = self.windowWidth / 4
                     for i in range(len(displayedText)):
                         text = font.render(displayedText[i], True, (255,255,255))
                         newRect = text.get_rect()
-                        newRect.x = 10
-                        newRect.y = (((10 * self.windowHeight) / 900) + textSize * i + textSize * i / 2) + (14 * width) + 10
+                        newRect.x = centerX * 2.2
+                        newRect.y = (((10 * self.windowHeight) / 900) + textSize * i + textSize * i / 2) + (1 * width) + 10
                         self.screen.blit(text, newRect)
 
-                    centerX = self.windowWidth / 4
+
                     self.drawCube(width, centerX, 100, True)
 
                 case "customScramble":
