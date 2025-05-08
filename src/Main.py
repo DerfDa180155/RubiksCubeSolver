@@ -136,7 +136,7 @@ class main:
                         else:
                             solveMoves += " ," + str(move)
 
-                        if count == 30:
+                        if count == 20:
                             count = 0
                             displayedText.append(solveMoves)
                             solveMoves = ""
@@ -156,7 +156,7 @@ class main:
                         else:
                             simplifiedMoves += " ," + str(move)
 
-                        if count == 30:
+                        if count == 20:
                             count = 0
                             displayedText.append(simplifiedMoves)
                             simplifiedMoves = ""
