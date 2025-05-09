@@ -178,6 +178,7 @@ class main:
                     if self.spacePressed:
                         self.solver.solve()
                         self.spacePressed = not self.spacePressed
+                        self.menu = "main"
 
                     centerX = self.windowWidth/2
                     centerY = self.windowHeight/2
