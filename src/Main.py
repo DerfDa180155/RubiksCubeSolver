@@ -80,6 +80,7 @@ class main:
                         self.menu = "main"
                     elif event.key == pygame.K_m:
                         self.menu = "customScramble"
+                        self.solver.reset()
                     elif event.key == pygame.K_q:
                         self.solver.reset()
 
