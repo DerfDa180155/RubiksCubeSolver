@@ -196,27 +196,6 @@ class main:
                             scrambleMoves += " ," + str(move)
                     displayedText.append("Scramble: " + scrambleMoves)
 
-                    displayedText.append("Solve (" + str(len(self.solver.simplifiedSolveMoves)) + "):")
-
-                    solveMoves = ""
-                    first = True
-                    count = 0
-                    for move in self.solver.simplifiedSolveMoves:
-                        count += 1
-
-                        if first:
-                            solveMoves += str(move)
-                            first = False
-                        else:
-                            solveMoves += " ," + str(move)
-
-                        if count == 30:
-                            count = 0
-                            displayedText.append(solveMoves)
-                            solveMoves = ""
-                            first = True
-                    displayedText.append(solveMoves)
-
                     for i in range(len(displayedText)):
                         text = font.render(displayedText[i], True, (255, 255, 255))
                         newRect = text.get_rect()
@@ -225,7 +204,7 @@ class main:
                         self.screen.blit(text, newRect)
 
 
-                    displayedText = ["U - Up", "D - Down", "R - Right", "L - Left", "F - Front", "B - Back", "W - x'", "SPACE - Solve"]
+                    displayedText = ["U - Up", "D - Down", "R - Right", "L - Left", "F - Front", "B - Back", "W - x'", "SPACE - Solve", "Q - Reset"]
 
                     for i in range(len(displayedText)):
                         text = font.render(displayedText[i], True, (255, 255, 255))
