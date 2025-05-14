@@ -204,7 +204,7 @@ class main:
                         self.screen.blit(text, newRect)
 
 
-                    displayedText = ["U - Up", "D - Down", "R - Right", "L - Left", "F - Front", "B - Back", "W - x'", "SPACE - Solve", "Q - Reset"]
+                    displayedText = ["U - Up", "D - Down", "R - Right", "L - Left", "F - Front", "B - Back", "W - X'", "E - x", "SPACE - Solve", "Q - Reset"]
 
                     for i in range(len(displayedText)):
                         text = font.render(displayedText[i], True, (255, 255, 255))
