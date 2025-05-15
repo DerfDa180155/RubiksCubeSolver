@@ -107,6 +107,47 @@ class main:
 
             match self.menu:
                 case "main":
+                    pass
+
+                case "customScramble":
+                    if self.spacePressed:
+                        self.solver.solve()
+                        self.spacePressed = not self.spacePressed
+                        self.menu = "solved"
+
+                    centerX = self.windowWidth/2
+                    centerY = self.windowHeight/2
+                    self.drawCube(width, centerX, 100, True)
+
+                    displayedText = []
+                    scrambleMoves = ""
+                    first = True
+                    for move in self.solver.scrambleMoves:
+                        if first:
+                            scrambleMoves += str(move)
+                            first = False
+                        else:
+                            scrambleMoves += " ," + str(move)
+                    displayedText.append("Scramble: " + scrambleMoves)
+
+                    for i in range(len(displayedText)):
+                        text = font.render(displayedText[i], True, (255, 255, 255))
+                        newRect = text.get_rect()
+                        newRect.x = 10
+                        newRect.y = (((10 * self.windowHeight) / 900) + textSize * i + textSize * i / 2) + (14 * width) + 10
+                        self.screen.blit(text, newRect)
+
+
+                    displayedText = ["U - Up", "D - Down", "R - Right", "L - Left", "F - Front", "B - Back", "W - X'", "E - x", "SPACE - Solve", "Q - Reset"]
+
+                    for i in range(len(displayedText)):
+                        text = font.render(displayedText[i], True, (255, 255, 255))
+                        newRect = text.get_rect()
+                        newRect.x = centerX*1.6
+                        newRect.y = (((20 * self.windowHeight) / 900) + textSize * i + textSize * i / 2) + 10
+                        self.screen.blit(text, newRect)
+
+                case "solved":
                     if self.spacePressed:
                         self.solver.generateScramble()
                         self.spacePressed = not self.spacePressed
@@ -166,52 +207,13 @@ class main:
 
                     centerX = self.windowWidth / 4
                     for i in range(len(displayedText)):
-                        text = font.render(displayedText[i], True, (255,255,255))
+                        text = font.render(displayedText[i], True, (255, 255, 255))
                         newRect = text.get_rect()
                         newRect.x = centerX * 2.2
                         newRect.y = (((10 * self.windowHeight) / 900) + textSize * i + textSize * i / 2) + (1 * width) + 10
                         self.screen.blit(text, newRect)
 
-
                     self.drawCube(width, centerX, 100, True)
-
-                case "customScramble":
-                    if self.spacePressed:
-                        self.solver.solve()
-                        self.spacePressed = not self.spacePressed
-                        self.menu = "main"
-
-                    centerX = self.windowWidth/2
-                    centerY = self.windowHeight/2
-                    self.drawCube(width, centerX, 100, True)
-
-                    displayedText = []
-                    scrambleMoves = ""
-                    first = True
-                    for move in self.solver.scrambleMoves:
-                        if first:
-                            scrambleMoves += str(move)
-                            first = False
-                        else:
-                            scrambleMoves += " ," + str(move)
-                    displayedText.append("Scramble: " + scrambleMoves)
-
-                    for i in range(len(displayedText)):
-                        text = font.render(displayedText[i], True, (255, 255, 255))
-                        newRect = text.get_rect()
-                        newRect.x = 10
-                        newRect.y = (((10 * self.windowHeight) / 900) + textSize * i + textSize * i / 2) + (14 * width) + 10
-                        self.screen.blit(text, newRect)
-
-
-                    displayedText = ["U - Up", "D - Down", "R - Right", "L - Left", "F - Front", "B - Back", "W - X'", "E - x", "SPACE - Solve", "Q - Reset"]
-
-                    for i in range(len(displayedText)):
-                        text = font.render(displayedText[i], True, (255, 255, 255))
-                        newRect = text.get_rect()
-                        newRect.x = centerX*1.6
-                        newRect.y = (((20 * self.windowHeight) / 900) + textSize * i + textSize * i / 2) + 10
-                        self.screen.blit(text, newRect)
 
             pygame.display.flip()
             self.clock.tick(60)
