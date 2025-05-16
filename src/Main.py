@@ -72,6 +72,8 @@ class main:
                             self.solver.makeMove("R" + ("'" if self.invertedMove else ""), True)
                         else:
                             self.solver.makeMove("r" + ("'" if self.invertedMove else ""), True)
+                    elif event.key == pygame.K_a:
+                        self.solver.generateScramble()
                     elif event.key == pygame.K_1:
                         self.solver.makeMove("M" + ("'" if self.invertedMove else ""), True)
                     elif event.key == pygame.K_SPACE:
@@ -138,7 +140,7 @@ class main:
                         self.screen.blit(text, newRect)
 
 
-                    displayedText = ["U - Up", "D - Down", "R - Right", "L - Left", "F - Front", "B - Back", "W - X'", "E - x", "SPACE - Solve", "Q - Reset"]
+                    displayedText = ["U - Up", "D - Down", "R - Right", "L - Left", "F - Front", "B - Back", "W - X'", "E - x", "SPACE - Solve", "Q - Reset", "A - Random"]
 
                     for i in range(len(displayedText)):
                         text = font.render(displayedText[i], True, (255, 255, 255))
