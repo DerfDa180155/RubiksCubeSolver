@@ -300,6 +300,10 @@ class RubiksCubeSolver:
 
         self.scramble(scrambleMoves)
 
+    def addRandomMove(self):
+        moves = ["U", "D", "F", "B", "L", "R"]
+        self.scrambleMoves.append(moves[random.randint(0, len(moves)-1)])
+
     def scramble(self, scramble):
         for move in scramble:
             self.makeMove(move, True)
