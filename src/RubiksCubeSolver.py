@@ -304,6 +304,10 @@ class RubiksCubeSolver:
         moves = ["U", "D", "F", "B", "L", "R"]
         self.scrambleMoves.append(moves[random.randint(0, len(moves)-1)])
 
+    def removeLastMove(self):
+        if len(self.scrambleMoves) > 0:
+            self.scrambleMoves.pop(len(self.scrambleMoves)-1)
+
     def scramble(self, scramble):
         for move in scramble:
             self.makeMove(move, True)
