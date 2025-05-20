@@ -302,7 +302,7 @@ class RubiksCubeSolver:
 
     def addRandomMove(self):
         moves = ["U", "D", "F", "B", "L", "R"]
-        self.scrambleMoves.append(moves[random.randint(0, len(moves)-1)])
+        self.makeMove(moves[random.randint(0, len(moves)-1)], True)
 
     def removeLastMove(self):
         if len(self.scrambleMoves) > 0:
