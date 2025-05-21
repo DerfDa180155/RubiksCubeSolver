@@ -306,6 +306,11 @@ class RubiksCubeSolver:
 
     def removeLastMove(self):
         if len(self.scrambleMoves) > 0:
+            if self.scrambleMoves[len(self.scrambleMoves) - 1].find("'") != -1:
+                self.makeMove(self.scrambleMoves[len(self.scrambleMoves) - 1].replace("'", ""), False)
+            else:
+                self.makeMove(self.scrambleMoves[len(self.scrambleMoves) - 1] + "'", False)
+
             self.scrambleMoves.pop(len(self.scrambleMoves)-1)
 
     def scramble(self, scramble):
