@@ -111,7 +111,12 @@ class main:
 
             match self.menu:
                 case "main":
-                    pass
+                    centerX = self.windowWidth / 2
+                    centerY = self.windowWidth / 2
+
+
+                    # draw cube
+                    self.drawCube(width, centerX, centerY, True, True)
 
                 case "customScramble":
                     if self.spacePressed:
