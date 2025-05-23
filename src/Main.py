@@ -94,6 +94,9 @@ class main:
             self.screen.fill((50, 50, 50))
 
             unscaledSize = 30
+            if self.menu == "main":
+                unscaledSize = 50
+
             if self.windowWidth < self.windowHeight:
                 textSize = int((unscaledSize * self.windowWidth) / 2000)  # scale text size
                 width = (100 * self.windowWidth) / 2000
@@ -113,6 +116,7 @@ class main:
                 case "main":
                     centerX = self.windowWidth / 2
                     centerY = self.windowWidth / 2
+
 
 
                     # draw cube
