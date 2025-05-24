@@ -104,20 +104,27 @@ class main:
                 textSize = int((unscaledSize * self.windowHeight) / 2000)  # scale text size
                 width = (100 * self.windowHeight) / 2000
 
-            font = pygame.font.Font(pygame.font.get_default_font(), textSize)
+            if self.menu != "main":
+                font = pygame.font.Font(pygame.font.get_default_font(), textSize)
 
-            text = font.render(self.menu, True, (255, 255, 255))
-            newRect = text.get_rect()
-            newRect.centerx = self.windowWidth/2
-            newRect.y = textSize * 0.5
-            self.screen.blit(text, newRect)
+                text = font.render(self.menu, True, (255, 255, 255))
+                newRect = text.get_rect()
+                newRect.centerx = self.windowWidth/2
+                newRect.y = textSize * 0.5
+                self.screen.blit(text, newRect)
 
             match self.menu:
                 case "main":
                     centerX = self.windowWidth / 2
                     centerY = self.windowWidth / 2
 
+                    font = pygame.font.Font(pygame.font.get_default_font(), textSize)
 
+                    text = font.render("Rubiks Cube Solver", True, (255, 255, 255))
+                    newRect = text.get_rect()
+                    newRect.centerx = self.windowWidth / 2
+                    newRect.y = textSize
+                    self.screen.blit(text, newRect)
 
                     # draw cube
                     self.drawCube(width, centerX, centerY, True, True)
