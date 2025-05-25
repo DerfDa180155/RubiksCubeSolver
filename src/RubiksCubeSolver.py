@@ -312,6 +312,7 @@ class RubiksCubeSolver:
                 self.makeMove(self.scrambleMoves[len(self.scrambleMoves) - 1] + "'", False)
 
             self.scrambleMoves.pop(len(self.scrambleMoves)-1)
+            self.solveMoves.pop(len(self.solveMoves) - 1)
 
     def scramble(self, scramble):
         for move in scramble:
