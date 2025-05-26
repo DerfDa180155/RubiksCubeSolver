@@ -116,7 +116,7 @@ class main:
             match self.menu:
                 case "main":
                     centerX = self.windowWidth / 2
-                    centerY = self.windowWidth / 2
+                    centerY = self.windowWidth / 1.9
 
                     font = pygame.font.Font(pygame.font.get_default_font(), textSize)
 
