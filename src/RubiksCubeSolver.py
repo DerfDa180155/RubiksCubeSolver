@@ -366,6 +366,7 @@ class RubiksCubeSolver:
                     self.PLLSolver()
                 case 5: # Done
                     print(self.simplifySolve())
+                    done = True
 
             #print(self.solveMoves)
             self.solveState()
