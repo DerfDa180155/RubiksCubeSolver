@@ -100,9 +100,11 @@ class main:
             if self.windowWidth < self.windowHeight:
                 textSize = int((unscaledSize * self.windowWidth) / 2000)  # scale text size
                 width = (100 * self.windowWidth) / 2000
+                startMenuSize = (130 * self.windowWidth) / 2000
             else:
                 textSize = int((unscaledSize * self.windowHeight) / 2000)  # scale text size
                 width = (100 * self.windowHeight) / 2000
+                startMenuSize = (130 * self.windowHeight) / 2000
 
             if self.menu != "main":
                 font = pygame.font.Font(pygame.font.get_default_font(), textSize)
@@ -116,7 +118,7 @@ class main:
             match self.menu:
                 case "main":
                     centerX = self.windowWidth / 2
-                    centerY = self.windowWidth / 1.9
+                    centerY = self.windowHeight / 1.9
 
                     font = pygame.font.Font(pygame.font.get_default_font(), textSize)
 
@@ -127,7 +129,7 @@ class main:
                     self.screen.blit(text, newRect)
 
                     # draw cube
-                    self.drawCube(width, centerX, centerY, True, True)
+                    self.drawCube(startMenuSize, centerX, centerY, True, True)
 
                 case "customScramble":
                     if self.spacePressed:
