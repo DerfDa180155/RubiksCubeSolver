@@ -1,7 +1,5 @@
 import random
 
-from numpy.random import vonmises
-
 
 class RubiksCubeSolver:
     def __init__(self):
