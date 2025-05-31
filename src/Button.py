@@ -1,7 +1,8 @@
-
+import pygame
 
 class Button:
-    def __init__(self, x, y, width, height, color):
+    def __init__(self, screen, x, y, width, height, color):
+        self.screen = screen
         self.x = x
         self.y = y
         self.width = width
@@ -9,7 +10,7 @@ class Button:
         self.color = color
 
     def draw(self):
-        pass
+        pygame.draw.rect(self.screen, self.color, (self.x, self.y, self.width, self.height))
 
     def update(self):
         pass
