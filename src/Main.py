@@ -1,6 +1,8 @@
 import pygame
 
 import RubiksCubeSolver
+import Button
+
 
 class main:
     def __init__(self):
@@ -271,7 +273,9 @@ class main:
                         case 6:  # orange
                             color = (255, 165, 0)
 
-                    pygame.draw.rect(self.screen, color, (x, y, width, height))
+                    temp = Button.Button(self.screen, x, y, width, height, color)
+                    temp.draw()
+                    #pygame.draw.rect(self.screen, color, (x, y, width, height))
 
 if __name__ == "__main__":
     main()
