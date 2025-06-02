@@ -9,8 +9,12 @@ class Button:
         self.height = height
         self.color = color
 
+        self.isHovered = False
+        self.animationSize = 0
+        self.maxAnimationSize = 10
+
     def draw(self):
-        pygame.draw.rect(self.screen, self.color, (self.x, self.y, self.width, self.height))
+        pygame.draw.rect(self.screen, self.color, (self.x-self.animationSize, self.y-self.animationSize, self.width+self.animationSize, self.height+self.animationSize))
 
     def update(self):
         pass
