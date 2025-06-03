@@ -17,7 +17,15 @@ class Button:
         pygame.draw.rect(self.screen, self.color, (self.x-self.animationSize, self.y-self.animationSize, self.width+self.animationSize, self.height+self.animationSize))
 
     def update(self):
-        pass
+        if self.isHovered:
+            self.animationSize += 1
+        else:
+            self.animationSize -= 1
+
+        if self.animationSize > self.maxAnimationSize:
+            self.animationSize = self.maxAnimationSize
+        elif self.animationSize < 0:
+            self.animationSize = 0
 
     def clicked(self):
         return False
