@@ -30,6 +30,12 @@ class Button:
     def clicked(self):
         return False
 
-    def hover(self):
-        return False
+    def hover(self, mx, my):
+        temp = pygame.rect
+        temp.Rect.x = self.x
+        temp.Rect.y = self.y
+        temp.Rect.width = self.width
+        temp.Rect.height = self.height
+        self.isHovered = temp.Rect.collidepoint(mx, my)
+        return self.isHovered
 
