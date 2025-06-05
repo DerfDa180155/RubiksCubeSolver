@@ -28,6 +28,8 @@ class main:
         self.menu = "main"
         self.spacePressed = False
 
+        self.menuButtons = [Button.Button(self.screen, 200, 400, 100, 100, (255,0,128))]
+
         self.run()
 
     def run(self):
@@ -95,6 +97,8 @@ class main:
 
             self.screen.fill((50, 50, 50))
 
+            mx, my = pygame.mouse.get_pos()
+
             unscaledSize = 30
             if self.menu == "main":
                 unscaledSize = 50
@@ -132,6 +136,11 @@ class main:
 
                     # draw cube
                     self.drawCube(startMenuSize, centerX, centerY, True, True)
+
+                    for button in self.menuButtons:
+                        #button.hover(mx, my)
+                        button.update()
+                        button.draw()
 
                 case "customScramble":
                     if self.spacePressed:
