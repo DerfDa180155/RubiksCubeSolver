@@ -11,10 +11,10 @@ class Button:
 
         self.isHovered = False
         self.animationSize = 0
-        self.maxAnimationSize = 10
+        self.maxAnimationSize = 20
 
     def draw(self):
-        pygame.draw.rect(self.screen, self.color, (self.x-self.animationSize, self.y-self.animationSize, self.width+self.animationSize, self.height+self.animationSize))
+        pygame.draw.rect(self.screen, self.color, (self.x-(self.animationSize/2), self.y-(self.animationSize/2), self.width+self.animationSize, self.height+self.animationSize))
 
     def update(self):
         if self.isHovered:
@@ -31,11 +31,7 @@ class Button:
         return False
 
     def hover(self, mx, my):
-        temp = pygame.rect
-        temp.Rect.x = self.x
-        temp.Rect.y = self.y
-        temp.Rect.width = self.width
-        temp.Rect.height = self.height
-        self.isHovered = temp.Rect.collidepoint(mx, my)
+        temp = pygame.Rect(self.x-(self.animationSize/2), self.y-(self.animationSize/2), self.width+self.animationSize, self.height+self.animationSize)
+        self.isHovered = temp.collidepoint((mx, my))
         return self.isHovered
 

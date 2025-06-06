@@ -138,7 +138,7 @@ class main:
                     self.drawCube(startMenuSize, centerX, centerY, True, True)
 
                     for button in self.menuButtons:
-                        #button.hover(mx, my)
+                        button.hover(mx, my)
                         button.update()
                         button.draw()
 
