@@ -29,6 +29,7 @@ class main:
         self.spacePressed = False
 
         self.menuButtons = [Button.Button(self.screen, 200, 400, 100, 100, (255,0,128))]
+        self.createMenuButtons()
 
         self.run()
 
@@ -135,7 +136,7 @@ class main:
                     self.screen.blit(text, newRect)
 
                     # draw cube
-                    self.drawCube(startMenuSize, centerX, centerY, True, True)
+                    #self.drawCube(startMenuSize, centerX, centerY, True, True)
 
                     for button in self.menuButtons:
                         button.hover(mx, my)
@@ -266,7 +267,7 @@ class main:
                     if centerX:
                         x += -(width*4.5)
                     if centerY:
-                        y += -(width*6)
+                        y += -(height*6)
 
                     match cube[i][j]:
                         case 1:  # white
@@ -285,6 +286,38 @@ class main:
                     temp = Button.Button(self.screen, x, y, width, height, color)
                     temp.draw()
                     #pygame.draw.rect(self.screen, color, (x, y, width, height))
+
+    def createMenuButtons(self):
+        cube = self.solver.generateComplete()
+        for i in range(len(cube)):
+            for j in range(len(cube[0])):
+                if cube[i][j] != -1:
+                    color = (0, 0, 0)
+
+                    width = 100
+                    height = width
+                    x = (j * (width + 10)) + 750
+                    y = (i * (height + 10)) + 750
+
+                    x += -(width * 4.5)
+                    y += -(height * 6)
+
+                    match cube[i][j]:
+                        case 1:  # white
+                            color = (255, 255, 255)
+                        case 2:  # blue
+                            color = (0, 0, 255)
+                        case 3:  # yellow
+                            color = (255, 255, 0)
+                        case 4:  # green
+                            color = (0, 255, 0)
+                        case 5:  # red
+                            color = (255, 0, 0)
+                        case 6:  # orange
+                            color = (255, 165, 0)
+
+                    self.menuButtons.append(Button.Button(self.screen, x, y, width, height, color))
+
 
 if __name__ == "__main__":
     main()
