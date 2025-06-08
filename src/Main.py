@@ -28,7 +28,7 @@ class main:
         self.menu = "main"
         self.spacePressed = False
 
-        self.menuButtons = [Button.Button(self.screen, 200, 400, 100, 100, (255,0,128))]
+        self.menuButtons = []
         self.createMenuButtons()
 
         self.run()

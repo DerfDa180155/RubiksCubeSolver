@@ -18,16 +18,16 @@ class Button:
 
     def update(self):
         if self.isHovered:
-            self.animationSize += 1
+            self.animationSize += 2
         else:
-            self.animationSize -= 1
+            self.animationSize -= 2
 
         if self.animationSize > self.maxAnimationSize:
             self.animationSize = self.maxAnimationSize
         elif self.animationSize < 0:
             self.animationSize = 0
 
-    def clicked(self):
+    def clicked(self,mx, my):
         return False
 
     def hover(self, mx, my):
