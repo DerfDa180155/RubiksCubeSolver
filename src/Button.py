@@ -10,6 +10,7 @@ class Button:
         self.color = color
 
         self.isHovered = False
+        self.isClicked = False
         self.animationSize = 0
         self.maxAnimationSize = 20
 
@@ -27,8 +28,11 @@ class Button:
         elif self.animationSize < 0:
             self.animationSize = 0
 
-    def clicked(self,mx, my):
-        return False
+    def clicked(self, mx, my):
+        self.hover(mx, my)
+
+        self.isClicked = self.isHovered
+        return self.isClicked
 
     def hover(self, mx, my):
         temp = pygame.Rect(self.x-(self.animationSize/2), self.y-(self.animationSize/2), self.width+self.animationSize, self.height+self.animationSize)
