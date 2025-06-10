@@ -316,7 +316,7 @@ class main:
                         case 6:  # orange
                             color = (255, 165, 0)
 
-                    self.menuButtons.append(Button.Button(self.screen, x, y, width, height, color))
+                    self.menuButtons.append(Button.Button(self.screen, x, y, width, height, color, "customScramble"))
 
 
 if __name__ == "__main__":
