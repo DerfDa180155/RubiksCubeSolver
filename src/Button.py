@@ -29,10 +29,11 @@ class Button:
         elif self.animationSize < 0:
             self.animationSize = 0
 
-    def clicked(self, mx, my):
-        self.hover(mx, my)
-
-        self.isClicked = self.isHovered
+    def clicked(self, mx, my, mouseClick):
+        if self.hover(mx, my) and mouseClick[0]:
+            self.isClicked = True
+        else:
+            self.isClicked = False
         return self.isClicked
 
     def hover(self, mx, my):
