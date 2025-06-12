@@ -143,6 +143,9 @@ class main:
                         button.update()
                         button.draw()
 
+                        if button.isClicked:
+                            self.menu = button.onClick
+
                 case "customScramble":
                     if self.spacePressed:
                         self.solver.solve()
