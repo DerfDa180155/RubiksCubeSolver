@@ -296,7 +296,7 @@ class main:
                         case 6:  # orange
                             color = (255, 165, 0)
 
-                    temp = Button.Button(self.screen, x, y, width, height, color)
+                    temp = Button.Button(self.screen, x, y, width, height, color, "test")
                     temp.draw()
                     #pygame.draw.rect(self.screen, color, (x, y, width, height))
 
