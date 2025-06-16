@@ -154,6 +154,8 @@ class main:
                         button.draw()
 
                         if button.isClicked:
+                            for tempbutton in self.menuButtons:
+                                tempbutton.reset()
                             self.menu = button.onClick
 
                 case "customScramble":
