@@ -41,7 +41,10 @@ class main:
                     self.running = False
                 elif event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_ESCAPE:  # Quit the Game
-                        self.running = False
+                        if self.menu == "main":
+                            self.running = False
+                        else:
+                            self.menu = "main"
                     elif event.key == pygame.K_s and self.menu == "main":
                         self.solver.solve()
                     elif event.key == pygame.K_w:
