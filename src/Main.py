@@ -336,6 +336,20 @@ class main:
 
                     self.menuButtons.append(Button.Button(self.screen, x, y, width, height, color, "customScramble"))
 
+    def updateMenuButtons(self):
+        cube = self.solver.generateComplete()
+        for i in range(len(cube)):
+            for j in range(len(cube[0])):
+                if cube[i][j] != -1:
+                    width = 100
+                    height = width
+                    x = (j * (width + 10)) + 750
+                    y = (i * (height + 10)) + 750
+
+                    x += -(width * 4.5)
+                    y += -(height * 6)
+
+
 
 if __name__ == "__main__":
     main()
