@@ -21,6 +21,10 @@ class Button:
         self.animationSize = 0
         self.maxAnimationSize = 20
 
+    def updateLocation(self, x, y):
+        self.x = x
+        self.y = y
+
     def draw(self):
         pygame.draw.rect(self.screen, self.color, (self.x-(self.animationSize/2), self.y-(self.animationSize/2), self.width+self.animationSize, self.height+self.animationSize))
 
