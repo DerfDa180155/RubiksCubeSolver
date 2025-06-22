@@ -314,10 +314,10 @@ class main:
                 if cube[i][j] != -1:
                     color = (0, 0, 0)
 
-                    width = 100
+                    width = (50*self.windowWidth)/1000
                     height = width
-                    x = (j * (width + 10)) + 750
-                    y = (i * (height + 10)) + 750
+                    x = (j * (width + 10)) + (self.windowWidth/2)
+                    y = (i * (height + 10)) + (self.windowHeight/2)
 
                     x += -(width * 4.5)
                     y += -(height * 6)
@@ -344,10 +344,10 @@ class main:
         for i in range(len(cube)):
             for j in range(len(cube[0])):
                 if cube[i][j] != -1:
-                    width = 100
+                    width = (50*self.windowWidth)/1000
                     height = width
-                    x = (j * (width + 10)) + 750
-                    y = (i * (height + 10)) + 750
+                    x = (j * (width + 10)) + (self.windowWidth / 2)
+                    y = (i * (height + 10)) + (self.windowHeight / 2)
 
                     x += -(width * 4.5)
                     y += -(height * 6)
