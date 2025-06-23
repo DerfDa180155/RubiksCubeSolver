@@ -150,7 +150,7 @@ class main:
                     # draw cube
                     #self.drawCube(startMenuSize, centerX, centerY, True, True)
 
-                    self.updateMenuButtons()
+                    self.updateMenuButtons(width)
 
                     for button in self.menuButtons:
                         button.hover(mx, my)
@@ -338,13 +338,12 @@ class main:
 
                     self.menuButtons.append(Button.Button(self.screen, x, y, width, height, color, "customScramble"))
 
-    def updateMenuButtons(self):
+    def updateMenuButtons(self, width):
         counter = 0
         cube = self.solver.generateComplete()
         for i in range(len(cube)):
             for j in range(len(cube[0])):
                 if cube[i][j] != -1:
-                    width = (50*self.windowWidth)/1000
                     height = width
                     x = (j * (width + 10)) + (self.windowWidth / 2)
                     y = (i * (height + 10)) + (self.windowHeight / 2)
