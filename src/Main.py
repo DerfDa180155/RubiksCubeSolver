@@ -31,6 +31,9 @@ class main:
         self.menuButtons = []
         self.createMenuButtons()
 
+        self.customScrambleButtons = []
+        self.createScrambleButtons()
+
         self.run()
 
     def run(self):
@@ -335,6 +338,37 @@ class main:
                             color = (255, 165, 0)
 
                     self.menuButtons.append(Button.Button(self.screen, x, y, width, height, color, "customScramble"))
+
+    def createScrambleButtons(self):
+        cube = self.solver.generateComplete()
+        for i in range(len(cube)):
+            for j in range(len(cube[0])):
+                if cube[i][j] != -1:
+                    color = (0, 0, 0)
+
+                    width = (50*self.windowWidth)/1000
+                    height = width
+                    x = (j * (width + 10)) + (self.windowWidth/2) - width / 2
+                    y = (i * (height + 10)) + (self.windowHeight/2) - height / 2
+
+                    x += -(width * 4.5)
+                    y += -(height * 6)
+
+                    match cube[i][j]:
+                        case 1:  # white
+                            color = (255, 255, 255)
+                        case 2:  # blue
+                            color = (0, 0, 255)
+                        case 3:  # yellow
+                            color = (255, 255, 0)
+                        case 4:  # green
+                            color = (0, 255, 0)
+                        case 5:  # red
+                            color = (255, 0, 0)
+                        case 6:  # orange
+                            color = (255, 165, 0)
+
+                    self.menuButtons.append(Button.Button(self.screen, x, y, width, height, color, ""))
 
     def updateMenuButtons(self, width):
         counter = 0
