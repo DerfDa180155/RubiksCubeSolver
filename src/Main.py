@@ -345,6 +345,7 @@ class main:
             for j in range(len(cube[0])):
                 if cube[i][j] != -1:
                     color = (0, 0, 0)
+                    onClick = ""
 
                     width = (50*self.windowWidth)/1000
                     height = width
@@ -355,20 +356,26 @@ class main:
                     y += -(height * 6)
 
                     match cube[i][j]:
-                        case 1:  # white
+                        case 1: # white
                             color = (255, 255, 255)
-                        case 2:  # blue
+                            onClick = "white"
+                        case 2: # blue
                             color = (0, 0, 255)
-                        case 3:  # yellow
+                            onClick = "blue"
+                        case 3: # yellow
                             color = (255, 255, 0)
-                        case 4:  # green
+                            onClick = "yellow"
+                        case 4: # green
                             color = (0, 255, 0)
-                        case 5:  # red
+                            onClick = "green"
+                        case 5: # red
                             color = (255, 0, 0)
-                        case 6:  # orange
+                            onClick = "red"
+                        case 6: # orange
                             color = (255, 165, 0)
+                            onClick = "orange"
 
-                    self.menuButtons.append(Button.Button(self.screen, x, y, width, height, color, ""))
+                    self.customScrambleButtons.append(Button.Button(self.screen, x, y, width, height, color, onClick))
 
     def updateMenuButtons(self, width):
         counter = 0
