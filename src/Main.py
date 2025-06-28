@@ -174,7 +174,7 @@ class main:
 
                     centerX = self.windowWidth/2
                     centerY = self.windowHeight/2
-                    self.drawCube(width, centerX, 100, True)
+                    #self.drawCube(width, centerX, 100, True)
 
                     displayedText = []
                     scrambleMoves = ""
@@ -203,6 +203,17 @@ class main:
                         newRect.x = centerX*1.6
                         newRect.y = (((20 * self.windowHeight) / 900) + textSize * i + textSize * i / 2) + 10
                         self.screen.blit(text, newRect)
+
+                    for button in self.customScrambleButtons:
+                        button.hover(mx, my)
+                        button.clicked(mx, my, mousePressedUp)
+                        button.update()
+                        button.draw()
+
+                        if button.isClicked:
+                            for tempbutton in self.customScrambleButtons:
+                                tempbutton.reset()
+                            self.menu = button.onClick
 
                 case "solved":
                     if self.spacePressed:
