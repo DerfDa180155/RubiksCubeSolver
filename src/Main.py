@@ -404,6 +404,21 @@ class main:
                     self.menuButtons[counter].updateLocationAndSize(x, y, width, height)
                     counter += 1
 
+    def updateCustomScrambleButtons(self, width):
+        counter = 0
+        cube = self.solver.generateComplete()
+        for i in range(len(cube)):
+            for j in range(len(cube[0])):
+                if cube[i][j] != -1:
+                    height = width
+                    x = (j * (width + 10)) + (self.windowWidth / 2) - width / 2
+                    y = (i * (height + 10)) + (self.windowHeight / 2) - height / 2
+
+                    x += -(width * 4.5)
+                    y += -(height * 6)
+
+                    self.customScrambleButtons[counter].updateLocationAndSize(x, y, width, height)
+                    counter += 1
 
 
 if __name__ == "__main__":
