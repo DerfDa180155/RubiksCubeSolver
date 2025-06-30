@@ -204,6 +204,8 @@ class main:
                         newRect.y = (((20 * self.windowHeight) / 900) + textSize * i + textSize * i / 2) + 10
                         self.screen.blit(text, newRect)
 
+                    self.updateCustomScrambleButtons(width)
+
                     for button in self.customScrambleButtons:
                         button.hover(mx, my)
                         button.clicked(mx, my, mousePressedUp)
