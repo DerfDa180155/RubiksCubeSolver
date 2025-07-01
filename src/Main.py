@@ -353,12 +353,13 @@ class main:
                     self.menuButtons.append(Button.Button(self.screen, x, y, width, height, color, "customScramble"))
 
     def createScrambleButtons(self):
+        counter = 0
+        onclickArray = ["top","top","top","top","top","top","top","top","top","left","left","left","front","front","front","right","right","right","left","left","left","front","front","front","right","right","right","left","left","left","front","front","front","right","right","right","bottom","bottom","bottom","bottom","bottom","bottom","bottom","bottom","bottom","back","back","back","back","back","back","back","back","back"]
         cube = self.solver.generateComplete()
         for i in range(len(cube)):
             for j in range(len(cube[0])):
                 if cube[i][j] != -1:
                     color = (0, 0, 0)
-                    onClick = ""
 
                     width = (50*self.windowWidth)/1000
                     height = width
@@ -368,25 +369,22 @@ class main:
                     x += -(width * 4.5)
                     y += -(height * 6)
 
+                    onClick = onclickArray[counter]
+                    counter = counter + 1
+
                     match cube[i][j]:
                         case 1: # white
                             color = (255, 255, 255)
-                            onClick = "white"
                         case 2: # blue
                             color = (0, 0, 255)
-                            onClick = "blue"
                         case 3: # yellow
                             color = (255, 255, 0)
-                            onClick = "yellow"
                         case 4: # green
                             color = (0, 255, 0)
-                            onClick = "green"
                         case 5: # red
                             color = (255, 0, 0)
-                            onClick = "red"
                         case 6: # orange
                             color = (255, 165, 0)
-                            onClick = "orange"
 
                     self.customScrambleButtons.append(Button.Button(self.screen, x, y, width, height, color, onClick))
 
