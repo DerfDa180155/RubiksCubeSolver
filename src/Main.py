@@ -213,9 +213,20 @@ class main:
                         button.draw()
 
                         if button.isClicked:
-                            for tempbutton in self.customScrambleButtons:
-                                tempbutton.reset()
-                            self.menu = button.onClick
+                            match button.onClick:
+                                case "top":
+                                    self.solver.makeMove("U", True)
+                                case "front":
+                                    self.solver.makeMove("F", True)
+                                case "bottom":
+                                    self.solver.makeMove("D", True)
+                                case "back":
+                                    self.solver.makeMove("B", True)
+                                case "left":
+                                    self.solver.makeMove("L", True)
+                                case "right":
+                                    self.solver.makeMove("R", True)
+
 
                 case "solved":
                     if self.spacePressed:
