@@ -428,7 +428,24 @@ class main:
                     x += -(width * 4.5)
                     y += -(height * 6)
 
+                    color = (0, 0, 0)
+
+                    match cube[i][j]:
+                        case 1:  # white
+                            color = (255, 255, 255)
+                        case 2:  # blue
+                            color = (0, 0, 255)
+                        case 3:  # yellow
+                            color = (255, 255, 0)
+                        case 4:  # green
+                            color = (0, 255, 0)
+                        case 5:  # red
+                            color = (255, 0, 0)
+                        case 6:  # orange
+                            color = (255, 165, 0)
+
                     self.customScrambleButtons[counter].updateLocationAndSize(x, y, width, height)
+                    self.customScrambleButtons[counter].color = color
                     counter += 1
 
 
