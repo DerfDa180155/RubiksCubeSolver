@@ -11,13 +11,15 @@ class Button:
         self.onClick = onClick
 
         self.isHovered = False
-        self.isClicked = False
+        self.isleftClicked = False
+        self.isrightClicked = False
         self.animationSize = 0
         self.maxAnimationSize = 20
 
     def reset(self):
         self.isHovered = False
-        self.isClicked = False
+        self.isleftClicked = False
+        self.isrightClicked = False
         self.animationSize = 0
         self.maxAnimationSize = 20
 
@@ -43,10 +45,13 @@ class Button:
 
     def clicked(self, mx, my, mouseClick):
         if self.hover(mx, my) and mouseClick[0]:
-            self.isClicked = True
+            self.isleftClicked = True
+        elif self.hover(mx, my) and mouseClick[2]:
+            self.isrightClicked = True
         else:
-            self.isClicked = False
-        return self.isClicked
+            self.isleftClicked = False
+            self.isrightClicked = False
+        return self.isleftClicked
 
     def hover(self, mx, my):
         temp = pygame.Rect(self.x-(self.animationSize/2), self.y-(self.animationSize/2), self.width+self.animationSize, self.height+self.animationSize)

@@ -161,7 +161,7 @@ class main:
                         button.update()
                         button.draw()
 
-                        if button.isClicked:
+                        if button.isleftClicked:
                             for tempbutton in self.menuButtons:
                                 tempbutton.reset()
                             self.menu = button.onClick
@@ -212,7 +212,7 @@ class main:
                         button.update()
                         button.draw()
 
-                        if button.isClicked:
+                        if button.isleftClicked:
                             match button.onClick:
                                 case "top":
                                     self.solver.makeMove("U", True)
