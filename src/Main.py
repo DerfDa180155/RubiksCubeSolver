@@ -215,20 +215,6 @@ class main:
                         if button.isleftClicked:
                             match button.onClick:
                                 case "top":
-                                    self.solver.makeMove("U", True)
-                                case "front":
-                                    self.solver.makeMove("F", True)
-                                case "bottom":
-                                    self.solver.makeMove("D", True)
-                                case "back":
-                                    self.solver.makeMove("B", True)
-                                case "left":
-                                    self.solver.makeMove("L", True)
-                                case "right":
-                                    self.solver.makeMove("R", True)
-                        elif button.isrightClicked:
-                            match button.onClick:
-                                case "top":
                                     self.solver.makeMove("U'", True)
                                 case "front":
                                     self.solver.makeMove("F'", True)
@@ -240,6 +226,20 @@ class main:
                                     self.solver.makeMove("L'", True)
                                 case "right":
                                     self.solver.makeMove("R'", True)
+                        elif button.isrightClicked:
+                            match button.onClick:
+                                case "top":
+                                    self.solver.makeMove("U", True)
+                                case "front":
+                                    self.solver.makeMove("F", True)
+                                case "bottom":
+                                    self.solver.makeMove("D", True)
+                                case "back":
+                                    self.solver.makeMove("B", True)
+                                case "left":
+                                    self.solver.makeMove("L", True)
+                                case "right":
+                                    self.solver.makeMove("R", True)
 
 
                 case "solved":
