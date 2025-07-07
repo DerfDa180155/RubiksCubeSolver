@@ -134,7 +134,7 @@ class main:
                 text = font.render(self.menu, True, (255, 255, 255))
                 newRect = text.get_rect()
                 newRect.centerx = self.windowWidth/2
-                newRect.y = textSize * 0.5
+                newRect.y = textSize
                 self.screen.blit(text, newRect)
 
             match self.menu:
