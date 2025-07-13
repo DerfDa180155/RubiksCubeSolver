@@ -185,7 +185,8 @@ class main:
                             first = False
                         else:
                             scrambleMoves += " ," + str(move)
-                    displayedText.append("Scramble: " + scrambleMoves)
+                    displayedText.append("Scramble:")
+                    displayedText.append(scrambleMoves)
 
                     for i in range(len(displayedText)):
                         text = font.render(displayedText[i], True, (255, 255, 255))
