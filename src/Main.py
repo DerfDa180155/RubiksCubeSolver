@@ -245,7 +245,6 @@ class main:
 
                 case "solved":
                     if self.spacePressed:
-                        self.solver.generateScramble()
                         self.spacePressed = not self.spacePressed
 
                     scrambleMoves = ""
