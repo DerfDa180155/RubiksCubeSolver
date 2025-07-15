@@ -84,20 +84,20 @@ class main:
                             self.solver.makeMove("R" + ("'" if self.invertedMove else ""), True)
                         else:
                             self.solver.makeMove("r" + ("'" if self.invertedMove else ""), True)
-                    elif event.key == pygame.K_a:
+                    elif event.key == pygame.K_a and self.menu == "customScramble":
                         self.solver.addRandomMove()
-                    elif event.key == pygame.K_s:
+                    elif event.key == pygame.K_s and self.menu == "customScramble":
                         self.solver.removeLastMove()
-                    elif event.key == pygame.K_1:
+                    elif event.key == pygame.K_1 and self.menu == "customScramble":
                         self.solver.makeMove("M" + ("'" if self.invertedMove else ""), True)
-                    elif event.key == pygame.K_SPACE:
+                    elif event.key == pygame.K_SPACE and self.menu == "customScramble":
                         self.spacePressed = True
-                    elif event.key == pygame.K_n:
+                    elif event.key == pygame.K_n and self.menu == "customScramble":
                         self.menu = "main"
                     elif event.key == pygame.K_m:
                         self.menu = "customScramble"
                         self.solver.reset()
-                    elif event.key == pygame.K_q:
+                    elif event.key == pygame.K_q and self.menu == "customScramble":
                         self.solver.reset()
 
             self.windowWidth = self.screen.get_width()
