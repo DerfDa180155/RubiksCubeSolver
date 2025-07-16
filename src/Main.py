@@ -165,6 +165,7 @@ class main:
                             for tempbutton in self.menuButtons:
                                 tempbutton.reset()
                             self.menu = button.onClick
+                            self.solver.reset()
 
                 case "customScramble":
                     if self.spacePressed:
