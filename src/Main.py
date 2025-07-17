@@ -54,32 +54,32 @@ class main:
                         self.invertedMove = not self.invertedMove
                     elif event.key == pygame.K_e:
                         self.middelMoves = not self.middelMoves
-                    elif event.key == pygame.K_u:
+                    elif event.key == pygame.K_u and self.menu == "customScramble":
                         if not self.middelMoves:
                             self.solver.makeMove("U" + ("'" if self.invertedMove else ""), True)
                         else:
                             self.solver.makeMove("u" + ("'" if self.invertedMove else ""), True)
-                    elif event.key == pygame.K_d:
+                    elif event.key == pygame.K_d and self.menu == "customScramble":
                         if not self.middelMoves:
                             self.solver.makeMove("D" + ("'" if self.invertedMove else ""), True)
                         else:
                             self.solver.makeMove("d" + ("'" if self.invertedMove else ""), True)
-                    elif event.key == pygame.K_f:
+                    elif event.key == pygame.K_f and self.menu == "customScramble":
                         if not self.middelMoves:
                             self.solver.makeMove("F" + ("'" if self.invertedMove else ""), True)
                         else:
                             self.solver.makeMove("f" + ("'" if self.invertedMove else ""), True)
-                    elif event.key == pygame.K_b:
+                    elif event.key == pygame.K_b and self.menu == "customScramble":
                         if not self.middelMoves:
                             self.solver.makeMove("B" + ("'" if self.invertedMove else ""), True)
                         else:
                             self.solver.makeMove("b" + ("'" if self.invertedMove else ""), True)
-                    elif event.key == pygame.K_l:
+                    elif event.key == pygame.K_l and self.menu == "customScramble":
                         if not self.middelMoves:
                             self.solver.makeMove("L" + ("'" if self.invertedMove else ""), True)
                         else:
                             self.solver.makeMove("l" + ("'" if self.invertedMove else ""), True)
-                    elif event.key == pygame.K_r:
+                    elif event.key == pygame.K_r and self.menu == "customScramble":
                         if not self.middelMoves:
                             self.solver.makeMove("R" + ("'" if self.invertedMove else ""), True)
                         else:
