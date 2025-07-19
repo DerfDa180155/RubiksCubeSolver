@@ -50,7 +50,7 @@ class main:
                             self.menu = "main"
                     elif event.key == pygame.K_s and self.menu == "main":
                         self.solver.solve()
-                    elif event.key == pygame.K_w:
+                    elif event.key == pygame.K_w and self.menu == "customScramble":
                         self.invertedMove = not self.invertedMove
                     elif event.key == pygame.K_e and self.menu == "customScramble":
                         self.middelMoves = not self.middelMoves
