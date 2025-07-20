@@ -94,9 +94,6 @@ class main:
                         self.spacePressed = True
                     elif event.key == pygame.K_n and self.menu == "customScramble":
                         self.menu = "main"
-                    elif event.key == pygame.K_m:
-                        self.menu = "customScramble"
-                        self.solver.reset()
                     elif event.key == pygame.K_q and self.menu == "customScramble":
                         self.solver.reset()
 
