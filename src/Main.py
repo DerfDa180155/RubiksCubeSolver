@@ -112,6 +112,9 @@ class main:
 
             oldMousePressed = mousePressed
 
+            if self.menu == "customScramble" and mousePressedDown[1]:
+                self.solver.removeLastMove()
+
             unscaledSize = 30
             if self.menu == "main":
                 unscaledSize = 50
