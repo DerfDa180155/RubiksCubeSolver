@@ -139,9 +139,6 @@ class main:
 
             match self.menu:
                 case "main":
-                    centerX = self.windowWidth / 2
-                    centerY = self.windowHeight / 1.9
-
                     font = pygame.font.Font(pygame.font.get_default_font(), textSize)
 
                     text = font.render("Rubiks Cube Solver", True, (255, 255, 255))
@@ -149,9 +146,6 @@ class main:
                     newRect.centerx = self.windowWidth / 2
                     newRect.y = textSize
                     self.screen.blit(text, newRect)
-
-                    # draw cube
-                    #self.drawCube(startMenuSize, centerX, centerY, True, True)
 
                     self.updateMenuButtons(width)
 
@@ -175,7 +169,6 @@ class main:
 
                     centerX = self.windowWidth/2
                     centerY = self.windowHeight/2
-                    #self.drawCube(width, centerX, 100, True)
 
                     displayedText = []
                     scrambleMoves = ""
