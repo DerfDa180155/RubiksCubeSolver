@@ -40,10 +40,10 @@ class main:
         oldMousePressed = pygame.mouse.get_pressed()
         while self.running:
             for event in pygame.event.get():
-                if event.type == pygame.QUIT:  # Quit the Game
+                if event.type == pygame.QUIT: # Quit the Game
                     self.running = False
                 elif event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_ESCAPE:  # Quit the Game
+                    if event.key == pygame.K_ESCAPE: # Quit the Game
                         if self.menu == "main":
                             self.running = False
                         else:
@@ -118,22 +118,13 @@ class main:
                 unscaledSize = 50
 
             if self.windowWidth < self.windowHeight:
-                textSize = int((unscaledSize * self.windowWidth) / 2000)  # scale text size
+                textSize = int((unscaledSize * self.windowWidth) / 2000) # scale text size
                 width = (100 * self.windowWidth) / 2000
                 startMenuSize = (130 * self.windowWidth) / 2000
             else:
-                textSize = int((unscaledSize * self.windowHeight) / 2000)  # scale text size
+                textSize = int((unscaledSize * self.windowHeight) / 2000) # scale text size
                 width = (100 * self.windowHeight) / 2000
                 startMenuSize = (130 * self.windowHeight) / 2000
-
-            if self.menu != "main":
-                font = pygame.font.Font(pygame.font.get_default_font(), textSize)
-
-                text = font.render(self.menu, True, (255, 255, 255))
-                newRect = text.get_rect()
-                newRect.centerx = self.windowWidth/2
-                newRect.y = textSize
-                self.screen.blit(text, newRect)
 
             match self.menu:
                 case "main":
@@ -164,6 +155,14 @@ class main:
                         self.solver.solve()
                         self.spacePressed = not self.spacePressed
                         self.menu = "solved"
+
+                    font = pygame.font.Font(pygame.font.get_default_font(), textSize)
+
+                    text = font.render(self.menu, True, (255, 255, 255))
+                    newRect = text.get_rect()
+                    newRect.centerx = self.windowWidth / 2
+                    newRect.y = textSize
+                    self.screen.blit(text, newRect)
 
                     centerX = self.windowWidth/2
                     centerY = self.windowHeight/2
@@ -238,6 +237,15 @@ class main:
                 case "solved":
                     if self.spacePressed:
                         self.spacePressed = not self.spacePressed
+
+                    font = pygame.font.Font(pygame.font.get_default_font(), textSize)
+
+                    text = font.render(self.menu, True, (255, 255, 255))
+                    newRect = text.get_rect()
+                    newRect.centerx = self.windowWidth / 2
+                    newRect.y = textSize
+                    self.screen.blit(text, newRect)
+
 
                     scrambleMoves = ""
                     first = True
