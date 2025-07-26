@@ -257,7 +257,7 @@ class main:
                             scrambleMoves += " ," + str(move)
 
                     displayedText = []
-                    displayedText.append("Scramble: (" + str(len(scrambleMoves)) + ")")
+                    displayedText.append("Scramble (" + str(len(scrambleMoves)) + "):")
                     displayedText.append(scrambleMoves)
 
                     displayedText.append("Solve (" + str(len(self.solver.solveMoves)) + "):")
