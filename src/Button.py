@@ -45,6 +45,11 @@ class Button:
             elif self.animationSize < 0:
                 self.animationSize = 0
 
+    def animateGroup(self, buttons):
+        for btn in buttons:
+            btn.isHovered = True
+            btn.update()
+
     def clicked(self, mx, my, mouseClick):
         if self.hover(mx, my) and mouseClick[0]:
             self.isleftClicked = True
