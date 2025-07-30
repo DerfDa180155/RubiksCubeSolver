@@ -17,6 +17,8 @@ class Button:
         self.animationSize = 0
         self.maxAnimationSize = 20
 
+        self.groupUpdate = False
+
     def reset(self):
         self.isHovered = False
         self.isleftClicked = False
@@ -34,20 +36,22 @@ class Button:
         pygame.draw.rect(self.screen, self.color, (self.x-(self.animationSize/2), self.y-(self.animationSize/2), self.width+self.animationSize, self.height+self.animationSize))
 
     def update(self):
-        if self.doAnimation:
-            if self.isHovered:
-                self.animationSize += 2
-            else:
-                self.animationSize -= 2
+        if not self.groupUpdate:
+            if self.doAnimation:
+                if self.isHovered:
+                    self.animationSize += 2
+                else:
+                    self.animationSize -= 2
 
-            if self.animationSize > self.maxAnimationSize:
-                self.animationSize = self.maxAnimationSize
-            elif self.animationSize < 0:
-                self.animationSize = 0
+                if self.animationSize > self.maxAnimationSize:
+                    self.animationSize = self.maxAnimationSize
+                elif self.animationSize < 0:
+                    self.animationSize = 0
 
     def animateGroup(self, buttons):
         for btn in buttons:
             btn.isHovered = True
+            btn.groupUpdate = True
             btn.update()
 
     def clicked(self, mx, my, mouseClick):
