@@ -53,8 +53,8 @@ class Button:
             temp = btn.doAnimation
             btn.doAnimation = True
             btn.isHovered = True
-            btn.groupUpdate = True
             btn.update()
+            btn.groupUpdate = True
             btn.doAnimation = temp
 
     def clicked(self, mx, my, mouseClick):

@@ -199,6 +199,9 @@ class main:
                     self.updateCustomScrambleButtons(width)
 
                     for button in self.customScrambleButtons:
+                        button.groupUpdate = False
+
+                    for button in self.customScrambleButtons:
                         button.hover(mx, my)
                         button.clicked(mx, my, mousePressedUp)
 
