@@ -53,6 +53,7 @@ class Button:
             temp = btn.doAnimation
             btn.doAnimation = True
             btn.isHovered = True
+            btn.groupUpdate = False
             btn.update()
             btn.groupUpdate = True
             btn.doAnimation = temp

@@ -207,8 +207,8 @@ class main:
 
                         if button.isHovered == True:
                             button.animateGroup(self.customScrambleButtons)
-
-                        button.update()
+                        else:
+                            button.update()
                         button.draw()
 
                         if button.isleftClicked:
