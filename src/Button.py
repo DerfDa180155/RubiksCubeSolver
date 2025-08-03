@@ -47,6 +47,11 @@ class Button:
                     self.animationSize = self.maxAnimationSize
                 elif self.animationSize < 0:
                     self.animationSize = 0
+            else:
+                if not self.isHovered:
+                    self.animationSize -= 2
+                if self.animationSize < 0:
+                    self.animationSize = 0
 
     def animateGroup(self, buttons):
         for btn in buttons:
