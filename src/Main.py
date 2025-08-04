@@ -198,6 +198,8 @@ class main:
 
                     self.updateCustomScrambleButtons(width)
 
+                    testgroup = [self.customScrambleButtons[0], self.customScrambleButtons[1]]
+
                     for button in self.customScrambleButtons:
                         button.groupUpdate = False
 
@@ -206,9 +208,9 @@ class main:
                         button.clicked(mx, my, mousePressedUp)
 
                         if button.isHovered == True:
-                            button.animateGroup(self.customScrambleButtons)
-                        else:
-                            button.update()
+                            button.animateGroup(testgroup)
+                        #else:
+                        button.update()
                         button.draw()
 
                         if button.isleftClicked:
