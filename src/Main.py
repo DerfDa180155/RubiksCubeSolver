@@ -209,8 +209,8 @@ class main:
 
                         if button.isHovered == True:
                             button.animateGroup(testgroup)
-                        #else:
-                        button.update()
+                        elif not button.groupUpdate:
+                            button.update()
                         button.draw()
 
                         if button.isleftClicked:
