@@ -53,19 +53,18 @@ class Button:
                 if self.animationSize < 0:
                     self.animationSize = 0
 
-    def doAnimation(self):
-        pass
+    def doAnimationDef(self):
+        temp = self.doAnimation
+        self.doAnimation = True
+        self.isHovered = True
+        self.groupUpdate = False
+        self.update()
+        self.groupUpdate = True
+        self.doAnimation = temp
 
     def animateGroup(self, buttons):
         for btn in buttons:
-            btn.doAnimation()
-            #temp = btn.doAnimation
-            #btn.doAnimation = True
-            #btn.isHovered = True
-            #btn.groupUpdate = False
-            #btn.update()
-            #btn.groupUpdate = True
-            #btn.doAnimation = temp
+            btn.doAnimationDef()
 
     def clicked(self, mx, my, mouseClick):
         if self.hover(mx, my) and mouseClick[0]:
