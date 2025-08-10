@@ -200,16 +200,16 @@ class main:
 
                     for button in self.customScrambleButtons:
                         button.groupUpdate = False
+
+                    for button in self.customScrambleButtons:
                         button.hover(mx, my)
-                        if button.isHovered == True:
+                        if button.isHovered == True and not button.groupUpdate:
                             button.animateGroup(self.customScrambleButtons)
 
                     for button in self.customScrambleButtons:
                         button.clicked(mx, my, mousePressedUp)
 
-
-                        if not button.groupUpdate:
-                            button.update()
+                        button.update()
                         button.draw()
 
                         if button.isleftClicked:
