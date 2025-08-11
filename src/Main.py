@@ -198,13 +198,16 @@ class main:
 
                     self.updateCustomScrambleButtons(width)
 
+                    buttongroups = []
+                    buttongroups.append([self.customScrambleButtons[0], self.customScrambleButtons[1], self.customScrambleButtons[2], self.customScrambleButtons[3], self.customScrambleButtons[4], self.customScrambleButtons[5], self.customScrambleButtons[6] ,self.customScrambleButtons[7] ,self.customScrambleButtons[8]])
+
                     for button in self.customScrambleButtons:
                         button.groupUpdate = False
 
                     for button in self.customScrambleButtons:
                         button.hover(mx, my)
                         if button.isHovered == True and not button.groupUpdate:
-                            button.animateGroup(self.customScrambleButtons)
+                            button.animateGroup(buttongroups[0])
 
                     for button in self.customScrambleButtons:
                         button.clicked(mx, my, mousePressedUp)
