@@ -199,10 +199,11 @@ class main:
                     self.updateCustomScrambleButtons(width)
 
                     buttongroups = []
-                    buttongroups.append([self.customScrambleButtons[0], self.customScrambleButtons[1], self.customScrambleButtons[2], self.customScrambleButtons[3], self.customScrambleButtons[4], self.customScrambleButtons[5], self.customScrambleButtons[6] ,self.customScrambleButtons[7] ,self.customScrambleButtons[8]])
-                    buttongroups.append([self.customScrambleButtons[9], self.customScrambleButtons[10], self.customScrambleButtons[11], self.customScrambleButtons[18], self.customScrambleButtons[19], self.customScrambleButtons[20], self.customScrambleButtons[27] ,self.customScrambleButtons[28] ,self.customScrambleButtons[29]])
-                    buttongroups.append([self.customScrambleButtons[12], self.customScrambleButtons[13], self.customScrambleButtons[14], self.customScrambleButtons[21], self.customScrambleButtons[22], self.customScrambleButtons[23], self.customScrambleButtons[30] ,self.customScrambleButtons[31] ,self.customScrambleButtons[32]])
-                    buttongroups.append([self.customScrambleButtons[15], self.customScrambleButtons[16], self.customScrambleButtons[17], self.customScrambleButtons[24], self.customScrambleButtons[25], self.customScrambleButtons[26], self.customScrambleButtons[33] ,self.customScrambleButtons[34] ,self.customScrambleButtons[35]])
+                    buttongroups.append([self.customScrambleButtons[0], self.customScrambleButtons[1], self.customScrambleButtons[2], self.customScrambleButtons[3], self.customScrambleButtons[4], self.customScrambleButtons[5], self.customScrambleButtons[6], self.customScrambleButtons[7], self.customScrambleButtons[8]])
+                    buttongroups.append([self.customScrambleButtons[9], self.customScrambleButtons[10], self.customScrambleButtons[11], self.customScrambleButtons[18], self.customScrambleButtons[19], self.customScrambleButtons[20], self.customScrambleButtons[27], self.customScrambleButtons[28], self.customScrambleButtons[29]])
+                    buttongroups.append([self.customScrambleButtons[12], self.customScrambleButtons[13], self.customScrambleButtons[14], self.customScrambleButtons[21], self.customScrambleButtons[22], self.customScrambleButtons[23], self.customScrambleButtons[30], self.customScrambleButtons[31], self.customScrambleButtons[32]])
+                    buttongroups.append([self.customScrambleButtons[15], self.customScrambleButtons[16], self.customScrambleButtons[17], self.customScrambleButtons[24], self.customScrambleButtons[25], self.customScrambleButtons[26], self.customScrambleButtons[33], self.customScrambleButtons[34], self.customScrambleButtons[35]])
+                    buttongroups.append([self.customScrambleButtons[36], self.customScrambleButtons[37], self.customScrambleButtons[38], self.customScrambleButtons[39], self.customScrambleButtons[40], self.customScrambleButtons[41], self.customScrambleButtons[42], self.customScrambleButtons[43], self.customScrambleButtons[44]])
 
                     for button in self.customScrambleButtons:
                         button.groupUpdate = False
@@ -210,7 +211,7 @@ class main:
                     for button in self.customScrambleButtons:
                         button.hover(mx, my)
                         if button.isHovered == True and not button.groupUpdate:
-                            button.animateGroup(buttongroups[3])
+                            button.animateGroup(buttongroups[4])
 
                     for button in self.customScrambleButtons:
                         button.clicked(mx, my, mousePressedUp)
