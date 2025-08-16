@@ -204,6 +204,7 @@ class main:
                     buttongroups.append([self.customScrambleButtons[12], self.customScrambleButtons[13], self.customScrambleButtons[14], self.customScrambleButtons[21], self.customScrambleButtons[22], self.customScrambleButtons[23], self.customScrambleButtons[30], self.customScrambleButtons[31], self.customScrambleButtons[32]])
                     buttongroups.append([self.customScrambleButtons[15], self.customScrambleButtons[16], self.customScrambleButtons[17], self.customScrambleButtons[24], self.customScrambleButtons[25], self.customScrambleButtons[26], self.customScrambleButtons[33], self.customScrambleButtons[34], self.customScrambleButtons[35]])
                     buttongroups.append([self.customScrambleButtons[36], self.customScrambleButtons[37], self.customScrambleButtons[38], self.customScrambleButtons[39], self.customScrambleButtons[40], self.customScrambleButtons[41], self.customScrambleButtons[42], self.customScrambleButtons[43], self.customScrambleButtons[44]])
+                    buttongroups.append([self.customScrambleButtons[45], self.customScrambleButtons[46], self.customScrambleButtons[47], self.customScrambleButtons[48], self.customScrambleButtons[49], self.customScrambleButtons[50], self.customScrambleButtons[51], self.customScrambleButtons[52], self.customScrambleButtons[53]])
 
                     for button in self.customScrambleButtons:
                         button.groupUpdate = False
@@ -211,7 +212,7 @@ class main:
                     for button in self.customScrambleButtons:
                         button.hover(mx, my)
                         if button.isHovered == True and not button.groupUpdate:
-                            button.animateGroup(buttongroups[4])
+                            button.animateGroup(buttongroups[5])
 
                     for button in self.customScrambleButtons:
                         button.clicked(mx, my, mousePressedUp)
