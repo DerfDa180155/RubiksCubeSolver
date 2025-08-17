@@ -206,48 +206,49 @@ class main:
                     buttongroups.append([self.customScrambleButtons[36], self.customScrambleButtons[37], self.customScrambleButtons[38], self.customScrambleButtons[39], self.customScrambleButtons[40], self.customScrambleButtons[41], self.customScrambleButtons[42], self.customScrambleButtons[43], self.customScrambleButtons[44]])
                     buttongroups.append([self.customScrambleButtons[45], self.customScrambleButtons[46], self.customScrambleButtons[47], self.customScrambleButtons[48], self.customScrambleButtons[49], self.customScrambleButtons[50], self.customScrambleButtons[51], self.customScrambleButtons[52], self.customScrambleButtons[53]])
 
-                    for button in self.customScrambleButtons:
-                        button.groupUpdate = False
+                    for buttongroup in buttongroups:
+                        for button in buttongroup:
+                            button.groupUpdate = False
 
-                    for button in self.customScrambleButtons:
-                        button.hover(mx, my)
-                        if button.isHovered == True and not button.groupUpdate:
-                            button.animateGroup(buttongroups[5])
+                        for button in buttongroup:
+                            button.hover(mx, my)
+                            if button.isHovered == True and not button.groupUpdate:
+                                button.animateGroup(buttongroup)
 
-                    for button in self.customScrambleButtons:
-                        button.clicked(mx, my, mousePressedUp)
+                        for button in buttongroup:
+                            button.clicked(mx, my, mousePressedUp)
 
-                        button.update()
-                        button.draw()
+                            button.update()
+                            button.draw()
 
-                        if button.isleftClicked:
-                            match button.onClick:
-                                case "top":
-                                    self.solver.makeMove("U'", True)
-                                case "front":
-                                    self.solver.makeMove("F'", True)
-                                case "bottom":
-                                    self.solver.makeMove("D'", True)
-                                case "back":
-                                    self.solver.makeMove("B'", True)
-                                case "left":
-                                    self.solver.makeMove("L'", True)
-                                case "right":
-                                    self.solver.makeMove("R'", True)
-                        elif button.isrightClicked:
-                            match button.onClick:
-                                case "top":
-                                    self.solver.makeMove("U", True)
-                                case "front":
-                                    self.solver.makeMove("F", True)
-                                case "bottom":
-                                    self.solver.makeMove("D", True)
-                                case "back":
-                                    self.solver.makeMove("B", True)
-                                case "left":
-                                    self.solver.makeMove("L", True)
-                                case "right":
-                                    self.solver.makeMove("R", True)
+                            if button.isleftClicked:
+                                match button.onClick:
+                                    case "top":
+                                        self.solver.makeMove("U'", True)
+                                    case "front":
+                                        self.solver.makeMove("F'", True)
+                                    case "bottom":
+                                        self.solver.makeMove("D'", True)
+                                    case "back":
+                                        self.solver.makeMove("B'", True)
+                                    case "left":
+                                        self.solver.makeMove("L'", True)
+                                    case "right":
+                                        self.solver.makeMove("R'", True)
+                            elif button.isrightClicked:
+                                match button.onClick:
+                                    case "top":
+                                        self.solver.makeMove("U", True)
+                                    case "front":
+                                        self.solver.makeMove("F", True)
+                                    case "bottom":
+                                        self.solver.makeMove("D", True)
+                                    case "back":
+                                        self.solver.makeMove("B", True)
+                                    case "left":
+                                        self.solver.makeMove("L", True)
+                                    case "right":
+                                        self.solver.makeMove("R", True)
 
 
                 case "solved":
