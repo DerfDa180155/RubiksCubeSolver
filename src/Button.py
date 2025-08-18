@@ -15,7 +15,7 @@ class Button:
         self.isleftClicked = False
         self.isrightClicked = False
         self.animationSize = 0
-        self.maxAnimationSize = 20
+        self.maxAnimationSize = 10
 
         self.groupUpdate = False
 
