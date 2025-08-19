@@ -1,7 +1,7 @@
 import pygame
 
 class Button:
-    def __init__(self, screen, x, y, width, height, color, onClick, doAnimation = True):
+    def __init__(self, screen, x, y, width, height, color, onClick, doAnimation = True, maxAnimationSize = 20):
         self.screen = screen
         self.x = x
         self.y = y
@@ -15,7 +15,7 @@ class Button:
         self.isleftClicked = False
         self.isrightClicked = False
         self.animationSize = 0
-        self.maxAnimationSize = 10
+        self.maxAnimationSize = maxAnimationSize
 
         self.groupUpdate = False
 
@@ -24,7 +24,6 @@ class Button:
         self.isleftClicked = False
         self.isrightClicked = False
         self.animationSize = 0
-        self.maxAnimationSize = 20
 
     def updateLocationAndSize(self, x, y, width, height):
         self.x = x

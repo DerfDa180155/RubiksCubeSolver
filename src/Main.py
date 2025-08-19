@@ -429,7 +429,7 @@ class main:
                         case 6: # orange
                             color = (255, 165, 0)
 
-                    self.customScrambleButtons.append(Button.Button(self.screen, x, y, width, height, color, onClick, False))
+                    self.customScrambleButtons.append(Button.Button(self.screen, x, y, width, height, color, onClick, False, 10))
 
     def updateMenuButtons(self, width):
         counter = 0
