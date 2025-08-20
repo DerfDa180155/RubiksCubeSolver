@@ -407,7 +407,7 @@ class main:
                     width = (50*self.windowWidth)/1000
                     height = width
                     x = (j * (width + 10)) + (self.windowWidth/2) - width / 2
-                    y = (i * (height + 10)) + (self.windowHeight/2) - (160*self.windowHeight/1000)
+                    y = (i * (height + 10)) + (self.windowHeight/2) - (155 * self.windowHeight / 1000)
 
                     x += -(width * 4.5)
                     y += -(height * 6)
@@ -455,7 +455,7 @@ class main:
                 if cube[i][j] != -1:
                     height = width
                     x = (j * (width + 10)) + (self.windowWidth / 2) - width / 2
-                    y = (i * (height + 10)) + (self.windowHeight / 2) - (160*self.windowHeight/1000)
+                    y = (i * (height + 10)) + (self.windowHeight / 2) - (155 * self.windowHeight / 1000)
 
                     x += -(width * 4.5)
                     y += -(height * 6)
