@@ -1,4 +1,7 @@
+import random
+
 import pygame
+import random
 
 class Button:
     def __init__(self, screen, x, y, width, height, color, onClick, doAnimation = True, maxAnimationSize = 20):
@@ -10,6 +13,9 @@ class Button:
         self.color = color
         self.onClick = onClick
         self.doAnimation = doAnimation
+
+        availableColors = [(255, 255, 255), (0, 0, 255), (255, 255, 0), (0, 255, 0), (180, 0, 0), (255, 165, 0)]
+        self.onClickTextColor = availableColors[random.randint(0, len(availableColors)-1)]
 
         self.isHovered = False
         self.isleftClicked = False
@@ -31,8 +37,18 @@ class Button:
         self.width = width
         self.height = height
 
-    def draw(self):
+    def draw(self, drawOnClickText=False, onClickTextSize=20):
         pygame.draw.rect(self.screen, self.color, (self.x-(self.animationSize/2), self.y-(self.animationSize/2), self.width+self.animationSize, self.height+self.animationSize))
+
+        if drawOnClickText:
+            font = pygame.font.Font(pygame.font.get_default_font(), int(onClickTextSize+self.animationSize/1.5))
+
+            text = font.render(self.onClick, True, self.onClickTextColor)
+            newRect = text.get_rect()
+            newRect.centerx = self.x + self.width/2
+            newRect.centery = self.y + self.height/2
+            self.screen.blit(text, newRect)
+
 
     def update(self):
         if not self.groupUpdate:
