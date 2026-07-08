@@ -1,8 +1,12 @@
+import random
+
 import pygame
+import webbrowser
 
 import RubiksCubeSolver
 import Button
-
+import RotatedRect
+import SwitchButton
 
 class main:
     def __init__(self):
@@ -15,9 +19,11 @@ class main:
         self.windowWidth = 1500
         self.windowHeight = 1500
 
+        self.author = "David Derflinger"
+
         # todo maybe resizeable entfernen und durch setting mit so 4 größen ersetzen oder einfach nur eine größe festlegen
         self.screen = pygame.display.set_mode((self.windowWidth, self.windowHeight), pygame.RESIZABLE | pygame.GL_DOUBLEBUFFER)
-        pygame.display.set_caption("Rubik`s Cube Solver by David Derflinger")
+        pygame.display.set_caption("Rubik`s Cube Solver by " + self.author)
 
         self.clock = pygame.time.Clock()
         self.running = True
@@ -29,18 +35,40 @@ class main:
         self.menu = "main"
         self.spacePressed = False
 
+        # background cubes
+        self.availableColors = [(255, 255, 255), (0, 0, 255), (255, 255, 0), (0, 255, 0), (180, 0, 0), (255, 165, 0)]
+        self.backgroundCubes = []
+        self.generateBackgroundCubes()
+
+        # buttons
         self.mainButtons = [Button.Button(self.screen, 250, 250, 1000, 200, (100, 100, 100), "Enter your Cube"),
                             Button.Button(self.screen, 250, 600, 1000, 200, (100, 100, 100), "Custom Scramble"),
                             Button.Button(self.screen, 250, 950, 400, 200, (100, 100, 100), "About"),
                             Button.Button(self.screen, 850, 950, 400, 200, (100, 100, 100), "GitHub Page")]
         self.aboutButtons = [Button.Button(self.screen, 250, 1100, 1000, 200, (100, 100, 100), "Back")]
 
+        self.enterYourCubeButtons = [Button.Button(self.screen, 50, 50, 100, 50, (100, 100, 100), "Back"),
+                                     Button.Button(self.screen, 1300, 150, 100, 100, (255, 255, 255), "SelectWhite"),
+                                     Button.Button(self.screen, 1300, 300, 100, 100, (0, 0, 255), "SelectBlue"),
+                                     Button.Button(self.screen, 1300, 450, 100, 100, (255, 255, 0), "SelectYellow"),
+                                     Button.Button(self.screen, 1300, 600, 100, 100, (0, 255, 0), "SelectGreen"),
+                                     Button.Button(self.screen, 1300, 750, 100, 100, (255, 0, 0), "SelectRed"),
+                                     Button.Button(self.screen, 1300, 900, 100, 100, (255, 165, 0), "SelectOrange"),
+                                     Button.Button(self.screen, 1250, 1050, 200, 80, (100, 100, 100), "Clear Cube"),
+                                     Button.Button(self.screen, 1250, 1180, 200, 80, (100, 100, 100), "Solve")]
+        self.enterYourCubeSwitchButtons = [SwitchButton.SwitchButton(self.screen, 50, 150, 100, 50, (100, 100, 100), "2D", "3D")]
+
+        self.enterYourCubeSelectedButton = self.enterYourCubeButtons[1]
+        self.enterYourCubeSelectedButton.selected = True
+
+        self.customScrambleButtons = [Button.Button(self.screen, 50, 50, 100, 50, (100, 100, 100), "Back")]
+        self.customScrambleSwitchButtons = [SwitchButton.SwitchButton(self.screen, 50, 150, 100, 50, (100, 100, 100), "2D", "3D")]
+
         # todo maybe entfernen
         self.menuButtons = []
         self.createMenuButtons()
 
         # todo maybe entfernen
-        self.customScrambleButtons = []
         self.createScrambleButtons()
 
         self.run()
@@ -143,22 +171,26 @@ class main:
             smalerFont = pygame.font.Font(pygame.font.get_default_font(), textSize)
 
 
-            # draw background cubes, copyright and version
-            if self.menu in ["main", "about", "custom_scramble"]:
+            # draw background cubes
+            if self.menu in ["main", "about"]:
                 # draw background cubes
+                for cube in self.backgroundCubes:
+                    cube.draw()
 
+            # draw copyright and version
+            if self.menu in ["main", "about", "custom_scramble"]:
                 # draw copyright
-                text = smalerFont.render("\u00A9 2026 David Derflinger", True, (150, 150, 150))
+                text = smalerFont.render("\u00A9 2026 " + self.author, True, (150, 150, 150))
                 newRect = text.get_rect()
-                newRect.x = 20
-                newRect.y = 1460
+                newRect.left = 20
+                newRect.bottom = self.windowHeight - 5
                 self.screen.blit(text, newRect)
 
                 # draw version
                 text = smalerFont.render("V1.0.0", True, (150, 150, 150))
                 newRect = text.get_rect()
-                newRect.right = 1480
-                newRect.y = 1460
+                newRect.right = self.windowWidth - 20
+                newRect.bottom = self.windowHeight - 5
                 self.screen.blit(text, newRect)
 
             match self.menu:
@@ -177,13 +209,14 @@ class main:
                         if button.clicked(mx, my, mousePressedUp):
                             match button.onClick:
                                 case "Enter your Cube":
+                                    self.solver.cleanCube()
                                     self.menu = "enter_your_scramble"
                                 case "Custom Scramble":
                                     self.menu = "custom_scramble"
                                 case "About":
                                     self.menu = "about"
                                 case "GitHub Page":
-                                    print("oben git page lol")
+                                    webbrowser.open_new_tab("https://github.com/DerfDa180155/RubiksCubeSolver")
 
                 case "about":
                     # draw headline
@@ -214,15 +247,51 @@ class main:
                     text = headingFont.render("Enter your scramble", True, (255, 255, 255))
                     newRect = text.get_rect()
                     newRect.centerx = self.windowWidth / 2
-                    newRect.y = textSize
+                    newRect.y = headingTextSize
                     self.screen.blit(text, newRect)
+
+                    cubeStyle = self.enterYourCubeSwitchButtons[0].action
+
+                    if cubeStyle == "2D":
+                        # 2D
+                        self.drawCube(80, self.windowWidth/2, 150, True)
+
+
+
+
+
+                    else:
+                        # 3D
+                        pass
+
+                    for button in self.enterYourCubeButtons:
+                        button.update()
+                        button.draw(drawOnClickText=not "Select" in button.onClick, onClickTextSize=25)
+                        if button.clicked(mx, my, mousePressedUp):
+                            if "Select" in button.onClick:
+                                self.enterYourCubeSelectedButton.selected = False
+                                self.enterYourCubeSelectedButton = button
+                                self.enterYourCubeSelectedButton.selected = True
+
+                            match button.onClick:
+                                case "Back":
+                                    self.menu = "main"
+                                case "Clear Cube":
+                                    self.solver.cleanCube()
+                                case "Solve":
+                                    # todo: solve cube, but check if all pieces are placed before
+                                    pass
+
+                    for switchButton in self.enterYourCubeSwitchButtons:
+                        switchButton.draw((20, 20, 20), (128, 255, 128))
+                        switchButton.clicked(mx, my, mousePressedUp)
 
                 case "custom_scramble":
                     # draw headline
                     text = headingFont.render("Custom scramble", True, (255, 255, 255))
                     newRect = text.get_rect()
                     newRect.centerx = self.windowWidth / 2
-                    newRect.y = textSize
+                    newRect.y = headingTextSize
                     self.screen.blit(text, newRect)
 
 
@@ -249,8 +318,7 @@ class main:
                         text = smalerFont.render(displayedText[i], True, (255, 255, 255))
                         newRect = text.get_rect()
                         newRect.x = 10
-                        newRect.y = (((10 * self.windowHeight) / 900) + textSize * i + textSize * i / 2) + (
-                                    14 * width) + 10
+                        newRect.y = (((10 * self.windowHeight) / 900) + textSize * i + textSize * i / 2) + (14 * width) + 10
                         self.screen.blit(text, newRect)
 
                     displayedText = ["U - Up", "D - Down", "R - Right", "L - Left", "F - Front", "B - Back", "W - X'",
@@ -338,6 +406,10 @@ class main:
                                         self.solver.makeMove("L", True)
                                     case "right":
                                         self.solver.makeMove("R", True)
+
+                    for switchButton in self.customScrambleSwitchButtons:
+                        switchButton.draw((20, 20, 20), (128, 255, 128))
+                        switchButton.clicked(mx, my, mousePressedUp)
 
                 case "solve":
                     if self.spacePressed:
@@ -617,6 +689,25 @@ class main:
             pygame.display.flip()
             self.clock.tick(60)
 
+    def generateBackgroundCubes(self):
+        self.backgroundCubes = []
+
+        minSize = 50
+        maxSize = 300
+        minRotation = 0
+        maxRotation = 90
+
+        locations = [[0, self.windowWidth/3, 0, self.windowHeight/3], [(self.windowWidth/3)*2, self.windowWidth, 0, self.windowHeight/3],
+                     [0, self.windowWidth/3, self.windowHeight/3, (self.windowHeight/3)*2], [(self.windowWidth/3)*2, self.windowWidth, self.windowHeight/3, (self.windowHeight/3)*2],
+                     [0, self.windowWidth/3, (self.windowHeight/3)*2, self.windowHeight], [self.windowWidth/3, (self.windowWidth/3)*2, (self.windowHeight/3)*2, self.windowHeight], [(self.windowWidth/3)*2, self.windowWidth, (self.windowHeight/3)*2, self.windowHeight]]
+
+        for location in locations:
+            randomSize = random.randint(minSize, maxSize)
+            size = [randomSize, randomSize]
+            degree = random.randint(minRotation, maxRotation)
+            color = self.availableColors[random.randint(0, len(self.availableColors)-1)]
+            self.backgroundCubes.append(RotatedRect.RotatedRect(self.screen, location, size, degree, color))
+
     def drawCube(self, width, posX, posY, centerX=False, centerY=False):
         # draw cube
         cube = self.solver.generateComplete()
@@ -635,6 +726,8 @@ class main:
                         y += -(height*6)
 
                     match cube[i][j]:
+                        case 0: # empty
+                            color = (100, 100, 100)
                         case 1:  # white
                             color = (255, 255, 255)
                         case 2:  # blue

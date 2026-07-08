@@ -19,12 +19,7 @@ class RubiksCubeSolver:
             self.fillSide(i)
 
     def reset(self):
-        self.top = self.generateEmptySide(middle=1)
-        self.bottom = self.generateEmptySide(middle=3)
-        self.right = self.generateEmptySide(middle=6)
-        self.left = self.generateEmptySide(middle=5)
-        self.front = self.generateEmptySide(middle=2)
-        self.back = self.generateEmptySide(middle=4)
+        self.cleanCube()
 
         self.scrambleMoves = []
         self.solveMoves = []
@@ -70,8 +65,16 @@ class RubiksCubeSolver:
                     for j in range(len(self.back[0])):
                         self.back[i][j] = self.back[1][1]
 
+    def cleanCube(self):
+        self.top = self.generateEmptySide(middle=1)
+        self.bottom = self.generateEmptySide(middle=3)
+        self.right = self.generateEmptySide(middle=6)
+        self.left = self.generateEmptySide(middle=5)
+        self.front = self.generateEmptySide(middle=2)
+        self.back = self.generateEmptySide(middle=4)
+
     def generateComplete(self):
-        complite =  []
+        complete =  []
 
         for i in range(3):
             temp = []
@@ -81,7 +84,7 @@ class RubiksCubeSolver:
                 temp.append(self.top[j][i])
             for j in range(3):
                 temp.append(-1)
-            complite.append(temp)
+            complete.append(temp)
 
         for i in range(3):
             temp = []
@@ -91,7 +94,7 @@ class RubiksCubeSolver:
                 temp.append(self.front[j][i])
             for j in range(3):
                 temp.append(self.right[j][i])
-            complite.append(temp)
+            complete.append(temp)
 
         for i in range(3):
             temp = []
@@ -101,7 +104,7 @@ class RubiksCubeSolver:
                 temp.append(self.bottom[j][i])
             for j in range(3):
                 temp.append(-1)
-            complite.append(temp)
+            complete.append(temp)
 
         for i in range(3):
             temp = []
@@ -111,9 +114,9 @@ class RubiksCubeSolver:
                 temp.append(self.back[j][i])
             for j in range(3):
                 temp.append(-1)
-            complite.append(temp)
+            complete.append(temp)
 
-        return complite
+        return complete
 
     def makeMove(self, move, isScrambleMove = False):
         if isScrambleMove and self.state == 5:

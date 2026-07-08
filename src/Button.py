@@ -23,6 +23,8 @@ class Button:
         self.animationSize = 0
         self.maxAnimationSize = maxAnimationSize
 
+        self.selected = False
+
         self.groupUpdate = False
 
     def reset(self):
@@ -38,6 +40,9 @@ class Button:
         self.height = height
 
     def draw(self, drawOnClickText=False, onClickTextSize=20):
+        if self.selected:
+            pygame.draw.rect(self.screen, (100, 100, 100), (self.x-10, self.y-10, self.width+20, self.height+20))
+
         pygame.draw.rect(self.screen, self.color, (self.x-(self.animationSize/2), self.y-(self.animationSize/2), self.width+self.animationSize, self.height+self.animationSize))
 
         if drawOnClickText:
@@ -48,7 +53,6 @@ class Button:
             newRect.centerx = self.x + self.width/2
             newRect.centery = self.y + self.height/2
             self.screen.blit(text, newRect)
-
 
     def update(self):
         if not self.groupUpdate:
