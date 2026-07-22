@@ -15,8 +15,7 @@ class RubiksCubeSolver:
         self.simplifiedSolveMoves = []
         self.state = 0
 
-        for i in range(1, 7):
-            self.fillSide(i)
+        self.fillCube()
 
     def reset(self):
         self.cleanCube()
@@ -72,6 +71,23 @@ class RubiksCubeSolver:
         self.left = self.generateEmptySide(middle=5)
         self.front = self.generateEmptySide(middle=2)
         self.back = self.generateEmptySide(middle=4)
+
+        self.solveMoves = []
+        self.simplifiedSolveMoves = []
+
+    def fillCube(self):
+        for i in range(1, 7):
+            self.fillSide(i)
+
+    def isFullCube(self):
+        fullCube = self.generateComplete()
+
+        for y in range(len(fullCube)):
+            for x in range(len(fullCube[y])):
+                if fullCube[y][x] == 0:
+                    return False
+
+        return True
 
     def generateComplete(self):
         complete =  []

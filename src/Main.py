@@ -61,12 +61,11 @@ class main:
         self.enterYourCubeSelectedButton = self.enterYourCubeButtons[1]
         self.enterYourCubeSelectedButton.selected = True
 
-        self.customScrambleButtons = [Button.Button(self.screen, 50, 50, 100, 50, (100, 100, 100), "Back")]
+        self.customScrambleButtons = [Button.Button(self.screen, 50, 50, 100, 50, (100, 100, 100), "Back"),
+                                      Button.Button(self.screen, 1200, 950, 200, 80, (100, 100, 100), "Reset"),
+                                      Button.Button(self.screen, 1200, 1070, 200, 80, (100, 100, 100), "Solve")]
+        self.customScrambleCubeButtons = []
         self.customScrambleSwitchButtons = [SwitchButton.SwitchButton(self.screen, 50, 150, 100, 50, (100, 100, 100), "2D", "3D")]
-
-        # todo maybe entfernen
-        self.menuButtons = []
-        self.createMenuButtons()
 
         # todo maybe entfernen
         self.createScrambleButtons()
@@ -168,7 +167,7 @@ class main:
                 startMenuSize = (130 * self.windowHeight) / 2000
 
             headingFont = pygame.font.Font(pygame.font.get_default_font(), headingTextSize)
-            smalerFont = pygame.font.Font(pygame.font.get_default_font(), textSize)
+            smallerFont = pygame.font.Font(pygame.font.get_default_font(), textSize)
 
 
             # draw background cubes
@@ -180,14 +179,14 @@ class main:
             # draw copyright and version
             if self.menu in ["main", "about", "custom_scramble"]:
                 # draw copyright
-                text = smalerFont.render("\u00A9 2026 " + self.author, True, (150, 150, 150))
+                text = smallerFont.render("\u00A9 2026 " + self.author, True, (150, 150, 150))
                 newRect = text.get_rect()
                 newRect.left = 20
                 newRect.bottom = self.windowHeight - 5
                 self.screen.blit(text, newRect)
 
                 # draw version
-                text = smalerFont.render("V1.0.0", True, (150, 150, 150))
+                text = smallerFont.render("V1.0.0", True, (150, 150, 150))
                 newRect = text.get_rect()
                 newRect.right = self.windowWidth - 20
                 newRect.bottom = self.windowHeight - 5
@@ -212,6 +211,7 @@ class main:
                                     self.solver.cleanCube()
                                     self.menu = "enter_your_scramble"
                                 case "Custom Scramble":
+                                    self.solver.fillCube()
                                     self.menu = "custom_scramble"
                                 case "About":
                                     self.menu = "about"
@@ -254,15 +254,187 @@ class main:
 
                     if cubeStyle == "2D":
                         # 2D
-                        self.drawCube(80, self.windowWidth/2, 150, True)
+                        cubeRects = self.drawCube(80, self.windowWidth/2, 150, True)
 
+                        placeColor = 0
+                        match self.enterYourCubeSelectedButton.onClick:
+                            case "SelectWhite":
+                                placeColor = 1
+                            case "SelectBlue":
+                                placeColor = 2
+                            case "SelectYellow":
+                                placeColor = 3
+                            case "SelectGreen":
+                                placeColor = 4
+                            case "SelectRed":
+                                placeColor = 5
+                            case "SelectOrange":
+                                placeColor = 6
 
+                        counter = 0
+                        for rect in cubeRects:
+                            if rect.collidepoint(mx, my) and counter not in [4, 19, 22, 25, 40, 49]:
+                                if mousePressedUp[0]:
+                                    match counter:
+                                        case 0:
+                                            self.solver.top[0][0] = placeColor
+                                        case 1:
+                                            self.solver.top[1][0] = placeColor
+                                        case 2:
+                                            self.solver.top[2][0] = placeColor
+                                        case 3:
+                                            self.solver.top[0][1] = placeColor
+                                        case 4:
+                                            self.solver.top[1][1] = placeColor
+                                        case 5:
+                                            self.solver.top[2][1] = placeColor
+                                        case 6:
+                                            self.solver.top[0][2] = placeColor
+                                        case 7:
+                                            self.solver.top[1][2] = placeColor
+                                        case 8:
+                                            self.solver.top[2][2] = placeColor
 
+                                        case 9:
+                                            self.solver.left[0][0] = placeColor
+                                        case 10:
+                                            self.solver.left[1][0] = placeColor
+                                        case 11:
+                                            self.solver.left[2][0] = placeColor
 
+                                        case 12:
+                                            self.solver.front[0][0] = placeColor
+                                        case 13:
+                                            self.solver.front[1][0] = placeColor
+                                        case 14:
+                                            self.solver.front[2][0] = placeColor
+
+                                        case 15:
+                                            self.solver.right[0][0] = placeColor
+                                        case 16:
+                                            self.solver.right[1][0] = placeColor
+                                        case 17:
+                                            self.solver.right[2][0] = placeColor
+
+                                        case 18:
+                                            self.solver.left[0][1] = placeColor
+                                        case 19:
+                                            self.solver.left[1][1] = placeColor
+                                        case 20:
+                                            self.solver.left[2][1] = placeColor
+
+                                        case 21:
+                                            self.solver.front[0][1] = placeColor
+                                        case 22:
+                                            self.solver.front[1][1] = placeColor
+                                        case 23:
+                                            self.solver.front[2][1] = placeColor
+
+                                        case 24:
+                                            self.solver.right[0][1] = placeColor
+                                        case 25:
+                                            self.solver.right[1][1] = placeColor
+                                        case 26:
+                                            self.solver.right[2][1] = placeColor
+
+                                        case 27:
+                                            self.solver.left[0][2] = placeColor
+                                        case 28:
+                                            self.solver.left[1][2] = placeColor
+                                        case 29:
+                                            self.solver.left[2][2] = placeColor
+
+                                        case 30:
+                                            self.solver.front[0][2] = placeColor
+                                        case 31:
+                                            self.solver.front[1][2] = placeColor
+                                        case 32:
+                                            self.solver.front[2][2] = placeColor
+
+                                        case 33:
+                                            self.solver.right[0][2] = placeColor
+                                        case 34:
+                                            self.solver.right[1][2] = placeColor
+                                        case 35:
+                                            self.solver.right[2][2] = placeColor
+
+                                        case 36:
+                                            self.solver.bottom[0][0] = placeColor
+                                        case 37:
+                                            self.solver.bottom[1][0] = placeColor
+                                        case 38:
+                                            self.solver.bottom[2][0] = placeColor
+                                        case 39:
+                                            self.solver.bottom[0][1] = placeColor
+                                        case 40:
+                                            self.solver.bottom[1][1] = placeColor
+                                        case 41:
+                                            self.solver.bottom[2][1] = placeColor
+                                        case 42:
+                                            self.solver.bottom[0][2] = placeColor
+                                        case 43:
+                                            self.solver.bottom[1][2] = placeColor
+                                        case 44:
+                                            self.solver.bottom[2][2] = placeColor
+
+                                        case 45:
+                                            self.solver.back[0][0] = placeColor
+                                        case 46:
+                                            self.solver.back[1][0] = placeColor
+                                        case 47:
+                                            self.solver.back[2][0] = placeColor
+                                        case 48:
+                                            self.solver.back[0][1] = placeColor
+                                        case 49:
+                                            self.solver.back[1][1] = placeColor
+                                        case 50:
+                                            self.solver.back[2][1] = placeColor
+                                        case 51:
+                                            self.solver.back[0][2] = placeColor
+                                        case 52:
+                                            self.solver.back[1][2] = placeColor
+                                        case 53:
+                                            self.solver.back[2][2] = placeColor
+
+                            counter += 1
 
                     else:
                         # 3D
-                        pass
+                        text = headingFont.render("Comming soon ...", True, (255, 255, 255))
+                        newRect = text.get_rect()
+                        newRect.centerx = self.windowWidth/2
+                        newRect.centery = self.windowHeight/2
+                        self.screen.blit(text, newRect)
+
+                    # display solve moves
+                    displayedText = []
+                    displayedText.append("Solve moves (" + str(len(self.solver.simplifySolve())) + "):")
+
+                    simplifiedMoves = ""
+                    first = True
+                    count = 0
+                    for move in self.solver.simplifySolve():
+                        count += 1
+                        if first:
+                            simplifiedMoves += str(move)
+                            first = False
+                        else:
+                            simplifiedMoves += " ," + str(move)
+
+                        if count == 25:
+                            count = 0
+                            displayedText.append(simplifiedMoves)
+                            simplifiedMoves = ""
+                            first = True
+                    displayedText.append(simplifiedMoves)
+
+                    for i in range(len(displayedText)):
+                        text = smallerFont.render(displayedText[i], True, (255, 255, 255))
+                        newRect = text.get_rect()
+                        newRect.x = 20
+                        newRect.y = 1200 + textSize * i
+                        self.screen.blit(text, newRect)
+
 
                     for button in self.enterYourCubeButtons:
                         button.update()
@@ -279,8 +451,9 @@ class main:
                                 case "Clear Cube":
                                     self.solver.cleanCube()
                                 case "Solve":
-                                    # todo: solve cube, but check if all pieces are placed before
-                                    pass
+                                    if self.solver.isFullCube():
+                                        self.solver.solve()
+                                        self.solver.simplifySolve()
 
                     for switchButton in self.enterYourCubeSwitchButtons:
                         switchButton.draw((20, 20, 20), (128, 255, 128))
@@ -294,14 +467,126 @@ class main:
                     newRect.y = headingTextSize
                     self.screen.blit(text, newRect)
 
-
+                    # space for solve
                     if self.spacePressed:
                         self.solver.solve()
                         self.spacePressed = not self.spacePressed
-                        self.menu = "solve"
+                        #self.menu = "solve" # no longer needed
+
+                    # display hotkeys
+                    displayedText = ["U - Up", "D - Down", "R - Right", "L - Left", "F - Front", "B - Back", "W - X'",
+                                     "E - x", "A - Random", "S - Remove", "SPACE - Solve", "Q - Reset"]
+
+                    for i in range(len(displayedText)):
+                        text = smallerFont.render(displayedText[i], True, (255, 255, 255))
+                        newRect = text.get_rect()
+                        newRect.x = centerX * 1.6
+                        newRect.y = (150 + textSize * i + textSize * i / 2)
+                        self.screen.blit(text, newRect)
 
 
+                    cubeStyle = self.customScrambleSwitchButtons[0].action
 
+                    if cubeStyle == "2D":
+                        self.updateCustomScrambleButtons(75)
+
+                        buttongroups = []
+                        buttongroups.append(
+                            [self.customScrambleCubeButtons[0], self.customScrambleCubeButtons[1],
+                             self.customScrambleCubeButtons[2],
+                             self.customScrambleCubeButtons[3], self.customScrambleCubeButtons[4],
+                             self.customScrambleCubeButtons[5],
+                             self.customScrambleCubeButtons[6], self.customScrambleCubeButtons[7],
+                             self.customScrambleCubeButtons[8]])
+                        buttongroups.append(
+                            [self.customScrambleCubeButtons[9], self.customScrambleCubeButtons[10],
+                             self.customScrambleCubeButtons[11],
+                             self.customScrambleCubeButtons[18], self.customScrambleCubeButtons[19],
+                             self.customScrambleCubeButtons[20],
+                             self.customScrambleCubeButtons[27], self.customScrambleCubeButtons[28],
+                             self.customScrambleCubeButtons[29]])
+                        buttongroups.append(
+                            [self.customScrambleCubeButtons[12], self.customScrambleCubeButtons[13],
+                             self.customScrambleCubeButtons[14],
+                             self.customScrambleCubeButtons[21], self.customScrambleCubeButtons[22],
+                             self.customScrambleCubeButtons[23],
+                             self.customScrambleCubeButtons[30], self.customScrambleCubeButtons[31],
+                             self.customScrambleCubeButtons[32]])
+                        buttongroups.append(
+                            [self.customScrambleCubeButtons[15], self.customScrambleCubeButtons[16],
+                             self.customScrambleCubeButtons[17],
+                             self.customScrambleCubeButtons[24], self.customScrambleCubeButtons[25],
+                             self.customScrambleCubeButtons[26],
+                             self.customScrambleCubeButtons[33], self.customScrambleCubeButtons[34],
+                             self.customScrambleCubeButtons[35]])
+                        buttongroups.append(
+                            [self.customScrambleCubeButtons[36], self.customScrambleCubeButtons[37],
+                             self.customScrambleCubeButtons[38],
+                             self.customScrambleCubeButtons[39], self.customScrambleCubeButtons[40],
+                             self.customScrambleCubeButtons[41],
+                             self.customScrambleCubeButtons[42], self.customScrambleCubeButtons[43],
+                             self.customScrambleCubeButtons[44]])
+                        buttongroups.append(
+                            [self.customScrambleCubeButtons[45], self.customScrambleCubeButtons[46],
+                             self.customScrambleCubeButtons[47],
+                             self.customScrambleCubeButtons[48], self.customScrambleCubeButtons[49],
+                             self.customScrambleCubeButtons[50],
+                             self.customScrambleCubeButtons[51], self.customScrambleCubeButtons[52],
+                             self.customScrambleCubeButtons[53]])
+
+                        for buttongroup in buttongroups:
+                            for button in buttongroup:
+                                button.groupUpdate = False
+
+                            for button in buttongroup:
+                                button.hover(mx, my)
+                                if button.isHovered == True and not button.groupUpdate:
+                                    button.animateGroup(buttongroup)
+
+                            for button in buttongroup:
+                                button.clicked(mx, my, mousePressedUp)
+                                button.update()
+                                button.draw()
+
+                                if button.isleftClicked:
+                                    match button.onClick:
+                                        case "top":
+                                            self.solver.makeMove("U'", True)
+                                        case "front":
+                                            self.solver.makeMove("F'", True)
+                                        case "bottom":
+                                            self.solver.makeMove("D'", True)
+                                        case "back":
+                                            self.solver.makeMove("B'", True)
+                                        case "left":
+                                            self.solver.makeMove("L'", True)
+                                        case "right":
+                                            self.solver.makeMove("R'", True)
+                                elif button.isrightClicked:
+                                    match button.onClick:
+                                        case "top":
+                                            self.solver.makeMove("U", True)
+                                        case "front":
+                                            self.solver.makeMove("F", True)
+                                        case "bottom":
+                                            self.solver.makeMove("D", True)
+                                        case "back":
+                                            self.solver.makeMove("B", True)
+                                        case "left":
+                                            self.solver.makeMove("L", True)
+                                        case "right":
+                                            self.solver.makeMove("R", True)
+
+                    else:
+                        # 3D
+                        text = headingFont.render("Comming soon ...", True, (255, 255, 255))
+                        newRect = text.get_rect()
+                        newRect.centerx = self.windowWidth / 2
+                        newRect.centery = self.windowHeight / 2
+                        self.screen.blit(text, newRect)
+
+
+                    # display scramble and solve moves
                     displayedText = []
                     scrambleMoves = ""
                     first = True
@@ -311,111 +596,56 @@ class main:
                             first = False
                         else:
                             scrambleMoves += " ," + str(move)
-                    displayedText.append("Scramble:")
+                    displayedText.append("Scramble: (" + str(len(self.solver.scrambleMoves)) + ")")
                     displayedText.append(scrambleMoves)
 
+                    if self.solver.solveMoves != []:
+                        displayedText.append("Solve: (" + str(len(self.solver.simplifiedSolveMoves)) + ")")
+
+                        simplifiedMoves = ""
+                        first = True
+                        count = 0
+                        for move in self.solver.simplifySolve():
+                            count += 1
+                            if first:
+                                simplifiedMoves += str(move)
+                                first = False
+                            else:
+                                simplifiedMoves += " ," + str(move)
+
+                            if count == 32:
+                                count = 0
+                                displayedText.append(simplifiedMoves)
+                                simplifiedMoves = ""
+                                first = True
+                        displayedText.append(simplifiedMoves)
+
                     for i in range(len(displayedText)):
-                        text = smalerFont.render(displayedText[i], True, (255, 255, 255))
+                        text = smallerFont.render(displayedText[i], True, (255, 255, 255))
                         newRect = text.get_rect()
-                        newRect.x = 10
-                        newRect.y = (((10 * self.windowHeight) / 900) + textSize * i + textSize * i / 2) + (14 * width) + 10
+                        newRect.x = 20
+                        newRect.y = (1200 + textSize * i + textSize * i / 2) - textSize * 1.5
                         self.screen.blit(text, newRect)
 
-                    displayedText = ["U - Up", "D - Down", "R - Right", "L - Left", "F - Front", "B - Back", "W - X'",
-                                     "E - x", "A - Random", "S - Remove", "SPACE - Solve", "Q - Reset"]
 
-                    for i in range(len(displayedText)):
-                        text = smalerFont.render(displayedText[i], True, (255, 255, 255))
-                        newRect = text.get_rect()
-                        newRect.x = centerX * 1.6
-                        newRect.y = (((20 * self.windowHeight) / 900) + textSize * i + textSize * i / 2) + 10
-                        self.screen.blit(text, newRect)
-
-                    self.updateCustomScrambleButtons(width)
-
-                    buttongroups = []
-                    buttongroups.append(
-                        [self.customScrambleButtons[0], self.customScrambleButtons[1], self.customScrambleButtons[2],
-                         self.customScrambleButtons[3], self.customScrambleButtons[4], self.customScrambleButtons[5],
-                         self.customScrambleButtons[6], self.customScrambleButtons[7], self.customScrambleButtons[8]])
-                    buttongroups.append(
-                        [self.customScrambleButtons[9], self.customScrambleButtons[10], self.customScrambleButtons[11],
-                         self.customScrambleButtons[18], self.customScrambleButtons[19], self.customScrambleButtons[20],
-                         self.customScrambleButtons[27], self.customScrambleButtons[28],
-                         self.customScrambleButtons[29]])
-                    buttongroups.append(
-                        [self.customScrambleButtons[12], self.customScrambleButtons[13], self.customScrambleButtons[14],
-                         self.customScrambleButtons[21], self.customScrambleButtons[22], self.customScrambleButtons[23],
-                         self.customScrambleButtons[30], self.customScrambleButtons[31],
-                         self.customScrambleButtons[32]])
-                    buttongroups.append(
-                        [self.customScrambleButtons[15], self.customScrambleButtons[16], self.customScrambleButtons[17],
-                         self.customScrambleButtons[24], self.customScrambleButtons[25], self.customScrambleButtons[26],
-                         self.customScrambleButtons[33], self.customScrambleButtons[34],
-                         self.customScrambleButtons[35]])
-                    buttongroups.append(
-                        [self.customScrambleButtons[36], self.customScrambleButtons[37], self.customScrambleButtons[38],
-                         self.customScrambleButtons[39], self.customScrambleButtons[40], self.customScrambleButtons[41],
-                         self.customScrambleButtons[42], self.customScrambleButtons[43],
-                         self.customScrambleButtons[44]])
-                    buttongroups.append(
-                        [self.customScrambleButtons[45], self.customScrambleButtons[46], self.customScrambleButtons[47],
-                         self.customScrambleButtons[48], self.customScrambleButtons[49], self.customScrambleButtons[50],
-                         self.customScrambleButtons[51], self.customScrambleButtons[52],
-                         self.customScrambleButtons[53]])
-
-                    for buttongroup in buttongroups:
-                        for button in buttongroup:
-                            button.groupUpdate = False
-
-                        for button in buttongroup:
-                            button.hover(mx, my)
-                            if button.isHovered == True and not button.groupUpdate:
-                                button.animateGroup(buttongroup)
-
-                        for button in buttongroup:
-                            button.clicked(mx, my, mousePressedUp)
-                            button.update()
-                            button.draw()
-
-                            if button.isleftClicked:
-                                match button.onClick:
-                                    case "top":
-                                        self.solver.makeMove("U'", True)
-                                    case "front":
-                                        self.solver.makeMove("F'", True)
-                                    case "bottom":
-                                        self.solver.makeMove("D'", True)
-                                    case "back":
-                                        self.solver.makeMove("B'", True)
-                                    case "left":
-                                        self.solver.makeMove("L'", True)
-                                    case "right":
-                                        self.solver.makeMove("R'", True)
-                            elif button.isrightClicked:
-                                match button.onClick:
-                                    case "top":
-                                        self.solver.makeMove("U", True)
-                                    case "front":
-                                        self.solver.makeMove("F", True)
-                                    case "bottom":
-                                        self.solver.makeMove("D", True)
-                                    case "back":
-                                        self.solver.makeMove("B", True)
-                                    case "left":
-                                        self.solver.makeMove("L", True)
-                                    case "right":
-                                        self.solver.makeMove("R", True)
+                    for button in self.customScrambleButtons:
+                        button.update()
+                        button.draw(drawOnClickText=True, onClickTextSize=25)
+                        if button.clicked(mx, my, mousePressedUp):
+                            match button.onClick:
+                                case "Back":
+                                    self.menu = "main"
+                                case "Reset":
+                                    self.solver.reset()
+                                case "Solve":
+                                    self.solver.solve()
 
                     for switchButton in self.customScrambleSwitchButtons:
                         switchButton.draw((20, 20, 20), (128, 255, 128))
                         switchButton.clicked(mx, my, mousePressedUp)
 
                 case "solve":
-                    if self.spacePressed:
-                        self.spacePressed = not self.spacePressed
-
-                    text = smalerFont.render(self.menu, True, (255, 255, 255))
+                    text = smallerFont.render(self.menu, True, (255, 255, 255))
                     newRect = text.get_rect()
                     newRect.centerx = self.windowWidth / 2
                     newRect.y = textSize
@@ -477,211 +707,11 @@ class main:
 
                     centerX = self.windowWidth / 4
                     for i in range(len(displayedText)):
-                        text = smalerFont.render(displayedText[i], True, (255, 255, 255))
+                        text = smallerFont.render(displayedText[i], True, (255, 255, 255))
                         newRect = text.get_rect()
                         newRect.x = centerX * 2.2
                         newRect.y = (((10 * self.windowHeight) / 900) + textSize * i + textSize * i / 2) + (
                                     1 * width) + 10
-                        self.screen.blit(text, newRect)
-
-                    self.drawCube(width, centerX, 100, True)
-
-
-
-                case "main_old":
-                    font = pygame.font.Font(pygame.font.get_default_font(), textSize)
-
-                    text = font.render("Rubiks Cube Solver", True, (255, 255, 255))
-                    newRect = text.get_rect()
-                    newRect.centerx = self.windowWidth / 2
-                    newRect.y = textSize
-                    self.screen.blit(text, newRect)
-
-                    self.updateMenuButtons(width)
-
-                    for button in self.menuButtons:
-                        button.hover(mx, my)
-                        button.clicked(mx, my, mousePressedUp)
-                        button.update()
-                        button.draw()
-
-                        if button.isleftClicked:
-                            for tempbutton in self.menuButtons:
-                                tempbutton.reset()
-                            self.menu = button.onClick
-                            self.solver.reset()
-
-                case "customScramble_old":
-                    if self.spacePressed:
-                        self.solver.solve()
-                        self.spacePressed = not self.spacePressed
-                        self.menu = "solved"
-
-                    font = pygame.font.Font(pygame.font.get_default_font(), textSize)
-
-                    text = font.render(self.menu, True, (255, 255, 255))
-                    newRect = text.get_rect()
-                    newRect.centerx = self.windowWidth / 2
-                    newRect.y = textSize
-                    self.screen.blit(text, newRect)
-
-                    displayedText = []
-                    scrambleMoves = ""
-                    first = True
-                    for move in self.solver.scrambleMoves:
-                        if first:
-                            scrambleMoves += str(move)
-                            first = False
-                        else:
-                            scrambleMoves += " ," + str(move)
-                    displayedText.append("Scramble:")
-                    displayedText.append(scrambleMoves)
-
-                    for i in range(len(displayedText)):
-                        text = font.render(displayedText[i], True, (255, 255, 255))
-                        newRect = text.get_rect()
-                        newRect.x = 10
-                        newRect.y = (((10 * self.windowHeight) / 900) + textSize * i + textSize * i / 2) + (14 * width) + 10
-                        self.screen.blit(text, newRect)
-
-
-                    displayedText = ["U - Up", "D - Down", "R - Right", "L - Left", "F - Front", "B - Back", "W - X'", "E - x", "A - Random", "S - Remove", "SPACE - Solve", "Q - Reset"]
-
-                    for i in range(len(displayedText)):
-                        text = font.render(displayedText[i], True, (255, 255, 255))
-                        newRect = text.get_rect()
-                        newRect.x = centerX*1.6
-                        newRect.y = (((20 * self.windowHeight) / 900) + textSize * i + textSize * i / 2) + 10
-                        self.screen.blit(text, newRect)
-
-                    self.updateCustomScrambleButtons(width)
-
-                    buttongroups = []
-                    buttongroups.append([self.customScrambleButtons[0], self.customScrambleButtons[1], self.customScrambleButtons[2], self.customScrambleButtons[3], self.customScrambleButtons[4], self.customScrambleButtons[5], self.customScrambleButtons[6], self.customScrambleButtons[7], self.customScrambleButtons[8]])
-                    buttongroups.append([self.customScrambleButtons[9], self.customScrambleButtons[10], self.customScrambleButtons[11], self.customScrambleButtons[18], self.customScrambleButtons[19], self.customScrambleButtons[20], self.customScrambleButtons[27], self.customScrambleButtons[28], self.customScrambleButtons[29]])
-                    buttongroups.append([self.customScrambleButtons[12], self.customScrambleButtons[13], self.customScrambleButtons[14], self.customScrambleButtons[21], self.customScrambleButtons[22], self.customScrambleButtons[23], self.customScrambleButtons[30], self.customScrambleButtons[31], self.customScrambleButtons[32]])
-                    buttongroups.append([self.customScrambleButtons[15], self.customScrambleButtons[16], self.customScrambleButtons[17], self.customScrambleButtons[24], self.customScrambleButtons[25], self.customScrambleButtons[26], self.customScrambleButtons[33], self.customScrambleButtons[34], self.customScrambleButtons[35]])
-                    buttongroups.append([self.customScrambleButtons[36], self.customScrambleButtons[37], self.customScrambleButtons[38], self.customScrambleButtons[39], self.customScrambleButtons[40], self.customScrambleButtons[41], self.customScrambleButtons[42], self.customScrambleButtons[43], self.customScrambleButtons[44]])
-                    buttongroups.append([self.customScrambleButtons[45], self.customScrambleButtons[46], self.customScrambleButtons[47], self.customScrambleButtons[48], self.customScrambleButtons[49], self.customScrambleButtons[50], self.customScrambleButtons[51], self.customScrambleButtons[52], self.customScrambleButtons[53]])
-
-                    for buttongroup in buttongroups:
-                        for button in buttongroup:
-                            button.groupUpdate = False
-
-                        for button in buttongroup:
-                            button.hover(mx, my)
-                            if button.isHovered == True and not button.groupUpdate:
-                                button.animateGroup(buttongroup)
-
-                        for button in buttongroup:
-                            button.clicked(mx, my, mousePressedUp)
-
-                            button.update()
-                            button.draw()
-
-                            if button.isleftClicked:
-                                match button.onClick:
-                                    case "top":
-                                        self.solver.makeMove("U'", True)
-                                    case "front":
-                                        self.solver.makeMove("F'", True)
-                                    case "bottom":
-                                        self.solver.makeMove("D'", True)
-                                    case "back":
-                                        self.solver.makeMove("B'", True)
-                                    case "left":
-                                        self.solver.makeMove("L'", True)
-                                    case "right":
-                                        self.solver.makeMove("R'", True)
-                            elif button.isrightClicked:
-                                match button.onClick:
-                                    case "top":
-                                        self.solver.makeMove("U", True)
-                                    case "front":
-                                        self.solver.makeMove("F", True)
-                                    case "bottom":
-                                        self.solver.makeMove("D", True)
-                                    case "back":
-                                        self.solver.makeMove("B", True)
-                                    case "left":
-                                        self.solver.makeMove("L", True)
-                                    case "right":
-                                        self.solver.makeMove("R", True)
-
-
-                case "solved_old":
-                    if self.spacePressed:
-                        self.spacePressed = not self.spacePressed
-
-                    font = pygame.font.Font(pygame.font.get_default_font(), textSize)
-
-                    text = font.render(self.menu, True, (255, 255, 255))
-                    newRect = text.get_rect()
-                    newRect.centerx = self.windowWidth / 2
-                    newRect.y = textSize
-                    self.screen.blit(text, newRect)
-
-
-                    scrambleMoves = ""
-                    first = True
-                    for move in self.solver.scrambleMoves:
-                        if first:
-                            scrambleMoves += str(move)
-                            first = False
-                        else:
-                            scrambleMoves += " ," + str(move)
-
-                    displayedText = []
-                    displayedText.append("Scramble (" + str(len(scrambleMoves)) + "):")
-                    displayedText.append(scrambleMoves)
-
-                    displayedText.append("Solve (" + str(len(self.solver.solveMoves)) + "):")
-
-                    solveMoves = ""
-                    first = True
-                    count = 0
-                    for move in self.solver.solveMoves:
-                        count += 1
-
-                        if first:
-                            solveMoves += str(move)
-                            first = False
-                        else:
-                            solveMoves += " ," + str(move)
-
-                        if count == 20:
-                            count = 0
-                            displayedText.append(solveMoves)
-                            solveMoves = ""
-                            first = True
-                    displayedText.append(solveMoves)
-
-                    displayedText.append("simplifiedMoves (" + str(len(self.solver.simplifySolve())) + "):")
-
-                    simplifiedMoves = ""
-                    first = True
-                    count = 0
-                    for move in self.solver.simplifySolve():
-                        count += 1
-                        if first:
-                            simplifiedMoves += str(move)
-                            first = False
-                        else:
-                            simplifiedMoves += " ," + str(move)
-
-                        if count == 20:
-                            count = 0
-                            displayedText.append(simplifiedMoves)
-                            simplifiedMoves = ""
-                            first = True
-                    displayedText.append(simplifiedMoves)
-
-                    centerX = self.windowWidth / 4
-                    for i in range(len(displayedText)):
-                        text = font.render(displayedText[i], True, (255, 255, 255))
-                        newRect = text.get_rect()
-                        newRect.x = centerX * 2.2
-                        newRect.y = (((10 * self.windowHeight) / 900) + textSize * i + textSize * i / 2) + (1 * width) + 10
                         self.screen.blit(text, newRect)
 
                     self.drawCube(width, centerX, 100, True)
@@ -710,6 +740,7 @@ class main:
 
     def drawCube(self, width, posX, posY, centerX=False, centerY=False):
         # draw cube
+        cubeRects = []
         cube = self.solver.generateComplete()
         for i in range(len(cube)):
             for j in range(len(cube[0])):
@@ -741,38 +772,11 @@ class main:
                         case 6:  # orange
                             color = (255, 165, 0)
 
-                    pygame.draw.rect(self.screen, color, (x, y, width, height))
+                    rect = pygame.Rect(x, y, width, width)
+                    cubeRects.append(rect)
+                    pygame.draw.rect(self.screen, color, rect)
 
-    def createMenuButtons(self):
-        cube = self.solver.generateComplete()
-        for i in range(len(cube)):
-            for j in range(len(cube[0])):
-                if cube[i][j] != -1:
-                    color = (0, 0, 0)
-
-                    width = (50*self.windowWidth)/1000
-                    height = width
-                    x = (j * (width + 10)) + (self.windowWidth/2) - width / 2
-                    y = (i * (height + 10)) + (self.windowHeight/2) - height / 2
-
-                    x += -(width * 4.5)
-                    y += -(height * 6)
-
-                    match cube[i][j]:
-                        case 1:  # white
-                            color = (255, 255, 255)
-                        case 2:  # blue
-                            color = (0, 0, 255)
-                        case 3:  # yellow
-                            color = (255, 255, 0)
-                        case 4:  # green
-                            color = (0, 255, 0)
-                        case 5:  # red
-                            color = (255, 0, 0)
-                        case 6:  # orange
-                            color = (255, 165, 0)
-
-                    self.menuButtons.append(Button.Button(self.screen, x, y, width, height, color, "customScramble"))
+        return cubeRects
 
     def createScrambleButtons(self):
         counter = 0
@@ -808,23 +812,7 @@ class main:
                         case 6: # orange
                             color = (255, 165, 0)
 
-                    self.customScrambleButtons.append(Button.Button(self.screen, x, y, width, height, color, onClick, False, 10))
-
-    def updateMenuButtons(self, width):
-        counter = 0
-        cube = self.solver.generateComplete()
-        for i in range(len(cube)):
-            for j in range(len(cube[0])):
-                if cube[i][j] != -1:
-                    height = width
-                    x = (j * (width + 10)) + (self.windowWidth / 2) - width / 2
-                    y = (i * (height + 10)) + (self.windowHeight / 2) - height / 2
-
-                    x += -(width * 4.5)
-                    y += -(height * 6)
-
-                    self.menuButtons[counter].updateLocationAndSize(x, y, width, height)
-                    counter += 1
+                    self.customScrambleCubeButtons.append(Button.Button(self.screen, x, y, width, height, color, onClick, False, 10))
 
     def updateCustomScrambleButtons(self, width):
         counter = 0
@@ -833,11 +821,8 @@ class main:
             for j in range(len(cube[0])):
                 if cube[i][j] != -1:
                     height = width
-                    x = (j * (width + 10)) + (self.windowWidth / 2) - width / 2
-                    y = (i * (height + 10)) + (self.windowHeight / 2) - (155 * self.windowHeight / 1000)
-
-                    x += -(width * 4.5)
-                    y += -(height * 6)
+                    x = (j * (width + 10)) + (self.windowWidth / 2) - width / 2 - (width * 4.5)
+                    y = (i * (height + 10)) + 150
 
                     color = (0, 0, 0)
 
@@ -855,8 +840,8 @@ class main:
                         case 6:  # orange
                             color = (255, 165, 0)
 
-                    self.customScrambleButtons[counter].updateLocationAndSize(x, y, width, height)
-                    self.customScrambleButtons[counter].color = color
+                    self.customScrambleCubeButtons[counter].updateLocationAndSize(x, y, width, height)
+                    self.customScrambleCubeButtons[counter].color = color
                     counter += 1
 
 
