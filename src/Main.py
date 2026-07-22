@@ -67,7 +67,6 @@ class main:
         self.customScrambleCubeButtons = []
         self.customScrambleSwitchButtons = [SwitchButton.SwitchButton(self.screen, 50, 150, 100, 50, (100, 100, 100), "2D", "3D")]
 
-        # todo maybe entfernen
         self.createScrambleButtons()
 
         self.run()
@@ -177,7 +176,7 @@ class main:
                     cube.draw()
 
             # draw copyright and version
-            if self.menu in ["main", "about", "custom_scramble"]:
+            if self.menu in ["main", "about", "enter_your_scramble", "custom_scramble"]:
                 # draw copyright
                 text = smallerFont.render("\u00A9 2026 " + self.author, True, (150, 150, 150))
                 newRect = text.get_rect()
@@ -227,11 +226,22 @@ class main:
                     self.screen.blit(text, newRect)
 
                     # draw text
-                    text = headingFont.render("................................\n................................\n................................", True, (255, 255, 255))
-                    newRect = text.get_rect()
-                    newRect.centerx = self.windowWidth / 2
-                    newRect.centery = (self.windowHeight / 2) - 100
-                    self.screen.blit(text, newRect)
+                    lines = [
+                        "A 3x3 Rubik's Cube Solver.",
+                        "You can either enter the colors of all",
+                        "the sides or enter your scramble.",
+                        "The solver then generates the solution",
+                        "moves using the CFOP method."
+                    ]
+
+                    start_y = (self.windowHeight / 2) - headingTextSize * 1.5 * 3
+
+                    for i in range(len(lines)):
+                        text = headingFont.render(lines[i], True, (255, 255, 255))
+                        rect = text.get_rect()
+                        rect.centerx = self.windowWidth / 2
+                        rect.centery = start_y + i * headingTextSize * 1.5
+                        self.screen.blit(text, rect)
 
                     # buttons
                     for button in self.aboutButtons:
@@ -643,78 +653,6 @@ class main:
                     for switchButton in self.customScrambleSwitchButtons:
                         switchButton.draw((20, 20, 20), (128, 255, 128))
                         switchButton.clicked(mx, my, mousePressedUp)
-
-                case "solve":
-                    text = smallerFont.render(self.menu, True, (255, 255, 255))
-                    newRect = text.get_rect()
-                    newRect.centerx = self.windowWidth / 2
-                    newRect.y = textSize
-                    self.screen.blit(text, newRect)
-
-                    scrambleMoves = ""
-                    first = True
-                    for move in self.solver.scrambleMoves:
-                        if first:
-                            scrambleMoves += str(move)
-                            first = False
-                        else:
-                            scrambleMoves += " ," + str(move)
-
-                    displayedText = []
-                    displayedText.append("Scramble (" + str(len(scrambleMoves)) + "):")
-                    displayedText.append(scrambleMoves)
-
-                    displayedText.append("Solve (" + str(len(self.solver.solveMoves)) + "):")
-
-                    solveMoves = ""
-                    first = True
-                    count = 0
-                    for move in self.solver.solveMoves:
-                        count += 1
-
-                        if first:
-                            solveMoves += str(move)
-                            first = False
-                        else:
-                            solveMoves += " ," + str(move)
-
-                        if count == 20:
-                            count = 0
-                            displayedText.append(solveMoves)
-                            solveMoves = ""
-                            first = True
-                    displayedText.append(solveMoves)
-
-                    displayedText.append("simplifiedMoves (" + str(len(self.solver.simplifySolve())) + "):")
-
-                    simplifiedMoves = ""
-                    first = True
-                    count = 0
-                    for move in self.solver.simplifySolve():
-                        count += 1
-                        if first:
-                            simplifiedMoves += str(move)
-                            first = False
-                        else:
-                            simplifiedMoves += " ," + str(move)
-
-                        if count == 20:
-                            count = 0
-                            displayedText.append(simplifiedMoves)
-                            simplifiedMoves = ""
-                            first = True
-                    displayedText.append(simplifiedMoves)
-
-                    centerX = self.windowWidth / 4
-                    for i in range(len(displayedText)):
-                        text = smallerFont.render(displayedText[i], True, (255, 255, 255))
-                        newRect = text.get_rect()
-                        newRect.x = centerX * 2.2
-                        newRect.y = (((10 * self.windowHeight) / 900) + textSize * i + textSize * i / 2) + (
-                                    1 * width) + 10
-                        self.screen.blit(text, newRect)
-
-                    self.drawCube(width, centerX, 100, True)
 
             pygame.display.flip()
             self.clock.tick(60)
